@@ -1,0 +1,15 @@
+node_modules/
+dist/
+.vite/
+
+# Agent tooling (local development only)
+.agents/
+
+# Downloaded reference images
+images/
+
+# Downloaded PHP archives
+*.phar
+
+# Local agent configuration
+opencode.json
