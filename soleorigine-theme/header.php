@@ -1,6 +1,6 @@
 <?php
 /**
- * The header template
+ * The header template - Premium Luxury Design
  *
  * @package SoleOrigine
  */
@@ -30,13 +30,13 @@ if ( ! defined( 'ABSPATH' ) ) {
     <!-- Top Bar -->
     <div class="header-top">
         <div class="header-top__left">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                 <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
             </svg>
-            <span><?php echo esc_html( get_bloginfo( 'description' ) ); ?></span>
+            <span><?php echo esc_html( get_bloginfo( 'description' ) ?: 'Premium Handcrafted Footwear' ); ?></span>
         </div>
         <div class="header-top__right">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                 <circle cx="12" cy="12" r="10"/>
                 <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
             </svg>
@@ -59,6 +59,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                 'menu_id'        => 'primary-menu',
                 'container'      => false,
                 'fallback_cb'    => false,
+                'items_wrap'     => '<ul id="%1$s" class="%2$s">%3$s</ul>',
             ) );
             ?>
         </nav>
@@ -66,7 +67,7 @@ if ( ! defined( 'ABSPATH' ) ) {
         <!-- Header Actions -->
         <div class="header-actions">
             <button class="header-actions__btn" aria-label="<?php esc_attr_e( 'Search', 'soleorigine' ); ?>">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                     <circle cx="11" cy="11" r="8"/>
                     <path d="M21 21l-4.35-4.35"/>
                 </svg>
@@ -75,16 +76,16 @@ if ( ! defined( 'ABSPATH' ) ) {
             <a href="<?php echo esc_url( class_exists( 'WooCommerce' ) ? wc_get_account_endpoint_url( 'dashboard' ) : '#' ); ?>"
                class="header-actions__btn"
                aria-label="<?php esc_attr_e( 'My Account', 'soleorigine' ); ?>">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                     <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
                     <circle cx="12" cy="7" r="4"/>
                 </svg>
             </a>
 
             <a href="<?php echo esc_url( class_exists( 'WooCommerce' ) ? wc_get_cart_url() : '#' ); ?>"
-               class="header-actions__btn"
+               class="header-actions__btn header-actions__btn--cart"
                aria-label="<?php esc_attr_e( 'Cart', 'soleorigine' ); ?>">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                     <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
                     <line x1="3" y1="6" x2="21" y2="6"/>
                     <path d="M16 10a4 4 0 0 1-8 0"/>
@@ -98,9 +99,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 
             <!-- Mobile Menu Toggle -->
             <button class="mobile-menu-toggle" aria-label="<?php esc_attr_e( 'Toggle mobile menu', 'soleorigine' ); ?>" aria-expanded="false">
-                <span></span>
-                <span></span>
-                <span></span>
+                <span class="mobile-menu-toggle__line"></span>
+                <span class="mobile-menu-toggle__line"></span>
+                <span class="mobile-menu-toggle__line"></span>
             </button>
         </div>
     </div>

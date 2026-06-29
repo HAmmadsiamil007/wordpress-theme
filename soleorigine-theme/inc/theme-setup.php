@@ -9,6 +9,11 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
+// New SoleOrigine_After_Setup singleton handles this when active.
+if ( class_exists( 'SoleOrigine_After_Setup' ) ) {
+    return;
+}
+
 /**
  * Sets up theme defaults and registers support for various WordPress features.
  */
@@ -175,3 +180,147 @@ function soleorigine_pingback_header() {
     }
 }
 add_action( 'wp_head', 'soleorigine_pingback_header' );
+
+/**
+ * Register Custom Post Types: Collections, Styles, Brands.
+ */
+function soleorigine_register_post_types() {
+    // Collections CPT
+    register_post_type( 'collection', array(
+        'labels'       => array(
+            'name'               => esc_html_x( 'Collections', 'post type general name', 'soleorigine' ),
+            'singular_name'      => esc_html_x( 'Collection', 'post type singular name', 'soleorigine' ),
+            'menu_name'          => esc_html_x( 'Collections', 'admin menu', 'soleorigine' ),
+            'add_new'            => esc_html__( 'Add New', 'soleorigine' ),
+            'add_new_item'       => esc_html__( 'Add New Collection', 'soleorigine' ),
+            'edit_item'          => esc_html__( 'Edit Collection', 'soleorigine' ),
+            'new_item'           => esc_html__( 'New Collection', 'soleorigine' ),
+            'view_item'          => esc_html__( 'View Collection', 'soleorigine' ),
+            'search_items'       => esc_html__( 'Search Collections', 'soleorigine' ),
+            'not_found'          => esc_html__( 'No collections found.', 'soleorigine' ),
+            'not_found_in_trash' => esc_html__( 'No collections found in Trash.', 'soleorigine' ),
+        ),
+        'public'       => true,
+        'has_archive'  => true,
+        'rewrite'      => array( 'slug' => 'collections' ),
+        'menu_icon'    => 'dashicons-layout',
+        'supports'     => array( 'title', 'editor', 'thumbnail', 'excerpt', 'custom-fields' ),
+        'show_in_rest' => true,
+    ) );
+
+    // Styles CPT
+    register_post_type( 'style', array(
+        'labels'       => array(
+            'name'               => esc_html_x( 'Styles', 'post type general name', 'soleorigine' ),
+            'singular_name'      => esc_html_x( 'Style', 'post type singular name', 'soleorigine' ),
+            'menu_name'          => esc_html_x( 'Styles', 'admin menu', 'soleorigine' ),
+            'add_new'            => esc_html__( 'Add New', 'soleorigine' ),
+            'add_new_item'       => esc_html__( 'Add New Style', 'soleorigine' ),
+            'edit_item'          => esc_html__( 'Edit Style', 'soleorigine' ),
+            'new_item'           => esc_html__( 'New Style', 'soleorigine' ),
+            'view_item'          => esc_html__( 'View Style', 'soleorigine' ),
+            'search_items'       => esc_html__( 'Search Styles', 'soleorigine' ),
+            'not_found'          => esc_html__( 'No styles found.', 'soleorigine' ),
+            'not_found_in_trash' => esc_html__( 'No styles found in Trash.', 'soleorigine' ),
+        ),
+        'public'       => true,
+        'has_archive'  => true,
+        'rewrite'      => array( 'slug' => 'styles' ),
+        'menu_icon'    => 'dashicons-admin-appearance',
+        'supports'     => array( 'title', 'editor', 'thumbnail', 'excerpt', 'custom-fields' ),
+        'show_in_rest' => true,
+    ) );
+
+    // Brands CPT
+    register_post_type( 'brand', array(
+        'labels'       => array(
+            'name'               => esc_html_x( 'Brands', 'post type general name', 'soleorigine' ),
+            'singular_name'      => esc_html_x( 'Brand', 'post type singular name', 'soleorigine' ),
+            'menu_name'          => esc_html_x( 'Brands', 'admin menu', 'soleorigine' ),
+            'add_new'            => esc_html__( 'Add New', 'soleorigine' ),
+            'add_new_item'       => esc_html__( 'Add New Brand', 'soleorigine' ),
+            'edit_item'          => esc_html__( 'Edit Brand', 'soleorigine' ),
+            'new_item'           => esc_html__( 'New Brand', 'soleorigine' ),
+            'view_item'          => esc_html__( 'View Brand', 'soleorigine' ),
+            'search_items'       => esc_html__( 'Search Brands', 'soleorigine' ),
+            'not_found'          => esc_html__( 'No brands found.', 'soleorigine' ),
+            'not_found_in_trash' => esc_html__( 'No brands found in Trash.', 'soleorigine' ),
+        ),
+        'public'       => true,
+        'has_archive'  => true,
+        'rewrite'      => array( 'slug' => 'brands' ),
+        'menu_icon'    => 'dashicons-shield',
+        'supports'     => array( 'title', 'editor', 'thumbnail', 'excerpt', 'custom-fields' ),
+        'show_in_rest' => true,
+    ) );
+}
+add_action( 'init', 'soleorigine_register_post_types' );
+
+/**
+ * Register Taxonomies for Custom Post Types.
+ */
+function soleorigine_register_taxonomies() {
+    // Collection Category
+    register_taxonomy( 'collection_category', 'collection', array(
+        'labels'            => array(
+            'name'          => esc_html_x( 'Collection Categories', 'taxonomy general name', 'soleorigine' ),
+            'singular_name' => esc_html_x( 'Collection Category', 'taxonomy singular name', 'soleorigine' ),
+            'search_items'  => esc_html__( 'Search Collection Categories', 'soleorigine' ),
+            'all_items'     => esc_html__( 'All Collection Categories', 'soleorigine' ),
+            'parent_item'   => esc_html__( 'Parent Category', 'soleorigine' ),
+            'edit_item'     => esc_html__( 'Edit Category', 'soleorigine' ),
+            'update_item'   => esc_html__( 'Update Category', 'soleorigine' ),
+            'add_new_item'  => esc_html__( 'Add New Category', 'soleorigine' ),
+            'new_item_name' => esc_html__( 'New Category Name', 'soleorigine' ),
+            'menu_name'     => esc_html__( 'Categories', 'soleorigine' ),
+        ),
+        'hierarchical'      => true,
+        'public'            => true,
+        'show_in_rest'      => true,
+        'rewrite'           => array( 'slug' => 'collection-category' ),
+        'show_admin_column' => true,
+    ) );
+
+    // Style Category
+    register_taxonomy( 'style_category', 'style', array(
+        'labels'            => array(
+            'name'          => esc_html_x( 'Style Categories', 'taxonomy general name', 'soleorigine' ),
+            'singular_name' => esc_html_x( 'Style Category', 'taxonomy singular name', 'soleorigine' ),
+            'search_items'  => esc_html__( 'Search Style Categories', 'soleorigine' ),
+            'all_items'     => esc_html__( 'All Style Categories', 'soleorigine' ),
+            'parent_item'   => esc_html__( 'Parent Category', 'soleorigine' ),
+            'edit_item'     => esc_html__( 'Edit Category', 'soleorigine' ),
+            'update_item'   => esc_html__( 'Update Category', 'soleorigine' ),
+            'add_new_item'  => esc_html__( 'Add New Category', 'soleorigine' ),
+            'new_item_name' => esc_html__( 'New Category Name', 'soleorigine' ),
+            'menu_name'     => esc_html__( 'Categories', 'soleorigine' ),
+        ),
+        'hierarchical'      => true,
+        'public'            => true,
+        'show_in_rest'      => true,
+        'rewrite'           => array( 'slug' => 'style-category' ),
+        'show_admin_column' => true,
+    ) );
+
+    // Brand Category
+    register_taxonomy( 'brand_category', 'brand', array(
+        'labels'            => array(
+            'name'          => esc_html_x( 'Brand Categories', 'taxonomy general name', 'soleorigine' ),
+            'singular_name' => esc_html_x( 'Brand Category', 'taxonomy singular name', 'soleorigine' ),
+            'search_items'  => esc_html__( 'Search Brand Categories', 'soleorigine' ),
+            'all_items'     => esc_html__( 'All Brand Categories', 'soleorigine' ),
+            'parent_item'   => esc_html__( 'Parent Category', 'soleorigine' ),
+            'edit_item'     => esc_html__( 'Edit Category', 'soleorigine' ),
+            'update_item'   => esc_html__( 'Update Category', 'soleorigine' ),
+            'add_new_item'  => esc_html__( 'Add New Category', 'soleorigine' ),
+            'new_item_name' => esc_html__( 'New Category Name', 'soleorigine' ),
+            'menu_name'     => esc_html__( 'Categories', 'soleorigine' ),
+        ),
+        'hierarchical'      => true,
+        'public'            => true,
+        'show_in_rest'      => true,
+        'rewrite'           => array( 'slug' => 'brand-category' ),
+        'show_admin_column' => true,
+    ) );
+}
+add_action( 'init', 'soleorigine_register_taxonomies' );

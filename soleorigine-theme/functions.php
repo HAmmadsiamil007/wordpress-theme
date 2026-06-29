@@ -18,7 +18,24 @@ define( 'SOLEORIGINE_DIR', get_template_directory() );
 define( 'SOLEORIGINE_URI', get_template_directory_uri() );
 
 /**
- * Include theme files
+ * Include singleton classes (new architecture)
+ */
+require SOLEORIGINE_DIR . '/inc/class-soleorigine-after-setup.php';
+require SOLEORIGINE_DIR . '/inc/class-soleorigine-enqueue.php';
+require SOLEORIGINE_DIR . '/inc/class-soleorigine-icons.php';
+require SOLEORIGINE_DIR . '/inc/class-soleorigine-customizer-config.php';
+
+/**
+ * Initialize singletons.
+ * Hook registration happens inside each private constructor.
+ */
+SoleOrigine_After_Setup::get_instance();
+SoleOrigine_Enqueue::get_instance();
+SoleOrigine_Icons::get_instance();
+SoleOrigine_Customizer_Config::get_instance();
+
+/**
+ * Include legacy flat files (will be migrated to classes).
  */
 require SOLEORIGINE_DIR . '/inc/theme-setup.php';
 require SOLEORIGINE_DIR . '/inc/enqueue.php';

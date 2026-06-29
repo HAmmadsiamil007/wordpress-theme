@@ -10,6 +10,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
+ * Guard: if the config-driven class is loaded, skip this flat file.
+ */
+if ( class_exists( 'SoleOrigine_Customizer_Config' ) ) {
+    return;
+}
+
+/**
  * Add Customizer Settings
  *
  * @param WP_Customize_Manager $wp_customize Theme Customizer object.

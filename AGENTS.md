@@ -75,6 +75,7 @@ When starting work, load skills in this priority order:
 5. **Animations:** `gsap-core` + `gsap-scrolltrigger` + `gsap-plugins` (scroll-triggered reveals, micro-interactions, hero animations)
 6. **Marketing & Content:** `marketing-psychology` + `brand` + `copywriting` + `ecommerce-image-workflow` (conversion optimization, brand storytelling, product images)
 7. **Quality & Review:** `design-review` + `wp-security` (final polish, code audit, accessibility check)
+8. **Automation & Quality Loops:** `loop-engineering` (iterative quality refinement, generate-review-improve cycles, escalation handling)
 
 ## Available Skills (`.agents/skills/`)
 
@@ -90,6 +91,11 @@ When starting work, load skills in this priority order:
 ### Marketing
 `marketing-psychology` `brand` `ad-creative` `content-strategy` `cold-email` `paid-ads`
 
+### Automation & Quality Loops
+`loop-engineering` — iterative quality refinement with generate-review-improve cycles. Sub-skills: `changelog-scan`, `ci-triage`, `dependency-triage`, `issue-triage`, `loop-budget`, `loop-verifier`, `minimal-fix`, `post-merge-scan`, `pr-review-triage`. Used for CI sweeps, dependency updates, changelog drafting, PR babysitting, and post-merge cleanup.
+
+Installed from `https://github.com/cobusgreyling/loop-engineering` into `C:\Users\hammad\Downloads\worldpress\.agents\skills\loop-engineering\` (project-local, full repo).
+
 ## MCP Servers
 
 Configured in `opencode.json` at project root:
@@ -98,15 +104,28 @@ Configured in `opencode.json` at project root:
 - **Headroom MCP** — WordPress project auditing, PHP linting, template hierarchy checks
 - **Serena MCP** — Design-to-code conversion, screen capture, visual regression
 
+## Environment Setup (Windows — LocalWP)
+
+| Tool | Path / Command |
+|---|---|
+| **PHP** | `C:\Users\hammad\AppData\Local\Programs\Local\resources\extraResources\lightning-services\php-8.2.29+0\bin\win64\php.exe` |
+| **Composer** | `php C:\Users\hammad\AppData\Local\Temp\composer.phar [cmd]` |
+| **Vite dev server** | `npm run dev` in `soleorigine-theme/` — runs on `http://localhost:5173` |
+| **Vite build** | `npm run build` in `soleorigine-theme/` — outputs to `soleorigine-theme/dist/` |
+| **Git remote** | `https://github.com/HAmmadsiamil007/wordpress-theme.git` (branch: `master`) |
+
 ## Common Commands
 
-- Test theme: Visit `wp-admin/themes.php`, activate SoleOrigine
-- Verify WooCommerce: Visit a shop page, single product, cart, checkout
-- Check CPTs: Visit `/wp-admin/edit.php?post_type=collection` (or style, brand)
-- Update .pot: `wp i18n make-pot . languages/soleorigine.pot`
-- Check template hierarchy: `wp eval 'var_dump(get_page_template());'`
-- Lint PHP: `php -l` on any modified file
-- Lint CSS: Check `style.css` `:root` variables match design tokens
+- **Start Vite:** `npm run dev` from `soleorigine-theme/`
+- **Build Vite:** `npm run build` from `soleorigine-theme/`
+- **Composer install:** `php C:\Users\hammad\AppData\Local\Temp\composer.phar install`
+- **Lint PHP:** `php -l` on any modified file
+- **Lint CSS:** Check `style.css` `:root` variables match design tokens
+- **Test theme:** Visit `wp-admin/themes.php`, activate SoleOrigine
+- **Verify WooCommerce:** Visit a shop page, single product, cart, checkout
+- **Check CPTs:** Visit `/wp-admin/edit.php?post_type=collection` (or style, brand)
+- **Update .pot:** `wp i18n make-pot . languages/soleorigine.pot`
+- **Git push:** `git push origin master` (from workspace root)
 
 ## SASS/CSS Conventions
 

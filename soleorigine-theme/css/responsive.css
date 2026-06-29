@@ -420,6 +420,67 @@
     }
 }
 
+/* Elite Collection */
+    .elite-collection__grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    /* Brand Story */
+    .brand-story__grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .brand-story__image {
+        order: -1;
+    }
+
+    /* Testimonials */
+    .testimonials__grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    /* Instagram Feed */
+    .instagram-feed__grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    /* Newsletter */
+    .newsletter-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 30px;
+    }
+
+    .newsletter-form {
+        max-width: 100%;
+        width: 100%;
+    }
+
+    .newsletter-form__inner {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .newsletter-form__inner input[type="email"] {
+        border-right: 1px solid var(--color-border);
+    }
+
+    /* Footer Bottom */
+    .footer-bottom {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+
+    .footer-payments {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+
 /* Small Mobile (max-width: 400px) */
 @media (max-width: 400px) {
     .hero__title {
@@ -439,7 +500,28 @@
         height: 180px;
     }
 
-    .about-image {
-        height: 200px;
+    .elite-item__number {
+        font-size: 2rem;
+    }
+
+    .brand-story__stats {
+        grid-template-columns: 1fr;
+    }
+
+    .brand-story__stat-number {
+        font-size: 1.5rem;
+    }
+
+    .instagram-feed__grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .testimonial-card {
+        padding: 20px;
+    }
+
+    .footer-payments__icons {
+        flex-wrap: wrap;
+        justify-content: center;
     }
 }
