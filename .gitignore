@@ -3,6 +3,11 @@ node_modules/
 dist/
 .serena/
 .playwright-mcp/
+.agents/
+output/
+plan/
+wordpress/
+mcp.txt
 Thumbs.db
 .DS_Store
 *.log
