@@ -19,6 +19,10 @@ define( 'Opulentia_DIR', get_template_directory() );
 define( 'Opulentia_URI', get_template_directory_uri() );
 define( 'Opulentia_SETTINGS', 'Opulentia_settings' );
 
+// Load textdomain early so any __() / esc_html__() calls in module
+// registration or constructor code find the translations loaded.
+load_theme_textdomain( 'opulentia', Opulentia_DIR . '/languages' );
+
 // -----------------------------------------------------------------------------
 // Theme Update System — DB Version Migration & Background Updater
 // Must load early so version checks run before other modules init.

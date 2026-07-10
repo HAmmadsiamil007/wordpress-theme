@@ -70,17 +70,10 @@ class Opulentia_Sticky_Header {
 			return false;
 		}
 
-		$devices = Opulentia_get_option( 'sticky-header-devices', array( 'desktop', 'tablet', 'mobile' ) );
+		$devices     = Opulentia_get_option( 'sticky-header-devices', array( 'desktop', 'tablet', 'mobile' ) );
+		$device_type = Opulentia_get_device_type();
 
-		if ( wp_is_mobile() ) {
-			return in_array( 'mobile', $devices, true );
-		}
-
-		if ( wp_is_tablet() ) {
-			return in_array( 'tablet', $devices, true );
-		}
-
-		return in_array( 'desktop', $devices, true );
+		return in_array( $device_type, $devices, true );
 	}
 
 	/**

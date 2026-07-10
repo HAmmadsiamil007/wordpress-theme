@@ -14,6 +14,40 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // -----------------------------------------------------------------------------
+// Device Detection
+// -----------------------------------------------------------------------------
+
+if ( ! function_exists( 'Opulentia_get_device_type' ) ) {
+	/**
+	 * Detect the current device type based on user agent.
+	 *
+	 * WordPress's wp_is_mobile() returns true for both phones and tablets,
+	 * so we need a more granular check for per-device features.
+	 *
+	 * @return string 'tablet', 'mobile', or 'desktop'.
+	 */
+	function Opulentia_get_device_type() {
+		if ( ! isset( $_SERVER['HTTP_USER_AGENT'] ) ) {
+			return 'desktop';
+		}
+
+		$ua = wp_unslash( $_SERVER['HTTP_USER_AGENT'] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+
+		// Tablet detection.
+		if ( preg_match( '/(tablet|ipad|playbook|silk)|(android(?!.*(?:mobile|mobi)))/i', $ua ) ) {
+			return 'tablet';
+		}
+
+		// Mobile detection.
+		if ( preg_match( '/(mobile|mobi|phone|iphone|ipod|blackberry|opera mini|fennec|minimo|symbian|psp|nokia|htc|samsung|sony|ericsson)/i', $ua ) ) {
+			return 'mobile';
+		}
+
+		return 'desktop';
+	}
+}
+
+// -----------------------------------------------------------------------------
 // CSS Generation
 // -----------------------------------------------------------------------------
 
