@@ -9,17 +9,17 @@
 /* Tablet (max-width: 992px) */
 @media (max-width: 992px) {
     /* Team grid: N columns → 2 */
-    .so-team__grid {
+    .opulentia-team__grid {
         grid-template-columns: repeat(2, 1fr) !important;
     }
 
     /* Logo showcase: N columns → 3 */
-    .so-logo-showcase__grid {
+    .opulentia-logo-showcase__grid {
         grid-template-columns: repeat(3, 1fr) !important;
     }
 
     /* Pricing card: full width within columns */
-    .so-pricing-card {
+    .opulentia-pricing-card {
         max-width: 100%;
     }
 
@@ -90,21 +90,21 @@
 /* Mobile (max-width: 576px) */
 @media (max-width: 576px) {
     /* Team grid: 2 columns → 1 */
-    .so-team__grid {
+    .opulentia-team__grid {
         grid-template-columns: 1fr !important;
     }
 
     /* Logo showcase: 3 columns → 2 */
-    .so-logo-showcase__grid {
+    .opulentia-logo-showcase__grid {
         grid-template-columns: repeat(2, 1fr) !important;
     }
 
     /* Pricing card: full width on mobile, reset featured scale */
-    .so-pricing-card {
+    .opulentia-pricing-card {
         padding: var(--spacing-xl);
     }
 
-    .so-pricing-card--featured {
+    .opulentia-pricing-card--featured {
         transform: scale(1) !important;
     }
 
@@ -609,7 +609,7 @@
     }
 
     /* Logo showcase: 2 columns → 1 on very small screens */
-    .so-logo-showcase__grid {
+    .opulentia-logo-showcase__grid {
         grid-template-columns: 1fr !important;
     }
 }

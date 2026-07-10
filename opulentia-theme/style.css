@@ -3493,11 +3493,11 @@ body.menu-open {
 }
 
 /* ── Pricing Card wrapper — ensure vertical spacing when stacked in columns ── */
-.so-pricing-card {
+.opulentia-pricing-card {
     margin-bottom: var(--grid-gap);
 }
 
-.so-pricing-card:last-child {
+.opulentia-pricing-card:last-child {
     margin-bottom: 0;
 }
 
@@ -3506,21 +3506,21 @@ body.menu-open {
    ============================================ */
 
 /* ── Counter Block ── */
-.so-counter {
+.opulentia-counter {
     text-align: center;
     padding: var(--spacing-lg);
 }
 
-.so-counter__icon {
+.opulentia-counter__icon {
     color: var(--color-gold);
     margin-bottom: var(--spacing-md);
 }
 
-.so-counter__icon svg {
+.opulentia-counter__icon svg {
     display: inline-block;
 }
 
-.so-counter__number {
+.opulentia-counter__number {
     font-family: var(--font-heading);
     font-size: 2.5rem;
     font-weight: 700;
@@ -3529,12 +3529,12 @@ body.menu-open {
     margin-bottom: var(--spacing-sm);
 }
 
-.so-counter__prefix,
-.so-counter__suffix {
+.opulentia-counter__prefix,
+.opulentia-counter__suffix {
     color: var(--color-gold);
 }
 
-.so-counter__label {
+.opulentia-counter__label {
     font-size: 0.875rem;
     color: var(--color-medium-gray);
     text-transform: uppercase;
@@ -3543,7 +3543,7 @@ body.menu-open {
 }
 
 /* ── Pricing Table Block ── */
-.so-pricing-card {
+.opulentia-pricing-card {
     background-color: var(--color-secondary-dark);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
@@ -3553,21 +3553,21 @@ body.menu-open {
     transition: border-color var(--transition-normal), transform var(--transition-normal);
 }
 
-.so-pricing-card:hover {
+.opulentia-pricing-card:hover {
     border-color: var(--color-gold);
     transform: translateY(-4px);
 }
 
-.so-pricing-card--featured {
+.opulentia-pricing-card--featured {
     border-color: var(--color-gold);
     transform: scale(1.03);
 }
 
-.so-pricing-card--featured:hover {
+.opulentia-pricing-card--featured:hover {
     transform: scale(1.03) translateY(-4px);
 }
 
-.so-pricing-card__badge {
+.opulentia-pricing-card__badge {
     position: absolute;
     top: 0;
     left: 50%;
@@ -3582,32 +3582,32 @@ body.menu-open {
     border-radius: 20px;
 }
 
-.so-pricing-card__plan {
+.opulentia-pricing-card__plan {
     font-family: var(--font-heading);
     font-size: 1.5rem;
     color: var(--color-white);
     margin-bottom: var(--spacing-sm);
 }
 
-.so-pricing-card__desc {
+.opulentia-pricing-card__desc {
     font-size: 0.9375rem;
     color: var(--color-medium-gray);
     margin-bottom: var(--spacing-lg);
 }
 
-.so-pricing-card__price {
+.opulentia-pricing-card__price {
     margin-bottom: var(--spacing-xl);
     padding-bottom: var(--spacing-xl);
     border-bottom: 1px solid var(--color-border);
 }
 
-.so-pricing-card__currency {
+.opulentia-pricing-card__currency {
     font-size: 1.25rem;
     vertical-align: super;
     color: var(--color-gold);
 }
 
-.so-pricing-card__amount {
+.opulentia-pricing-card__amount {
     font-family: var(--font-heading);
     font-size: 3rem;
     font-weight: 700;
@@ -3615,18 +3615,18 @@ body.menu-open {
     line-height: 1;
 }
 
-.so-pricing-card__interval {
+.opulentia-pricing-card__interval {
     font-size: 0.875rem;
     color: var(--color-medium-gray);
 }
 
-.so-pricing-card__features {
+.opulentia-pricing-card__features {
     list-style: none;
     margin: 0 0 var(--spacing-xl);
     padding: 0;
 }
 
-.so-pricing-card__feature {
+.opulentia-pricing-card__feature {
     display: flex;
     align-items: center;
     gap: var(--spacing-sm);
@@ -3636,39 +3636,39 @@ body.menu-open {
     border-bottom: 1px solid var(--color-border);
 }
 
-.so-pricing-card__feature:last-child {
+.opulentia-pricing-card__feature:last-child {
     border-bottom: none;
 }
 
-.so-pricing-card__feature svg {
+.opulentia-pricing-card__feature svg {
     flex-shrink: 0;
 }
 
-.so-pricing-card__feature.is--included {
+.opulentia-pricing-card__feature.is--included {
     color: var(--color-gold);
 }
 
-.so-pricing-card__feature.is--excluded {
+.opulentia-pricing-card__feature.is--excluded {
     color: var(--color-medium-gray);
     opacity: 0.6;
 }
 
-.so-pricing-card__btn {
+.opulentia-pricing-card__btn {
     width: 100%;
 }
 
 /* ── Team Block ── */
-.so-team {
+.opulentia-team {
     padding: var(--section-padding-top, var(--spacing-5xl)) 0 var(--section-padding-bottom, var(--spacing-5xl));
 }
 
-.so-team__grid {
+.opulentia-team__grid {
     display: grid;
     gap: var(--grid-gap);
     row-gap: var(--grid-gap);
 }
 
-.so-team__card {
+.opulentia-team__card {
     background-color: var(--color-secondary-dark);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
@@ -3676,28 +3676,28 @@ body.menu-open {
     transition: transform var(--transition-normal), border-color var(--transition-normal);
 }
 
-.so-team__card:hover {
+.opulentia-team__card:hover {
     transform: translateY(-5px);
     border-color: var(--color-gold);
 }
 
-.so-team__image {
+.opulentia-team__image {
     aspect-ratio: 1;
     overflow: hidden;
 }
 
-.so-team__image img {
+.opulentia-team__image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     transition: transform 0.5s ease;
 }
 
-.so-team__card:hover .so-team__image img {
+.opulentia-team__card:hover .opulentia-team__image img {
     transform: scale(1.06);
 }
 
-.so-team__avatar {
+.opulentia-team__avatar {
     width: 100%;
     height: 100%;
     display: flex;
@@ -3710,19 +3710,19 @@ body.menu-open {
     background: linear-gradient(135deg, var(--color-gold), var(--color-accent));
 }
 
-.so-team__info {
+.opulentia-team__info {
     padding: var(--spacing-lg);
     text-align: center;
 }
 
-.so-team__name {
+.opulentia-team__name {
     font-family: var(--font-heading);
     font-size: 1.25rem;
     color: var(--color-white);
     margin-bottom: var(--spacing-xs);
 }
 
-.so-team__role {
+.opulentia-team__role {
     font-size: 0.875rem;
     color: var(--color-gold);
     text-transform: uppercase;
@@ -3730,20 +3730,20 @@ body.menu-open {
     margin-bottom: var(--spacing-sm);
 }
 
-.so-team__bio {
+.opulentia-team__bio {
     font-size: 0.875rem;
     color: var(--color-medium-gray);
     line-height: 1.6;
     margin-bottom: var(--spacing-md);
 }
 
-.so-team__social {
+.opulentia-team__social {
     display: flex;
     justify-content: center;
     gap: var(--spacing-sm);
 }
 
-.so-team__social-link {
+.opulentia-team__social-link {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -3755,7 +3755,7 @@ body.menu-open {
     transition: all var(--transition-fast);
 }
 
-.so-team__social-link:hover {
+.opulentia-team__social-link:hover {
     background-color: var(--color-gold);
     color: var(--color-white);
 }
@@ -3820,34 +3820,34 @@ body.menu-open {
 }
 
 /* ── FAQ Block ── */
-.so-faq {
+.opulentia-faq {
     padding: var(--section-padding-top, var(--spacing-5xl)) 0 var(--section-padding-bottom, var(--spacing-5xl));
     max-width: 800px;
     margin: 0 auto;
 }
 
-.so-faq__list {
+.opulentia-faq__list {
     display: flex;
     flex-direction: column;
     gap: var(--spacing-sm);
 }
 
-.so-faq__item {
+.opulentia-faq__item {
     border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
     overflow: hidden;
     transition: border-color var(--transition-fast);
 }
 
-.so-faq__item:hover {
+.opulentia-faq__item:hover {
     border-color: var(--color-medium-gray);
 }
 
-.so-faq__item.is-open {
+.opulentia-faq__item.is-open {
     border-color: var(--color-gold);
 }
 
-.so-faq__question {
+.opulentia-faq__question {
     width: 100%;
     display: flex;
     align-items: center;
@@ -3864,30 +3864,30 @@ body.menu-open {
     transition: color var(--transition-fast);
 }
 
-.so-faq__question:hover {
+.opulentia-faq__question:hover {
     color: var(--color-gold);
 }
 
-.so-faq__icon {
+.opulentia-faq__icon {
     flex-shrink: 0;
     transition: transform var(--transition-normal);
 }
 
-.is-open .so-faq__icon {
+.is-open .opulentia-faq__icon {
     transform: rotate(90deg);
 }
 
-.so-faq__answer {
+.opulentia-faq__answer {
     max-height: 0;
     overflow: hidden;
     transition: max-height var(--transition-normal);
 }
 
-.is-open .so-faq__answer {
+.is-open .opulentia-faq__answer {
     max-height: 500px;
 }
 
-.so-faq__answer > div {
+.opulentia-faq__answer > div {
     padding: 0 var(--spacing-lg) var(--spacing-lg);
     font-size: 0.9375rem;
     color: var(--color-medium-gray);
@@ -3895,20 +3895,20 @@ body.menu-open {
 }
 
 /* ── Tabs Block ── */
-.so-tabs {
+.opulentia-tabs {
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
     overflow: hidden;
 }
 
-.so-tabs__nav {
+.opulentia-tabs__nav {
     display: flex;
     border-bottom: 1px solid var(--color-border);
     background-color: var(--color-secondary-dark);
     overflow-x: auto;
 }
 
-.so-tabs__tab {
+.opulentia-tabs__tab {
     flex: 1;
     padding: var(--spacing-md) var(--spacing-lg);
     background: none;
@@ -3925,7 +3925,7 @@ body.menu-open {
     white-space: nowrap;
 }
 
-.so-tabs__tab::after {
+.opulentia-tabs__tab::after {
     content: '';
     position: absolute;
     bottom: 0;
@@ -3936,60 +3936,60 @@ body.menu-open {
     transition: background-color var(--transition-fast);
 }
 
-.so-tabs__tab:hover {
+.opulentia-tabs__tab:hover {
     color: var(--color-gold);
 }
 
-.so-tabs__tab.is-active {
+.opulentia-tabs__tab.is-active {
     color: var(--color-gold);
 }
 
-.so-tabs__tab.is-active::after {
+.opulentia-tabs__tab.is-active::after {
     background-color: var(--color-gold);
 }
 
-.so-tabs__panel {
+.opulentia-tabs__panel {
     display: none;
     padding: var(--spacing-xl);
     background-color: var(--color-primary-dark);
 }
 
-.so-tabs__panel.is-active {
+.opulentia-tabs__panel.is-active {
     display: block;
 }
 
-.so-tabs__panel p:last-child {
+.opulentia-tabs__panel p:last-child {
     margin-bottom: 0;
 }
 
 /* ── Progress Bar Block ── */
-.so-progress-bars {
+.opulentia-progress-bars {
     display: flex;
     flex-direction: column;
     gap: var(--spacing-xl);
     padding: var(--spacing-lg) 0;
 }
 
-.so-progress__header {
+.opulentia-progress__header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: var(--spacing-sm);
 }
 
-.so-progress__label {
+.opulentia-progress__label {
     font-size: 0.9375rem;
     font-weight: 600;
     color: var(--color-text);
 }
 
-.so-progress__percent {
+.opulentia-progress__percent {
     font-size: 0.875rem;
     color: var(--color-gold);
     font-weight: 600;
 }
 
-.so-progress__track {
+.opulentia-progress__track {
     width: 100%;
     height: 8px;
     background-color: var(--color-border);
@@ -3997,21 +3997,21 @@ body.menu-open {
     overflow: hidden;
 }
 
-.so-progress__bar {
+.opulentia-progress__bar {
     height: 100%;
     border-radius: 4px;
     transition: width 0.8s ease;
 }
 
 /* ── Video Popup Block ── */
-.so-video-popup__wrapper {
+.opulentia-video-popup__wrapper {
     position: relative;
     border-radius: var(--radius-lg);
     overflow: hidden;
     background-color: var(--color-secondary-dark);
 }
 
-.so-video-popup__thumbnail {
+.opulentia-video-popup__thumbnail {
     position: relative;
     width: 100%;
     height: 100%;
@@ -4022,7 +4022,7 @@ body.menu-open {
     background-color: var(--color-light-gray);
 }
 
-.so-video-popup__thumbnail img {
+.opulentia-video-popup__thumbnail img {
     position: absolute;
     inset: 0;
     width: 100%;
@@ -4030,14 +4030,14 @@ body.menu-open {
     object-fit: cover;
 }
 
-.so-video-popup__placeholder {
+.opulentia-video-popup__placeholder {
     display: flex;
     align-items: center;
     justify-content: center;
     color: var(--color-medium-gray);
 }
 
-.so-video-popup__play {
+.opulentia-video-popup__play {
     position: absolute;
     inset: 0;
     display: flex;
@@ -4050,31 +4050,31 @@ body.menu-open {
     transition: transform var(--transition-fast);
 }
 
-.so-video-popup__play:hover {
+.opulentia-video-popup__play:hover {
     transform: scale(1.1);
 }
 
-.so-video-popup__content {
+.opulentia-video-popup__content {
     position: relative;
     z-index: 1;
     padding: var(--spacing-lg);
     text-align: center;
 }
 
-.so-video-popup__title {
+.opulentia-video-popup__title {
     font-size: 1.125rem;
     color: var(--color-white);
     margin-bottom: var(--spacing-xs);
 }
 
-.so-video-popup__desc {
+.opulentia-video-popup__desc {
     font-size: 0.9375rem;
     color: var(--color-medium-gray);
     margin: 0;
 }
 
 /* Video Popup Modal */
-.so-video-popup__modal {
+.opulentia-video-popup__modal {
     position: fixed;
     inset: 0;
     z-index: 99999;
@@ -4086,24 +4086,24 @@ body.menu-open {
     transition: all var(--transition-normal);
 }
 
-.so-video-popup__modal.is-open {
+.opulentia-video-popup__modal.is-open {
     opacity: 1;
     visibility: visible;
 }
 
-.so-video-popup__modal-overlay {
+.opulentia-video-popup__modal-overlay {
     position: absolute;
     inset: 0;
     background-color: rgba(0, 0, 0, 0.9);
 }
 
-.so-video-popup__modal-content {
+.opulentia-video-popup__modal-content {
     position: relative;
     width: min(900px, 90vw);
     aspect-ratio: 16/9;
 }
 
-.so-video-popup__modal-close {
+.opulentia-video-popup__modal-close {
     position: absolute;
     top: -40px;
     right: 0;
@@ -4115,23 +4115,23 @@ body.menu-open {
     transition: color var(--transition-fast);
 }
 
-.so-video-popup__modal-close:hover {
+.opulentia-video-popup__modal-close:hover {
     color: var(--color-gold);
 }
 
-.so-video-popup__modal-embed {
+.opulentia-video-popup__modal-embed {
     width: 100%;
     height: 100%;
 }
 
-.so-video-popup__modal-embed iframe {
+.opulentia-video-popup__modal-embed iframe {
     width: 100%;
     height: 100%;
     border: none;
 }
 
 /* ── Icon Box Block ── */
-.so-icon-box {
+.opulentia-icon-box {
     text-align: center;
     padding: var(--spacing-2xl) var(--spacing-lg);
     background-color: var(--color-secondary-dark);
@@ -4140,30 +4140,30 @@ body.menu-open {
     transition: transform var(--transition-normal), border-color var(--transition-normal);
 }
 
-.so-icon-box:hover {
+.opulentia-icon-box:hover {
     transform: translateY(-4px);
     border-color: var(--color-gold);
 }
 
-.so-icon-box__icon {
+.opulentia-icon-box__icon {
     margin-bottom: var(--spacing-lg);
 }
 
-.so-icon-box__title {
+.opulentia-icon-box__title {
     font-family: var(--font-heading);
     font-size: 1.25rem;
     color: var(--color-white);
     margin-bottom: var(--spacing-sm);
 }
 
-.so-icon-box__desc {
+.opulentia-icon-box__desc {
     font-size: 0.9375rem;
     color: var(--color-medium-gray);
     line-height: 1.7;
     margin-bottom: var(--spacing-lg);
 }
 
-.so-icon-box__link {
+.opulentia-icon-box__link {
     display: inline-flex;
     align-items: center;
     gap: var(--spacing-sm);
@@ -4175,17 +4175,17 @@ body.menu-open {
     transition: gap var(--transition-fast);
 }
 
-.so-icon-box__link:hover {
+.opulentia-icon-box__link:hover {
     gap: var(--spacing-md);
 }
 
 /* ── Logo Showcase Block ── */
-.so-logo-showcase {
+.opulentia-logo-showcase {
     padding: var(--section-padding-top, var(--spacing-4xl)) 0 var(--section-padding-bottom, var(--spacing-4xl));
     text-align: center;
 }
 
-.so-logo-showcase__title {
+.opulentia-logo-showcase__title {
     font-size: 1.5rem;
     color: var(--color-white);
     margin-bottom: var(--spacing-2xl);
@@ -4193,14 +4193,14 @@ body.menu-open {
     letter-spacing: 2px;
 }
 
-.so-logo-showcase__grid {
+.opulentia-logo-showcase__grid {
     display: grid;
     gap: var(--grid-gap);
     row-gap: var(--grid-gap);
     align-items: center;
 }
 
-.so-logo-showcase__item {
+.opulentia-logo-showcase__item {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -4211,22 +4211,22 @@ body.menu-open {
     transition: border-color var(--transition-fast);
 }
 
-.so-logo-showcase__item:hover {
+.opulentia-logo-showcase__item:hover {
     border-color: var(--color-gold);
 }
 
-.so-logo-showcase__item img {
+.opulentia-logo-showcase__item img {
     max-width: 120px;
     height: auto;
     opacity: 0.7;
     transition: opacity var(--transition-fast);
 }
 
-.so-logo-showcase__item:hover img {
+.opulentia-logo-showcase__item:hover img {
     opacity: 1;
 }
 
-.so-logo-showcase__placeholder {
+.opulentia-logo-showcase__placeholder {
     font-size: 1rem;
     font-weight: 600;
     color: var(--color-medium-gray);

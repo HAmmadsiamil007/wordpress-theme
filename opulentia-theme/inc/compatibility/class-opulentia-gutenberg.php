@@ -1111,19 +1111,19 @@ class Opulentia_Gutenberg {
 
         ob_start();
         ?>
-        <div class="so-counter" data-count="<?php echo esc_attr( $number ); ?>" data-duration="<?php echo esc_attr( $duration ); ?>">
-            <div class="so-counter__icon">
+        <div class="opulentia-counter" data-count="<?php echo esc_attr( $number ); ?>" data-duration="<?php echo esc_attr( $duration ); ?>">
+            <div class="opulentia-counter__icon">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="36" height="36">
                     <?php $this->feature_icon_path( $icon ); ?>
                 </svg>
             </div>
-            <div class="so-counter__number">
-                <span class="so-counter__prefix"><?php echo esc_html( $prefix ); ?></span>
-                <span class="so-counter__value">0</span>
-                <span class="so-counter__suffix"><?php echo esc_html( $suffix ); ?></span>
+            <div class="opulentia-counter__number">
+                <span class="opulentia-counter__prefix"><?php echo esc_html( $prefix ); ?></span>
+                <span class="opulentia-counter__value">0</span>
+                <span class="opulentia-counter__suffix"><?php echo esc_html( $suffix ); ?></span>
             </div>
             <?php if ( $label ) : ?>
-                <p class="so-counter__label"><?php echo esc_html( $label ); ?></p>
+                <p class="opulentia-counter__label"><?php echo esc_html( $label ); ?></p>
             <?php endif; ?>
         </div>
         <?php
@@ -1151,32 +1151,32 @@ class Opulentia_Gutenberg {
         $btn_url    = isset( $attributes['buttonUrl'] ) ? $attributes['buttonUrl'] : '#';
         $featured   = isset( $attributes['featured'] ) ? (bool) $attributes['featured'] : false;
 
-        $classes = array( 'so-pricing-card' );
+        $classes = array( 'opulentia-pricing-card' );
         if ( $featured ) {
-            $classes[] = 'so-pricing-card--featured';
+            $classes[] = 'opulentia-pricing-card--featured';
         }
 
         ob_start();
         ?>
         <div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
             <?php if ( $featured ) : ?>
-                <span class="so-pricing-card__badge"><?php esc_html_e( 'Popular', 'opulentia' ); ?></span>
+                <span class="opulentia-pricing-card__badge"><?php esc_html_e( 'Popular', 'opulentia' ); ?></span>
             <?php endif; ?>
-            <h3 class="so-pricing-card__plan"><?php echo esc_html( $plan ); ?></h3>
+            <h3 class="opulentia-pricing-card__plan"><?php echo esc_html( $plan ); ?></h3>
             <?php if ( $desc ) : ?>
-                <p class="so-pricing-card__desc"><?php echo esc_html( $desc ); ?></p>
+                <p class="opulentia-pricing-card__desc"><?php echo esc_html( $desc ); ?></p>
             <?php endif; ?>
-            <div class="so-pricing-card__price">
-                <span class="so-pricing-card__currency"><?php echo esc_html( $currency ); ?></span>
-                <span class="so-pricing-card__amount"><?php echo esc_html( $price ); ?></span>
+            <div class="opulentia-pricing-card__price">
+                <span class="opulentia-pricing-card__currency"><?php echo esc_html( $currency ); ?></span>
+                <span class="opulentia-pricing-card__amount"><?php echo esc_html( $price ); ?></span>
                 <?php if ( $interval ) : ?>
-                    <span class="so-pricing-card__interval"><?php echo esc_html( $interval ); ?></span>
+                    <span class="opulentia-pricing-card__interval"><?php echo esc_html( $interval ); ?></span>
                 <?php endif; ?>
             </div>
             <?php if ( ! empty( $features ) ) : ?>
-                <ul class="so-pricing-card__features">
+                <ul class="opulentia-pricing-card__features">
                     <?php foreach ( $features as $feature ) : ?>
-                        <li class="so-pricing-card__feature <?php echo ! empty( $feature['included'] ) ? 'is--included' : 'is--excluded'; ?>">
+                        <li class="opulentia-pricing-card__feature <?php echo ! empty( $feature['included'] ) ? 'is--included' : 'is--excluded'; ?>">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
                                 <?php if ( ! empty( $feature['included'] ) ) : ?>
                                     <path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/>
@@ -1190,7 +1190,7 @@ class Opulentia_Gutenberg {
                 </ul>
             <?php endif; ?>
             <?php if ( $btn_text ) : ?>
-                <a href="<?php echo esc_url( $btn_url ); ?>" class="btn btn--primary so-pricing-card__btn">
+                <a href="<?php echo esc_url( $btn_url ); ?>" class="btn btn--primary opulentia-pricing-card__btn">
                     <?php echo esc_html( $btn_text ); ?>
                 </a>
             <?php endif; ?>
@@ -1221,7 +1221,7 @@ class Opulentia_Gutenberg {
 
         ob_start();
         ?>
-        <section class="so-team">
+        <section class="opulentia-team">
             <div class="container">
                 <?php if ( $title || $subtitle ) : ?>
                     <div class="section-header">
@@ -1234,27 +1234,27 @@ class Opulentia_Gutenberg {
                         <?php endif; ?>
                     </div>
                 <?php endif; ?>
-                <div class="so-team__grid" style="grid-template-columns: repeat(<?php echo esc_attr( $columns ); ?>, 1fr);">
+                <div class="opulentia-team__grid" style="grid-template-columns: repeat(<?php echo esc_attr( $columns ); ?>, 1fr);">
                     <?php foreach ( $members as $member ) : ?>
-                        <div class="so-team__card">
-                            <div class="so-team__image">
+                        <div class="opulentia-team__card">
+                            <div class="opulentia-team__image">
                                 <?php if ( ! empty( $member['imageUrl'] ) ) : ?>
                                     <img src="<?php echo esc_url( $member['imageUrl'] ); ?>" alt="<?php echo esc_attr( $member['name'] ); ?>" loading="lazy">
                                 <?php else : ?>
-                                    <div class="so-team__avatar"><?php echo esc_html( strtoupper( substr( $member['name'], 0, 2 ) ) ); ?></div>
+                                    <div class="opulentia-team__avatar"><?php echo esc_html( strtoupper( substr( $member['name'], 0, 2 ) ) ); ?></div>
                                 <?php endif; ?>
                             </div>
-                            <div class="so-team__info">
-                                <h3 class="so-team__name"><?php echo esc_html( $member['name'] ); ?></h3>
-                                <p class="so-team__role"><?php echo esc_html( $member['role'] ); ?></p>
+                            <div class="opulentia-team__info">
+                                <h3 class="opulentia-team__name"><?php echo esc_html( $member['name'] ); ?></h3>
+                                <p class="opulentia-team__role"><?php echo esc_html( $member['role'] ); ?></p>
                                 <?php if ( ! empty( $member['bio'] ) ) : ?>
-                                    <p class="so-team__bio"><?php echo esc_html( $member['bio'] ); ?></p>
+                                    <p class="opulentia-team__bio"><?php echo esc_html( $member['bio'] ); ?></p>
                                 <?php endif; ?>
                                 <?php if ( ! empty( $member['social'] ) ) : ?>
-                                    <div class="so-team__social">
+                                    <div class="opulentia-team__social">
                                         <?php foreach ( $member['social'] as $platform => $url ) : ?>
                                             <?php if ( $url ) : ?>
-                                                <a href="<?php echo esc_url( $url ); ?>" class="so-team__social-link" target="_blank" rel="noopener noreferrer" aria-label="<?php echo esc_attr( $platform ); ?>">
+                                                <a href="<?php echo esc_url( $url ); ?>" class="opulentia-team__social-link" target="_blank" rel="noopener noreferrer" aria-label="<?php echo esc_attr( $platform ); ?>">
                                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
                                                         <?php if ( 'facebook' === $platform ) : ?>
                                                             <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
@@ -1299,28 +1299,28 @@ class Opulentia_Gutenberg {
         $alignment   = isset( $attributes['alignment'] ) ? $attributes['alignment'] : 'center';
         $bg_image    = isset( $attributes['bgImageUrl'] ) ? $attributes['bgImageUrl'] : '';
 
-        $classes = array( 'so-cta', 'so-cta--' . $alignment );
+        $classes = array( 'opulentia-cta', 'opulentia-cta--' . $alignment );
         if ( $bg_image ) {
-            $classes[] = 'so-cta--has-bg';
+            $classes[] = 'opulentia-cta--has-bg';
         }
 
         ob_start();
         ?>
         <section class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
             <?php if ( $bg_image ) : ?>
-                <div class="so-cta__bg" style="background-image: url(<?php echo esc_url( $bg_image ); ?>);"></div>
-                <div class="so-cta__overlay"></div>
+                <div class="opulentia-cta__bg" style="background-image: url(<?php echo esc_url( $bg_image ); ?>);"></div>
+                <div class="opulentia-cta__overlay"></div>
             <?php endif; ?>
             <div class="container">
-                <div class="so-cta__content">
+                <div class="opulentia-cta__content">
                     <?php if ( $title ) : ?>
-                        <h2 class="so-cta__title"><?php echo esc_html( $title ); ?></h2>
+                        <h2 class="opulentia-cta__title"><?php echo esc_html( $title ); ?></h2>
                     <?php endif; ?>
                     <?php if ( $description ) : ?>
-                        <p class="so-cta__description"><?php echo esc_html( $description ); ?></p>
+                        <p class="opulentia-cta__description"><?php echo esc_html( $description ); ?></p>
                     <?php endif; ?>
                     <?php if ( $btn_text ) : ?>
-                        <a href="<?php echo esc_url( $btn_url ); ?>" class="btn btn--primary so-cta__btn">
+                        <a href="<?php echo esc_url( $btn_url ); ?>" class="btn btn--primary opulentia-cta__btn">
                             <?php echo esc_html( $btn_text ); ?>
                         </a>
                     <?php endif; ?>
@@ -1352,22 +1352,22 @@ class Opulentia_Gutenberg {
 
         ob_start();
         ?>
-        <section class="so-logo-showcase">
+        <section class="opulentia-logo-showcase">
             <div class="container">
                 <?php if ( $title ) : ?>
-                    <h2 class="so-logo-showcase__title"><?php echo esc_html( $title ); ?></h2>
+                    <h2 class="opulentia-logo-showcase__title"><?php echo esc_html( $title ); ?></h2>
                 <?php endif; ?>
-                <div class="so-logo-showcase__grid" style="grid-template-columns: repeat(<?php echo esc_attr( $columns ); ?>, 1fr);">
+                <div class="opulentia-logo-showcase__grid" style="grid-template-columns: repeat(<?php echo esc_attr( $columns ); ?>, 1fr);">
                     <?php foreach ( $logos as $logo ) : ?>
                         <?php
                         $logo_html = '';
                         if ( ! empty( $logo['imageUrl'] ) ) {
                             $logo_html = '<img src="' . esc_url( $logo['imageUrl'] ) . '" alt="' . esc_attr( $logo['title'] ) . '" loading="lazy">';
                         } else {
-                            $logo_html = '<span class="so-logo-showcase__placeholder">' . esc_html( $logo['title'] ) . '</span>';
+                            $logo_html = '<span class="opulentia-logo-showcase__placeholder">' . esc_html( $logo['title'] ) . '</span>';
                         }
                         ?>
-                        <div class="so-logo-showcase__item">
+                        <div class="opulentia-logo-showcase__item">
                             <?php if ( ! empty( $logo['link'] ) ) : ?>
                                 <a href="<?php echo esc_url( $logo['link'] ); ?>" target="_blank" rel="noopener noreferrer">
                                     <?php echo $logo_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
@@ -1405,7 +1405,7 @@ class Opulentia_Gutenberg {
 
         ob_start();
         ?>
-        <section class="so-faq">
+        <section class="opulentia-faq">
             <div class="container">
                 <?php if ( $title || $subtitle ) : ?>
                     <div class="section-header">
@@ -1418,14 +1418,14 @@ class Opulentia_Gutenberg {
                         <?php endif; ?>
                     </div>
                 <?php endif; ?>
-                <div class="so-faq__list" itemscope="" itemtype="https://schema.org/FAQPage">
+                <div class="opulentia-faq__list" itemscope="" itemtype="https://schema.org/FAQPage">
                     <?php foreach ( $items as $index => $item ) : ?>
-                        <div class="so-faq__item" itemscope="" itemprop="mainEntity" itemtype="https://schema.org/Question">
-                            <button class="so-faq__question" aria-expanded="false" aria-controls="so-faq-answer-<?php echo esc_attr( $index ); ?>">
+                        <div class="opulentia-faq__item" itemscope="" itemprop="mainEntity" itemtype="https://schema.org/Question">
+                            <button class="opulentia-faq__question" aria-expanded="false" aria-controls="opulentia-faq-answer-<?php echo esc_attr( $index ); ?>">
                                 <span itemprop="name"><?php echo esc_html( $item['question'] ); ?></span>
-                                <svg class="so-faq__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M9 18l6-6-6-6"/></svg>
+                                <svg class="opulentia-faq__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M9 18l6-6-6-6"/></svg>
                             </button>
-                            <div id="so-faq-answer-<?php echo esc_attr( $index ); ?>" class="so-faq__answer" itemscope="" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer" role="region">
+                            <div id="opulentia-faq-answer-<?php echo esc_attr( $index ); ?>" class="opulentia-faq__answer" itemscope="" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer" role="region">
                                 <div itemprop="text"><?php echo wp_kses_post( wpautop( $item['answer'] ) ); ?></div>
                             </div>
                         </div>
@@ -1456,23 +1456,23 @@ class Opulentia_Gutenberg {
 
         ob_start();
         ?>
-        <div class="so-tabs">
-            <div class="so-tabs__nav" role="tablist">
+        <div class="opulentia-tabs">
+            <div class="opulentia-tabs__nav" role="tablist">
                 <?php foreach ( $tabs as $index => $tab ) : ?>
-                    <button class="so-tabs__tab <?php echo 0 === $index ? 'is-active' : ''; ?>"
+                    <button class="opulentia-tabs__tab <?php echo 0 === $index ? 'is-active' : ''; ?>"
                             role="tab"
                             aria-selected="<?php echo 0 === $index ? 'true' : 'false'; ?>"
-                            aria-controls="so-tab-panel-<?php echo esc_attr( $index ); ?>"
-                            id="so-tab-<?php echo esc_attr( $index ); ?>">
+                            aria-controls="opulentia-tab-panel-<?php echo esc_attr( $index ); ?>"
+                            id="opulentia-tab-<?php echo esc_attr( $index ); ?>">
                         <?php echo esc_html( $tab['title'] ); ?>
                     </button>
                 <?php endforeach; ?>
             </div>
             <?php foreach ( $tabs as $index => $tab ) : ?>
-                <div class="so-tabs__panel <?php echo 0 === $index ? 'is-active' : ''; ?>"
+                <div class="opulentia-tabs__panel <?php echo 0 === $index ? 'is-active' : ''; ?>"
                      role="tabpanel"
-                     aria-labelledby="so-tab-<?php echo esc_attr( $index ); ?>"
-                     id="so-tab-panel-<?php echo esc_attr( $index ); ?>">
+                     aria-labelledby="opulentia-tab-<?php echo esc_attr( $index ); ?>"
+                     id="opulentia-tab-panel-<?php echo esc_attr( $index ); ?>">
                     <?php echo wp_kses_post( wpautop( $tab['content'] ) ); ?>
                 </div>
             <?php endforeach; ?>
@@ -1500,23 +1500,23 @@ class Opulentia_Gutenberg {
 
         ob_start();
         ?>
-        <div class="so-progress-bars">
+        <div class="opulentia-progress-bars">
             <?php foreach ( $items as $item ) : ?>
                 <?php
                 $label     = isset( $item['label'] ) ? $item['label'] : '';
                 $percent   = isset( $item['percentage'] ) ? absint( $item['percentage'] ) : 0;
                 $color     = isset( $item['color'] ) ? $item['color'] : '#c9a96e';
-                $bar_id    = 'so-progress-' . wp_rand( 1000, 9999 );
+                $bar_id    = 'opulentia-progress-' . wp_rand( 1000, 9999 );
                 ?>
-                <div class="so-progress">
+                <div class="opulentia-progress">
                     <?php if ( $label ) : ?>
-                        <div class="so-progress__header">
-                            <span class="so-progress__label"><?php echo esc_html( $label ); ?></span>
-                            <span class="so-progress__percent"><?php echo esc_html( $percent ); ?>%</span>
+                        <div class="opulentia-progress__header">
+                            <span class="opulentia-progress__label"><?php echo esc_html( $label ); ?></span>
+                            <span class="opulentia-progress__percent"><?php echo esc_html( $percent ); ?>%</span>
                         </div>
                     <?php endif; ?>
-                    <div class="so-progress__track">
-                        <div class="so-progress__bar"
+                    <div class="opulentia-progress__track">
+                        <div class="opulentia-progress__bar"
                              id="<?php echo esc_attr( $bar_id ); ?>"
                              data-width="<?php echo esc_attr( $percent ); ?>"
                              style="width: 0%; background-color: <?php echo esc_attr( $color ); ?>;">
@@ -1558,17 +1558,17 @@ class Opulentia_Gutenberg {
 
         ob_start();
         ?>
-        <div class="so-video-popup">
-            <div class="so-video-popup__wrapper" style="aspect-ratio: <?php echo esc_attr( $aspect ); ?>;">
-                <div class="so-video-popup__thumbnail">
+        <div class="opulentia-video-popup">
+            <div class="opulentia-video-popup__wrapper" style="aspect-ratio: <?php echo esc_attr( $aspect ); ?>;">
+                <div class="opulentia-video-popup__thumbnail">
                     <?php if ( $thumb_url ) : ?>
                         <img src="<?php echo esc_url( $thumb_url ); ?>" alt="<?php echo esc_attr( $title ); ?>" loading="lazy">
                     <?php else : ?>
-                        <div class="so-video-popup__placeholder">
+                        <div class="opulentia-video-popup__placeholder">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" width="64" height="64"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16" fill="currentColor" stroke="none"/></svg>
                         </div>
                     <?php endif; ?>
-                    <button class="so-video-popup__play" aria-label="<?php esc_attr_e( 'Play video', 'opulentia' ); ?>" data-embed="<?php echo esc_url( $embed_url ); ?>">
+                    <button class="opulentia-video-popup__play" aria-label="<?php esc_attr_e( 'Play video', 'opulentia' ); ?>" data-embed="<?php echo esc_url( $embed_url ); ?>">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="60" height="60">
                             <circle cx="12" cy="12" r="10" fill="rgba(0,0,0,0.6)" stroke="#fff" stroke-width="1.5"/>
                             <polygon points="10 8 16 12 10 16" fill="#fff" stroke="none"/>
@@ -1576,24 +1576,24 @@ class Opulentia_Gutenberg {
                     </button>
                 </div>
                 <?php if ( $title || $description ) : ?>
-                    <div class="so-video-popup__content">
+                    <div class="opulentia-video-popup__content">
                         <?php if ( $title ) : ?>
-                            <h3 class="so-video-popup__title"><?php echo esc_html( $title ); ?></h3>
+                            <h3 class="opulentia-video-popup__title"><?php echo esc_html( $title ); ?></h3>
                         <?php endif; ?>
                         <?php if ( $description ) : ?>
-                            <p class="so-video-popup__desc"><?php echo esc_html( $description ); ?></p>
+                            <p class="opulentia-video-popup__desc"><?php echo esc_html( $description ); ?></p>
                         <?php endif; ?>
                     </div>
                 <?php endif; ?>
             </div>
 
-            <div class="so-video-popup__modal" aria-hidden="true">
-                <div class="so-video-popup__modal-overlay"></div>
-                <div class="so-video-popup__modal-content">
-                    <button class="so-video-popup__modal-close" aria-label="<?php esc_attr_e( 'Close', 'opulentia' ); ?>">
+            <div class="opulentia-video-popup__modal" aria-hidden="true">
+                <div class="opulentia-video-popup__modal-overlay"></div>
+                <div class="opulentia-video-popup__modal-content">
+                    <button class="opulentia-video-popup__modal-close" aria-label="<?php esc_attr_e( 'Close', 'opulentia' ); ?>">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
                     </button>
-                    <div class="so-video-popup__modal-embed">
+                    <div class="opulentia-video-popup__modal-embed">
                         <iframe src="" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
                     </div>
                 </div>
@@ -1624,20 +1624,20 @@ class Opulentia_Gutenberg {
 
         ob_start();
         ?>
-        <div class="so-icon-box">
-            <div class="so-icon-box__icon" style="color: <?php echo esc_attr( $icon_color ); ?>;">
+        <div class="opulentia-icon-box">
+            <div class="opulentia-icon-box__icon" style="color: <?php echo esc_attr( $icon_color ); ?>;">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="40" height="40">
                     <?php $this->feature_icon_path( $icon ); ?>
                 </svg>
             </div>
             <?php if ( $title ) : ?>
-                <h3 class="so-icon-box__title"><?php echo esc_html( $title ); ?></h3>
+                <h3 class="opulentia-icon-box__title"><?php echo esc_html( $title ); ?></h3>
             <?php endif; ?>
             <?php if ( $description ) : ?>
-                <p class="so-icon-box__desc"><?php echo esc_html( $description ); ?></p>
+                <p class="opulentia-icon-box__desc"><?php echo esc_html( $description ); ?></p>
             <?php endif; ?>
             <?php if ( $show_btn && $btn_text ) : ?>
-                <a href="<?php echo esc_url( $btn_url ); ?>" class="so-icon-box__link">
+                <a href="<?php echo esc_url( $btn_url ); ?>" class="opulentia-icon-box__link">
                     <?php echo esc_html( $btn_text ); ?>
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                 </a>
@@ -1668,7 +1668,7 @@ class Opulentia_Gutenberg {
             'wp-blocks',
             '( function() {
     function setProgressBars() {
-        var bars = document.querySelectorAll( ".so-progress__bar" );
+        var bars = document.querySelectorAll( ".opulentia-progress__bar" );
         bars.forEach( function( bar ) {
             var width = bar.getAttribute( "data-width" );
             if ( width ) {
@@ -1694,16 +1694,16 @@ class Opulentia_Gutenberg {
             'opulentia-editor',
             '
                 /* ── Editor-only root variables ── */
-                .editor-styles-wrapper .so-counter,
-                .editor-styles-wrapper .so-pricing-card,
-                .editor-styles-wrapper .so-team,
-                .editor-styles-wrapper .so-cta,
-                .editor-styles-wrapper .so-faq,
-                .editor-styles-wrapper .so-tabs,
-                .editor-styles-wrapper .so-progress-bars,
-                .editor-styles-wrapper .so-video-popup,
-                .editor-styles-wrapper .so-icon-box,
-                .editor-styles-wrapper .so-logo-showcase {
+                .editor-styles-wrapper .opulentia-counter,
+                .editor-styles-wrapper .opulentia-pricing-card,
+                .editor-styles-wrapper .opulentia-team,
+                .editor-styles-wrapper .opulentia-cta,
+                .editor-styles-wrapper .opulentia-faq,
+                .editor-styles-wrapper .opulentia-tabs,
+                .editor-styles-wrapper .opulentia-progress-bars,
+                .editor-styles-wrapper .opulentia-video-popup,
+                .editor-styles-wrapper .opulentia-icon-box,
+                .editor-styles-wrapper .opulentia-logo-showcase {
                     --color-primary-dark: #1a1a1a;
                     --color-secondary-dark: #111111;
                     --color-gold: #c9a96e;
@@ -1745,7 +1745,7 @@ class Opulentia_Gutenberg {
                     margin-right: auto;
                 }
 
-                .editor-styles-wrapper .so-counter {
+                .editor-styles-wrapper .opulentia-counter {
                     max-width: 320px;
                     margin-left: auto;
                     margin-right: auto;
@@ -1754,53 +1754,53 @@ class Opulentia_Gutenberg {
                     padding: 24px;
                 }
 
-                .editor-styles-wrapper .so-pricing-card {
+                .editor-styles-wrapper .opulentia-pricing-card {
                     max-width: 380px;
                     margin-left: auto;
                     margin-right: auto;
                 }
 
-                .editor-styles-wrapper .so-icon-box {
+                .editor-styles-wrapper .opulentia-icon-box {
                     max-width: 360px;
                     margin-left: auto;
                     margin-right: auto;
                 }
 
-                .editor-styles-wrapper .so-team {
+                .editor-styles-wrapper .opulentia-team {
                     padding: 48px 0;
                 }
 
-                .editor-styles-wrapper .so-team__grid {
+                .editor-styles-wrapper .opulentia-team__grid {
                     grid-template-columns: repeat(3, 1fr) !important;
                 }
 
-                .editor-styles-wrapper .so-cta {
+                .editor-styles-wrapper .opulentia-cta {
                     border-radius: 8px;
                 }
 
-                .editor-styles-wrapper .so-faq {
+                .editor-styles-wrapper .opulentia-faq {
                     max-width: 800px;
                     margin-left: auto;
                     margin-right: auto;
                 }
 
-                .editor-styles-wrapper .so-tabs {
+                .editor-styles-wrapper .opulentia-tabs {
                     max-width: 760px;
                     margin-left: auto;
                     margin-right: auto;
                 }
 
-                .editor-styles-wrapper .so-progress-bars {
+                .editor-styles-wrapper .opulentia-progress-bars {
                     max-width: 600px;
                     margin-left: auto;
                     margin-right: auto;
                 }
 
-                .editor-styles-wrapper .so-logo-showcase__grid {
+                .editor-styles-wrapper .opulentia-logo-showcase__grid {
                     grid-template-columns: repeat(4, 1fr) !important;
                 }
 
-                .editor-styles-wrapper .so-video-popup__wrapper {
+                .editor-styles-wrapper .opulentia-video-popup__wrapper {
                     max-width: 700px;
                     margin-left: auto;
                     margin-right: auto;
@@ -1829,7 +1829,7 @@ class Opulentia_Gutenberg {
                 }
 
                 /* ── Interactive block visual hints in editor ── */
-                .editor-styles-wrapper .so-faq__item::after {
+                .editor-styles-wrapper .opulentia-faq__item::after {
                     content: "\25B6 Click to toggle";
                     display: block;
                     font-size: 0.75rem;
@@ -1840,25 +1840,25 @@ class Opulentia_Gutenberg {
                     font-style: italic;
                 }
 
-                .editor-styles-wrapper .so-faq__item.is-open::after {
+                .editor-styles-wrapper .opulentia-faq__item.is-open::after {
                     display: none;
                 }
 
-                .editor-styles-wrapper .so-tabs__panel {
+                .editor-styles-wrapper .opulentia-tabs__panel {
                     min-height: 60px;
                 }
 
-                .editor-styles-wrapper .so-video-popup__play {
+                .editor-styles-wrapper .opulentia-video-popup__play {
                     cursor: default;
                 }
 
                 /* ── Placeholder text for empty content ── */
-                .editor-styles-wrapper .so-counter__value:empty::before {
+                .editor-styles-wrapper .opulentia-counter__value:empty::before {
                     content: "100";
                     opacity: 0.4;
                 }
 
-                .editor-styles-wrapper .so-counter__label:empty::before {
+                .editor-styles-wrapper .opulentia-counter__label:empty::before {
                     content: "Counter Label";
                     opacity: 0.4;
                 }
@@ -1872,28 +1872,28 @@ class Opulentia_Gutenberg {
                     padding: 24px !important;
                 }
 
-                .block-editor-block-preview__content .so-team__grid {
+                .block-editor-block-preview__content .opulentia-team__grid {
                     grid-template-columns: repeat(2, 1fr) !important;
                 }
 
-                .block-editor-block-preview__content .so-logo-showcase__grid {
+                .block-editor-block-preview__content .opulentia-logo-showcase__grid {
                     grid-template-columns: repeat(3, 1fr) !important;
                 }
 
-                .block-editor-block-preview__content .so-pricing-card {
+                .block-editor-block-preview__content .opulentia-pricing-card {
                     padding: 24px !important;
                 }
 
-                .block-editor-block-preview__content .so-pricing-card__amount {
+                .block-editor-block-preview__content .opulentia-pricing-card__amount {
                     font-size: 2rem !important;
                 }
 
                 /* ── Narrow container (≤ 640px) adaptations ── */
                 @container narrow (max-width: 640px) {
-                    .editor-styles-wrapper .so-team__grid {
+                    .editor-styles-wrapper .opulentia-team__grid {
                         grid-template-columns: repeat(2, 1fr) !important;
                     }
-                    .editor-styles-wrapper .so-logo-showcase__grid {
+                    .editor-styles-wrapper .opulentia-logo-showcase__grid {
                         grid-template-columns: repeat(3, 1fr) !important;
                     }
                     .editor-styles-wrapper .features-bar__grid {
@@ -1908,22 +1908,22 @@ class Opulentia_Gutenberg {
                     .editor-styles-wrapper .brand-story__grid {
                         grid-template-columns: 1fr !important;
                     }
-                    .editor-styles-wrapper .so-pricing-card {
+                    .editor-styles-wrapper .opulentia-pricing-card {
                         max-width: 100% !important;
                     }
-                    .editor-styles-wrapper .so-counter {
+                    .editor-styles-wrapper .opulentia-counter {
                         max-width: 100% !important;
                     }
-                    .editor-styles-wrapper .so-icon-box {
+                    .editor-styles-wrapper .opulentia-icon-box {
                         max-width: 100% !important;
                     }
                 }
 
                 @container narrow (max-width: 480px) {
-                    .editor-styles-wrapper .so-team__grid {
+                    .editor-styles-wrapper .opulentia-team__grid {
                         grid-template-columns: 1fr !important;
                     }
-                    .editor-styles-wrapper .so-logo-showcase__grid {
+                    .editor-styles-wrapper .opulentia-logo-showcase__grid {
                         grid-template-columns: repeat(2, 1fr) !important;
                     }
                     .editor-styles-wrapper .features-bar__grid {

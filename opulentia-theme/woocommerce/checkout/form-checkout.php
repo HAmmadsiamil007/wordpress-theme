@@ -23,15 +23,15 @@ if ( ! $checkout->is_registration_enabled() && $checkout->is_registration_requir
 }
 ?>
 
-<div class="so-checkout">
-    <div class="so-checkout__inner">
-        <div class="so-checkout__form">
+<div class="opulentia-checkout">
+    <div class="opulentia-checkout__inner">
+        <div class="opulentia-checkout__form">
 
             <?php if ( $checkout->get_checkout_fields() ) : ?>
 
                 <?php do_action( 'woocommerce_checkout_before_customer_details' ); ?>
 
-                <div class="so-checkout__billing" id="customer_details">
+                <div class="opulentia-checkout__billing" id="customer_details">
                     <?php do_action( 'woocommerce_checkout_billing' ); ?>
                 </div>
 
@@ -41,9 +41,9 @@ if ( ! $checkout->is_registration_enabled() && $checkout->is_registration_requir
 
         </div>
 
-        <div class="so-checkout__sidebar">
-            <div class="so-checkout__order-review">
-                <div class="so-checkout-section-title">
+        <div class="opulentia-checkout__sidebar">
+            <div class="opulentia-checkout__order-review">
+                <div class="opulentia-checkout-section-title">
                     <?php esc_html_e( 'Your Order', 'opulentia' ); ?>
                 </div>
                 <?php do_action( 'woocommerce_checkout_order_review' ); ?>

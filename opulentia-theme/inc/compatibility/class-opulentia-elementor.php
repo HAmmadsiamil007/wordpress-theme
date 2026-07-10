@@ -1125,8 +1125,8 @@ class Opulentia_Elementor {
                         'label'     => esc_html__( 'Icon Color', 'opulentia' ),
                         'type'      => \Elementor\Controls_Manager::COLOR,
                         'selectors' => array(
-                            '{{WRAPPER}} .so-counter__icon' => 'color: {{VALUE}};',
-                            '{{WRAPPER}} .so-counter__number' => 'color: {{VALUE}};',
+                            '{{WRAPPER}} .opulentia-counter__icon' => 'color: {{VALUE}};',
+                            '{{WRAPPER}} .opulentia-counter__number' => 'color: {{VALUE}};',
                         ),
                         'default'   => '#c9a96e',
                     )
@@ -1143,19 +1143,19 @@ class Opulentia_Elementor {
                 $prefix   = $settings['prefix'];
                 $icon     = $settings['icon'];
                 ?>
-                <div class="so-counter" data-count="<?php echo esc_attr( $number ); ?>">
-                    <div class="so-counter__icon">
+                <div class="opulentia-counter" data-count="<?php echo esc_attr( $number ); ?>">
+                    <div class="opulentia-counter__icon">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="36" height="36">
                             <?php echo $this->get_feature_icon( $icon ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
                         </svg>
                     </div>
-                    <div class="so-counter__number">
-                        <span class="so-counter__prefix"><?php echo esc_html( $prefix ); ?></span>
-                        <span class="so-counter__value">0</span>
-                        <span class="so-counter__suffix"><?php echo esc_html( $suffix ); ?></span>
+                    <div class="opulentia-counter__number">
+                        <span class="opulentia-counter__prefix"><?php echo esc_html( $prefix ); ?></span>
+                        <span class="opulentia-counter__value">0</span>
+                        <span class="opulentia-counter__suffix"><?php echo esc_html( $suffix ); ?></span>
                     </div>
                     <?php if ( $label ) : ?>
-                        <p class="so-counter__label"><?php echo esc_html( $label ); ?></p>
+                        <p class="opulentia-counter__label"><?php echo esc_html( $label ); ?></p>
                     <?php endif; ?>
                 </div>
                 <?php
@@ -1346,8 +1346,8 @@ class Opulentia_Elementor {
                         'label'     => esc_html__( 'Accent Color', 'opulentia' ),
                         'type'      => \Elementor\Controls_Manager::COLOR,
                         'selectors' => array(
-                            '{{WRAPPER}} .so-pricing-card--featured' => 'border-color: {{VALUE}};',
-                            '{{WRAPPER}} .so-pricing-card__badge' => 'background: {{VALUE}};',
+                            '{{WRAPPER}} .opulentia-pricing-card--featured' => 'border-color: {{VALUE}};',
+                            '{{WRAPPER}} .opulentia-pricing-card__badge' => 'background: {{VALUE}};',
                         ),
                         'default'   => '#c9a96e',
                     )
@@ -1368,30 +1368,30 @@ class Opulentia_Elementor {
                 $btn_url   = $settings['button_url']['url'];
                 $featured  = 'yes' === $settings['featured'];
 
-                $classes = array( 'so-pricing-card' );
+                $classes = array( 'opulentia-pricing-card' );
                 if ( $featured ) {
-                    $classes[] = 'so-pricing-card--featured';
+                    $classes[] = 'opulentia-pricing-card--featured';
                 }
                 ?>
                 <div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
                     <?php if ( $featured ) : ?>
-                        <span class="so-pricing-card__badge"><?php esc_html_e( 'Popular', 'opulentia' ); ?></span>
+                        <span class="opulentia-pricing-card__badge"><?php esc_html_e( 'Popular', 'opulentia' ); ?></span>
                     <?php endif; ?>
-                    <h3 class="so-pricing-card__plan"><?php echo esc_html( $plan ); ?></h3>
+                    <h3 class="opulentia-pricing-card__plan"><?php echo esc_html( $plan ); ?></h3>
                     <?php if ( $desc ) : ?>
-                        <p class="so-pricing-card__desc"><?php echo esc_html( $desc ); ?></p>
+                        <p class="opulentia-pricing-card__desc"><?php echo esc_html( $desc ); ?></p>
                     <?php endif; ?>
-                    <div class="so-pricing-card__price">
-                        <span class="so-pricing-card__currency"><?php echo esc_html( $currency ); ?></span>
-                        <span class="so-pricing-card__amount"><?php echo esc_html( $price ); ?></span>
+                    <div class="opulentia-pricing-card__price">
+                        <span class="opulentia-pricing-card__currency"><?php echo esc_html( $currency ); ?></span>
+                        <span class="opulentia-pricing-card__amount"><?php echo esc_html( $price ); ?></span>
                         <?php if ( $interval ) : ?>
-                            <span class="so-pricing-card__interval"><?php echo esc_html( $interval ); ?></span>
+                            <span class="opulentia-pricing-card__interval"><?php echo esc_html( $interval ); ?></span>
                         <?php endif; ?>
                     </div>
                     <?php if ( ! empty( $features ) ) : ?>
-                        <ul class="so-pricing-card__features">
+                        <ul class="opulentia-pricing-card__features">
                             <?php foreach ( $features as $feature ) : ?>
-                                <li class="so-pricing-card__feature <?php echo 'yes' === $feature['included'] ? 'is--included' : 'is--excluded'; ?>">
+                                <li class="opulentia-pricing-card__feature <?php echo 'yes' === $feature['included'] ? 'is--included' : 'is--excluded'; ?>">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
                                         <?php if ( 'yes' === $feature['included'] ) : ?>
                                             <path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/>
@@ -1405,7 +1405,7 @@ class Opulentia_Elementor {
                         </ul>
                     <?php endif; ?>
                     <?php if ( $btn_text ) : ?>
-                        <a href="<?php echo esc_url( $btn_url ); ?>" class="btn btn--primary so-pricing-card__btn">
+                        <a href="<?php echo esc_url( $btn_url ); ?>" class="btn btn--primary opulentia-pricing-card__btn">
                             <?php echo esc_html( $btn_text ); ?>
                         </a>
                     <?php endif; ?>
@@ -1594,7 +1594,7 @@ class Opulentia_Elementor {
                     return;
                 }
                 ?>
-                <section class="so-team">
+                <section class="opulentia-team">
                     <div class="container">
                         <?php if ( $title || $subtitle ) : ?>
                             <div class="section-header">
@@ -1607,35 +1607,35 @@ class Opulentia_Elementor {
                                 <?php endif; ?>
                             </div>
                         <?php endif; ?>
-                        <div class="so-team__grid" style="grid-template-columns: repeat(<?php echo esc_attr( $columns ); ?>, 1fr);">
+                        <div class="opulentia-team__grid" style="grid-template-columns: repeat(<?php echo esc_attr( $columns ); ?>, 1fr);">
                             <?php foreach ( $members as $member ) : ?>
-                                <div class="so-team__card">
-                                    <div class="so-team__image">
+                                <div class="opulentia-team__card">
+                                    <div class="opulentia-team__image">
                                         <?php if ( ! empty( $member['image']['url'] ) ) : ?>
                                             <img src="<?php echo esc_url( $member['image']['url'] ); ?>" alt="<?php echo esc_attr( $member['member_name'] ); ?>" loading="lazy">
                                         <?php else : ?>
-                                            <div class="so-team__avatar"><?php echo esc_html( strtoupper( substr( $member['member_name'], 0, 2 ) ) ); ?></div>
+                                            <div class="opulentia-team__avatar"><?php echo esc_html( strtoupper( substr( $member['member_name'], 0, 2 ) ) ); ?></div>
                                         <?php endif; ?>
                                     </div>
-                                    <div class="so-team__info">
-                                        <h3 class="so-team__name"><?php echo esc_html( $member['member_name'] ); ?></h3>
-                                        <p class="so-team__role"><?php echo esc_html( $member['role'] ); ?></p>
+                                    <div class="opulentia-team__info">
+                                        <h3 class="opulentia-team__name"><?php echo esc_html( $member['member_name'] ); ?></h3>
+                                        <p class="opulentia-team__role"><?php echo esc_html( $member['role'] ); ?></p>
                                         <?php if ( ! empty( $member['bio'] ) ) : ?>
-                                            <p class="so-team__bio"><?php echo esc_html( $member['bio'] ); ?></p>
+                                            <p class="opulentia-team__bio"><?php echo esc_html( $member['bio'] ); ?></p>
                                         <?php endif; ?>
-                                        <div class="so-team__social">
+                                        <div class="opulentia-team__social">
                                             <?php if ( ! empty( $member['facebook_url']['url'] ) ) : ?>
-                                                <a href="<?php echo esc_url( $member['facebook_url']['url'] ); ?>" class="so-team__social-link" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                                                <a href="<?php echo esc_url( $member['facebook_url']['url'] ); ?>" class="opulentia-team__social-link" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
                                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
                                                 </a>
                                             <?php endif; ?>
                                             <?php if ( ! empty( $member['twitter_url']['url'] ) ) : ?>
-                                                <a href="<?php echo esc_url( $member['twitter_url']['url'] ); ?>" class="so-team__social-link" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+                                                <a href="<?php echo esc_url( $member['twitter_url']['url'] ); ?>" class="opulentia-team__social-link" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
                                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg>
                                                 </a>
                                             <?php endif; ?>
                                             <?php if ( ! empty( $member['linkedin_url']['url'] ) ) : ?>
-                                                <a href="<?php echo esc_url( $member['linkedin_url']['url'] ); ?>" class="so-team__social-link" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                                                <a href="<?php echo esc_url( $member['linkedin_url']['url'] ); ?>" class="opulentia-team__social-link" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
                                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
                                                 </a>
                                             <?php endif; ?>
@@ -1756,7 +1756,7 @@ class Opulentia_Elementor {
                     return;
                 }
                 ?>
-                <section class="so-faq">
+                <section class="opulentia-faq">
                     <div class="container">
                         <?php if ( $title || $subtitle ) : ?>
                             <div class="section-header">
@@ -1769,14 +1769,14 @@ class Opulentia_Elementor {
                                 <?php endif; ?>
                             </div>
                         <?php endif; ?>
-                        <div class="so-faq__list" itemscope="" itemtype="https://schema.org/FAQPage">
+                        <div class="opulentia-faq__list" itemscope="" itemtype="https://schema.org/FAQPage">
                             <?php foreach ( $items as $index => $item ) : ?>
-                                <div class="so-faq__item" itemscope="" itemprop="mainEntity" itemtype="https://schema.org/Question">
-                                    <button class="so-faq__question" aria-expanded="false" aria-controls="so-faq-answer-<?php echo esc_attr( $index ); ?>">
+                                <div class="opulentia-faq__item" itemscope="" itemprop="mainEntity" itemtype="https://schema.org/Question">
+                                    <button class="opulentia-faq__question" aria-expanded="false" aria-controls="opulentia-faq-answer-<?php echo esc_attr( $index ); ?>">
                                         <span itemprop="name"><?php echo esc_html( $item['question'] ); ?></span>
-                                        <svg class="so-faq__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M9 18l6-6-6-6"/></svg>
+                                        <svg class="opulentia-faq__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M9 18l6-6-6-6"/></svg>
                                     </button>
-                                    <div id="so-faq-answer-<?php echo esc_attr( $index ); ?>" class="so-faq__answer" itemscope="" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer" role="region">
+                                    <div id="opulentia-faq-answer-<?php echo esc_attr( $index ); ?>" class="opulentia-faq__answer" itemscope="" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer" role="region">
                                         <div itemprop="text"><?php echo wp_kses_post( wpautop( $item['answer'] ) ); ?></div>
                                     </div>
                                 </div>
@@ -1867,23 +1867,23 @@ class Opulentia_Elementor {
                     return;
                 }
                 ?>
-                <div class="so-tabs">
-                    <div class="so-tabs__nav" role="tablist">
+                <div class="opulentia-tabs">
+                    <div class="opulentia-tabs__nav" role="tablist">
                         <?php foreach ( $tabs as $index => $tab ) : ?>
-                            <button class="so-tabs__tab <?php echo 0 === $index ? 'is-active' : ''; ?>"
+                            <button class="opulentia-tabs__tab <?php echo 0 === $index ? 'is-active' : ''; ?>"
                                     role="tab"
                                     aria-selected="<?php echo 0 === $index ? 'true' : 'false'; ?>"
-                                    aria-controls="so-tab-panel-<?php echo esc_attr( $index ); ?>"
-                                    id="so-tab-<?php echo esc_attr( $index ); ?>">
+                                    aria-controls="opulentia-tab-panel-<?php echo esc_attr( $index ); ?>"
+                                    id="opulentia-tab-<?php echo esc_attr( $index ); ?>">
                                 <?php echo esc_html( $tab['tab_title'] ); ?>
                             </button>
                         <?php endforeach; ?>
                     </div>
                     <?php foreach ( $tabs as $index => $tab ) : ?>
-                        <div class="so-tabs__panel <?php echo 0 === $index ? 'is-active' : ''; ?>"
+                        <div class="opulentia-tabs__panel <?php echo 0 === $index ? 'is-active' : ''; ?>"
                              role="tabpanel"
-                             aria-labelledby="so-tab-<?php echo esc_attr( $index ); ?>"
-                             id="so-tab-panel-<?php echo esc_attr( $index ); ?>">
+                             aria-labelledby="opulentia-tab-<?php echo esc_attr( $index ); ?>"
+                             id="opulentia-tab-panel-<?php echo esc_attr( $index ); ?>">
                             <?php echo wp_kses_post( wpautop( $tab['tab_content'] ) ); ?>
                         </div>
                     <?php endforeach; ?>
@@ -1970,7 +1970,7 @@ class Opulentia_Elementor {
                         'label'     => esc_html__( 'Icon Color', 'opulentia' ),
                         'type'      => \Elementor\Controls_Manager::COLOR,
                         'selectors' => array(
-                            '{{WRAPPER}} .so-icon-box__icon' => 'color: {{VALUE}};',
+                            '{{WRAPPER}} .opulentia-icon-box__icon' => 'color: {{VALUE}};',
                         ),
                         'default'   => '#c9a96e',
                     )
@@ -2023,20 +2023,20 @@ class Opulentia_Elementor {
                 $btn_text    = $settings['button_text'];
                 $btn_url     = $settings['button_url']['url'];
                 ?>
-                <div class="so-icon-box">
-                    <div class="so-icon-box__icon">
+                <div class="opulentia-icon-box">
+                    <div class="opulentia-icon-box__icon">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="40" height="40">
                             <?php echo $this->get_feature_icon( $icon ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
                         </svg>
                     </div>
                     <?php if ( $title ) : ?>
-                        <h3 class="so-icon-box__title"><?php echo esc_html( $title ); ?></h3>
+                        <h3 class="opulentia-icon-box__title"><?php echo esc_html( $title ); ?></h3>
                     <?php endif; ?>
                     <?php if ( $description ) : ?>
-                        <p class="so-icon-box__desc"><?php echo esc_html( $description ); ?></p>
+                        <p class="opulentia-icon-box__desc"><?php echo esc_html( $description ); ?></p>
                     <?php endif; ?>
                     <?php if ( $show_btn && $btn_text ) : ?>
-                        <a href="<?php echo esc_url( $btn_url ); ?>" class="so-icon-box__link">
+                        <a href="<?php echo esc_url( $btn_url ); ?>" class="opulentia-icon-box__link">
                             <?php echo esc_html( $btn_text ); ?>
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                         </a>
@@ -2170,17 +2170,17 @@ class Opulentia_Elementor {
                     $embed_url = $video_url;
                 }
                 ?>
-                <div class="so-video-popup">
-                    <div class="so-video-popup__wrapper" style="aspect-ratio: <?php echo esc_attr( $aspect ); ?>;">
-                        <div class="so-video-popup__thumbnail">
+                <div class="opulentia-video-popup">
+                    <div class="opulentia-video-popup__wrapper" style="aspect-ratio: <?php echo esc_attr( $aspect ); ?>;">
+                        <div class="opulentia-video-popup__thumbnail">
                             <?php if ( $thumb_url ) : ?>
                                 <img src="<?php echo esc_url( $thumb_url ); ?>" alt="<?php echo esc_attr( $title ); ?>" loading="lazy">
                             <?php else : ?>
-                                <div class="so-video-popup__placeholder">
+                                <div class="opulentia-video-popup__placeholder">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" width="64" height="64"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16" fill="currentColor" stroke="none"/></svg>
                                 </div>
                             <?php endif; ?>
-                            <button class="so-video-popup__play" aria-label="<?php esc_attr_e( 'Play video', 'opulentia' ); ?>" data-embed="<?php echo esc_url( $embed_url ); ?>">
+                            <button class="opulentia-video-popup__play" aria-label="<?php esc_attr_e( 'Play video', 'opulentia' ); ?>" data-embed="<?php echo esc_url( $embed_url ); ?>">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="60" height="60">
                                     <circle cx="12" cy="12" r="10" fill="rgba(0,0,0,0.6)" stroke="#fff" stroke-width="1.5"/>
                                     <polygon points="10 8 16 12 10 16" fill="#fff" stroke="none"/>
@@ -2188,23 +2188,23 @@ class Opulentia_Elementor {
                             </button>
                         </div>
                         <?php if ( $title || $description ) : ?>
-                            <div class="so-video-popup__content">
+                            <div class="opulentia-video-popup__content">
                                 <?php if ( $title ) : ?>
-                                    <h3 class="so-video-popup__title"><?php echo esc_html( $title ); ?></h3>
+                                    <h3 class="opulentia-video-popup__title"><?php echo esc_html( $title ); ?></h3>
                                 <?php endif; ?>
                                 <?php if ( $description ) : ?>
-                                    <p class="so-video-popup__desc"><?php echo esc_html( $description ); ?></p>
+                                    <p class="opulentia-video-popup__desc"><?php echo esc_html( $description ); ?></p>
                                 <?php endif; ?>
                             </div>
                         <?php endif; ?>
                     </div>
-                    <div class="so-video-popup__modal" aria-hidden="true">
-                        <div class="so-video-popup__modal-overlay"></div>
-                        <div class="so-video-popup__modal-content">
-                            <button class="so-video-popup__modal-close" aria-label="<?php esc_attr_e( 'Close', 'opulentia' ); ?>">
+                    <div class="opulentia-video-popup__modal" aria-hidden="true">
+                        <div class="opulentia-video-popup__modal-overlay"></div>
+                        <div class="opulentia-video-popup__modal-content">
+                            <button class="opulentia-video-popup__modal-close" aria-label="<?php esc_attr_e( 'Close', 'opulentia' ); ?>">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
                             </button>
-                            <div class="so-video-popup__modal-embed">
+                            <div class="opulentia-video-popup__modal-embed">
                                 <iframe src="" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
                             </div>
                         </div>
@@ -2330,14 +2330,14 @@ class Opulentia_Elementor {
                     return;
                 }
                 ?>
-                <section class="so-logo-showcase">
+                <section class="opulentia-logo-showcase">
                     <div class="container">
                         <?php if ( $title ) : ?>
-                            <h2 class="so-logo-showcase__title"><?php echo esc_html( $title ); ?></h2>
+                            <h2 class="opulentia-logo-showcase__title"><?php echo esc_html( $title ); ?></h2>
                         <?php endif; ?>
-                        <div class="so-logo-showcase__grid" style="grid-template-columns: repeat(<?php echo esc_attr( $columns ); ?>, 1fr);">
+                        <div class="opulentia-logo-showcase__grid" style="grid-template-columns: repeat(<?php echo esc_attr( $columns ); ?>, 1fr);">
                             <?php foreach ( $logos as $logo ) : ?>
-                                <div class="so-logo-showcase__item">
+                                <div class="opulentia-logo-showcase__item">
                                     <?php if ( ! empty( $logo['logo_image']['url'] ) && ! empty( $logo['logo_link']['url'] ) ) : ?>
                                         <a href="<?php echo esc_url( $logo['logo_link']['url'] ); ?>" target="_blank" rel="noopener noreferrer">
                                             <img src="<?php echo esc_url( $logo['logo_image']['url'] ); ?>" alt="<?php echo esc_attr( $logo['logo_title'] ); ?>" loading="lazy">
@@ -2345,7 +2345,7 @@ class Opulentia_Elementor {
                                     <?php elseif ( ! empty( $logo['logo_image']['url'] ) ) : ?>
                                         <img src="<?php echo esc_url( $logo['logo_image']['url'] ); ?>" alt="<?php echo esc_attr( $logo['logo_title'] ); ?>" loading="lazy">
                                     <?php else : ?>
-                                        <span class="so-logo-showcase__placeholder"><?php echo esc_html( $logo['logo_title'] ); ?></span>
+                                        <span class="opulentia-logo-showcase__placeholder"><?php echo esc_html( $logo['logo_title'] ); ?></span>
                                     <?php endif; ?>
                                 </div>
                             <?php endforeach; ?>

@@ -585,8 +585,8 @@
 
     /* ── Counter Animation ── */
     function initCounterAnimations() {
-        document.querySelectorAll('.so-counter').forEach(function (counter) {
-            var valueEl = counter.querySelector('.so-counter__value');
+        document.querySelectorAll('.opulentia-counter').forEach(function (counter) {
+            var valueEl = counter.querySelector('.opulentia-counter__value');
             if (!valueEl) return;
 
             var target = parseInt(counter.dataset.count) || 100;
@@ -635,18 +635,18 @@
 
     /* ── FAQ Accordion ── */
     function initFaqAccordion() {
-        document.querySelectorAll('.so-faq__item').forEach(function (item) {
-            var question = item.querySelector('.so-faq__question');
+        document.querySelectorAll('.opulentia-faq__item').forEach(function (item) {
+            var question = item.querySelector('.opulentia-faq__question');
             if (!question) return;
 
             question.addEventListener('click', function () {
                 var isOpen = item.classList.contains('is-open');
 
                 // Close all other items
-                item.parentElement.querySelectorAll('.so-faq__item.is-open').forEach(function (openItem) {
+                item.parentElement.querySelectorAll('.opulentia-faq__item.is-open').forEach(function (openItem) {
                     if (openItem !== item) {
                         openItem.classList.remove('is-open');
-                        openItem.querySelector('.so-faq__question').setAttribute('aria-expanded', 'false');
+                        openItem.querySelector('.opulentia-faq__question').setAttribute('aria-expanded', 'false');
                     }
                 });
 
@@ -667,9 +667,9 @@
 
     /* ── Tabs ── */
     function initTabs() {
-        document.querySelectorAll('.so-tabs').forEach(function (tabsContainer) {
-            var tabs = tabsContainer.querySelectorAll('.so-tabs__tab');
-            var panels = tabsContainer.querySelectorAll('.so-tabs__panel');
+        document.querySelectorAll('.opulentia-tabs').forEach(function (tabsContainer) {
+            var tabs = tabsContainer.querySelectorAll('.opulentia-tabs__tab');
+            var panels = tabsContainer.querySelectorAll('.opulentia-tabs__panel');
 
             tabs.forEach(function (tab) {
                 tab.addEventListener('click', function () {
@@ -695,7 +695,7 @@
                     if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
                         e.preventDefault();
                         var next = tab.nextElementSibling;
-                        if (next && next.classList.contains('so-tabs__tab')) {
+                        if (next && next.classList.contains('opulentia-tabs__tab')) {
                             next.click();
                             next.focus();
                         }
@@ -703,7 +703,7 @@
                     if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
                         e.preventDefault();
                         var prev = tab.previousElementSibling;
-                        if (prev && prev.classList.contains('so-tabs__tab')) {
+                        if (prev && prev.classList.contains('opulentia-tabs__tab')) {
                             prev.click();
                             prev.focus();
                         }
@@ -715,8 +715,8 @@
 
     /* ── Progress Bar Animation ── */
     function initProgressBars() {
-        document.querySelectorAll('.so-progress').forEach(function (progress) {
-            var bar = progress.querySelector('.so-progress__bar');
+        document.querySelectorAll('.opulentia-progress').forEach(function (progress) {
+            var bar = progress.querySelector('.opulentia-progress__bar');
             if (!bar) return;
 
             var targetWidth = parseInt(bar.dataset.width) || 0;
@@ -746,12 +746,12 @@
 
     /* ── Video Popup Lightbox ── */
     function initVideoPopups() {
-        document.querySelectorAll('.so-video-popup').forEach(function (container) {
-            var playBtn = container.querySelector('.so-video-popup__play');
-            var modal = container.querySelector('.so-video-popup__modal');
-            var closeBtn = container.querySelector('.so-video-popup__modal-close');
-            var overlay = container.querySelector('.so-video-popup__modal-overlay');
-            var iframe = container.querySelector('.so-video-popup__modal-embed iframe');
+        document.querySelectorAll('.opulentia-video-popup').forEach(function (container) {
+            var playBtn = container.querySelector('.opulentia-video-popup__play');
+            var modal = container.querySelector('.opulentia-video-popup__modal');
+            var closeBtn = container.querySelector('.opulentia-video-popup__modal-close');
+            var overlay = container.querySelector('.opulentia-video-popup__modal-overlay');
+            var iframe = container.querySelector('.opulentia-video-popup__modal-embed iframe');
 
             if (!playBtn || !modal || !iframe) return;
 
