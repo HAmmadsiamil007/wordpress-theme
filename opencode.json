@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "context7": {
+      "type": "builtin"
+    },
+    "dembrandt": {
+      "command": "npx",
+      "args": ["-y", "--package", "dembrandt", "dembrandt-mcp"]
+    }
+  }
+}
