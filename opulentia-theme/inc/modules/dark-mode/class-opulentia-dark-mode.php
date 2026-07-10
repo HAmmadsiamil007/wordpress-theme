@@ -13,7 +13,7 @@
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
-    exit;
+	exit;
 }
 
 /**
@@ -21,101 +21,101 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Opulentia_Dark_Mode {
 
-    /**
-     * Singleton instance.
-     *
-     * @var self|null
-     */
-    private static $instance = null;
+	/**
+	 * Singleton instance.
+	 *
+	 * @var self|null
+	 */
+	private static $instance = null;
 
-    /**
-     * Returns the singleton instance.
-     *
-     * @return self
-     */
-    public static function get_instance() {
-        if ( is_null( self::$instance ) ) {
-            self::$instance = new self();
-        }
-        return self::$instance;
-    }
+	/**
+	 * Returns the singleton instance.
+	 *
+	 * @return self
+	 */
+	public static function get_instance() {
+		if ( is_null( self::$instance ) ) {
+			self::$instance = new self();
+		}
+		return self::$instance;
+	}
 
-    /**
-     * Constructor — registers hooks.
-     */
-    private function __construct() {
-        add_action( 'wp_head', array( $this, 'output_dark_mode_script' ), 0 );
-        add_action( 'wp_enqueue_scripts', array( $this, 'inline_css' ), 100 );
-        add_filter( 'body_class', array( $this, 'body_class' ) );
-    }
+	/**
+	 * Constructor — registers hooks.
+	 */
+	private function __construct() {
+		add_action( 'wp_head', array( $this, 'output_dark_mode_script' ), 0 );
+		add_action( 'wp_enqueue_scripts', array( $this, 'inline_css' ), 100 );
+		add_filter( 'body_class', array( $this, 'body_class' ) );
+	}
 
-    /**
-     * Get dark mode mode.
-     *
-     * @return string 'auto', 'manual', 'off'
-     */
-    private function get_mode() {
-        $mode = Opulentia_get_option( 'dark-mode-mode', 'off' );
-        return in_array( $mode, array( 'auto', 'manual', 'off' ), true ) ? $mode : 'off';
-    }
+	/**
+	 * Get dark mode mode.
+	 *
+	 * @return string 'auto', 'manual', 'off'
+	 */
+	private function get_mode() {
+		$mode = Opulentia_get_option( 'dark-mode-mode', 'off' );
+		return in_array( $mode, array( 'auto', 'manual', 'off' ), true ) ? $mode : 'off';
+	}
 
-    /**
-     * Output dark mode detection script in head.
-     */
-    public function output_dark_mode_script() {
-        $mode = $this->get_mode();
+	/**
+	 * Output dark mode detection script in head.
+	 */
+	public function output_dark_mode_script() {
+		$mode = $this->get_mode();
 
-        if ( 'off' === $mode ) {
-            return;
-        }
-        ?>
-        <script>
-        (function() {
-            var mode = '<?php echo esc_js( $mode ); ?>';
-            var isDark = false;
+		if ( 'off' === $mode ) {
+			return;
+		}
+		?>
+		<script>
+		(function() {
+			var mode = '<?php echo esc_js( $mode ); ?>';
+			var isDark = false;
 
-            if (mode === 'auto') {
-                isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            } else if (mode === 'manual') {
-                isDark = localStorage.getItem('Opulentia_dark_mode') === 'true';
-            }
+			if (mode === 'auto') {
+				isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+			} else if (mode === 'manual') {
+				isDark = localStorage.getItem('Opulentia_dark_mode') === 'true';
+			}
 
-            if (isDark) {
-                document.documentElement.classList.add('opulentia-dark-mode');
-            }
+			if (isDark) {
+				document.documentElement.classList.add('opulentia-dark-mode');
+			}
 
-            if (mode === 'auto') {
-                window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
-                    if (e.matches) {
-                        document.documentElement.classList.add('opulentia-dark-mode');
-                    } else {
-                        document.documentElement.classList.remove('opulentia-dark-mode');
-                    }
-                });
-            }
-        })();
-        </script>
-        <?php
-    }
+			if (mode === 'auto') {
+				window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+					if (e.matches) {
+						document.documentElement.classList.add('opulentia-dark-mode');
+					} else {
+						document.documentElement.classList.remove('opulentia-dark-mode');
+					}
+				});
+			}
+		})();
+		</script>
+		<?php
+	}
 
-    /**
-     * Output dark mode inline CSS.
-     */
-    public function inline_css() {
-        $mode = $this->get_mode();
+	/**
+	 * Output dark mode inline CSS.
+	 */
+	public function inline_css() {
+		$mode = $this->get_mode();
 
-        if ( 'off' === $mode ) {
-            return;
-        }
+		if ( 'off' === $mode ) {
+			return;
+		}
 
-        $bg_color     = Opulentia_get_option( 'dark-mode-bg-color', '#0a0a0a' );
-        $text_color   = Opulentia_get_option( 'dark-mode-text-color', '#e0e0e0' );
-        $link_color   = Opulentia_get_option( 'dark-mode-link-color', '#c9a96e' );
-        $heading_color = Opulentia_get_option( 'dark-mode-heading-color', '#ffffff' );
-        $border_color = Opulentia_get_option( 'dark-mode-border-color', '#2a2a2a' );
-        $image_brightness = (int) Opulentia_get_option( 'dark-mode-image-brightness', 85 );
+		$bg_color         = Opulentia_get_option( 'dark-mode-bg-color', '#0a0a0a' );
+		$text_color       = Opulentia_get_option( 'dark-mode-text-color', '#e0e0e0' );
+		$link_color       = Opulentia_get_option( 'dark-mode-link-color', '#c9a96e' );
+		$heading_color    = Opulentia_get_option( 'dark-mode-heading-color', '#ffffff' );
+		$border_color     = Opulentia_get_option( 'dark-mode-border-color', '#2a2a2a' );
+		$image_brightness = (int) Opulentia_get_option( 'dark-mode-image-brightness', 85 );
 
-        $css = '
+		$css = '
         .opulentia-dark-mode {
             --color-primary-dark: ' . $bg_color . ';
             --color-secondary-dark: #0e0e0e;
@@ -142,8 +142,8 @@ class Opulentia_Dark_Mode {
         }
         ';
 
-        // Dark mode toggle button styles.
-        $css .= '
+		// Dark mode toggle button styles.
+		$css .= '
         .dark-mode-toggle {
             background: none;
             border: none;
@@ -164,24 +164,24 @@ class Opulentia_Dark_Mode {
         }
         ';
 
-        wp_add_inline_style( 'opulentia-style', $css );
-    }
+		wp_add_inline_style( 'opulentia-style', $css );
+	}
 
-    /**
-     * Add dark mode body class.
-     *
-     * @param array $classes Body classes.
-     * @return array
-     */
-    public function body_class( $classes ) {
-        $mode = $this->get_mode();
+	/**
+	 * Add dark mode body class.
+	 *
+	 * @param array $classes Body classes.
+	 * @return array
+	 */
+	public function body_class( $classes ) {
+		$mode = $this->get_mode();
 
-        if ( 'manual' === $mode ) {
-            $classes[] = 'dark-mode-manual';
-        } elseif ( 'auto' === $mode ) {
-            $classes[] = 'dark-mode-auto';
-        }
+		if ( 'manual' === $mode ) {
+			$classes[] = 'dark-mode-manual';
+		} elseif ( 'auto' === $mode ) {
+			$classes[] = 'dark-mode-auto';
+		}
 
-        return $classes;
-    }
+		return $classes;
+	}
 }

@@ -1,125 +1,163 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) {
-    exit;
+	exit;
 }
 
 class Opulentia_LifterLMS {
 
-    private static $instance = null;
+	private static $instance = null;
 
-    public static function get_instance() {
-        if ( is_null( self::$instance ) ) {
-            self::$instance = new self();
-        }
-        return self::$instance;
-    }
+	public static function get_instance() {
+		if ( is_null( self::$instance ) ) {
+			self::$instance = new self();
+		}
+		return self::$instance;
+	}
 
-    private function __construct() {
-        if ( ! function_exists( 'llms' ) ) {
-            return;
-        }
-        add_action( 'after_setup_theme', array( $this, 'add_theme_support' ) );
-        add_action( 'customize_register', array( $this, 'register_customizer' ), 30 );
-        add_action( 'wp_enqueue_scripts', array( $this, 'inline_css' ), 120 );
-        add_filter( 'body_class', array( $this, 'body_class' ) );
-        add_filter( 'llms_get_loop_defaults', array( $this, 'loop_columns' ) );
-    }
+	private function __construct() {
+		if ( ! function_exists( 'llms' ) ) {
+			return;
+		}
+		add_action( 'after_setup_theme', array( $this, 'add_theme_support' ) );
+		add_action( 'customize_register', array( $this, 'register_customizer' ), 30 );
+		add_action( 'wp_enqueue_scripts', array( $this, 'inline_css' ), 120 );
+		add_filter( 'body_class', array( $this, 'body_class' ) );
+		add_filter( 'llms_get_loop_defaults', array( $this, 'loop_columns' ) );
+	}
 
-    public function add_theme_support() {
-        add_theme_support( 'lifterlms-sidebar-support' );
-        add_theme_support( 'lifterlms' );
-    }
+	public function add_theme_support() {
+		add_theme_support( 'lifterlms-sidebar-support' );
+		add_theme_support( 'lifterlms' );
+	}
 
-    public function register_customizer( $wp_customize ) {
-        $wp_customize->add_section( 'opulentia_lifterlms', array(
-            'title'    => __( 'LifterLMS', 'opulentia' ),
-            'panel'    => 'Opulentia_global_settings',
-            'priority' => 85,
-        ) );
+	public function register_customizer( $wp_customize ) {
+		$wp_customize->add_section(
+			'opulentia_lifterlms',
+			array(
+				'title'    => __( 'LifterLMS', 'opulentia' ),
+				'panel'    => 'Opulentia_global_settings',
+				'priority' => 85,
+			)
+		);
 
-        $wp_customize->add_setting( 'lifterlms-course-columns', array(
-            'default'           => 3,
-            'sanitize_callback' => 'absint',
-            'transport'         => 'refresh',
-        ) );
-        $wp_customize->add_control( 'lifterlms-course-columns', array(
-            'label'       => __( 'Course Grid Columns', 'opulentia' ),
-            'section'     => 'opulentia_lifterlms',
-            'type'        => 'select',
-            'choices'     => array( 1 => 1, 2 => 2, 3 => 3, 4 => 4 ),
-        ) );
+		$wp_customize->add_setting(
+			'lifterlms-course-columns',
+			array(
+				'default'           => 3,
+				'sanitize_callback' => 'absint',
+				'transport'         => 'refresh',
+			)
+		);
+		$wp_customize->add_control(
+			'lifterlms-course-columns',
+			array(
+				'label'   => __( 'Course Grid Columns', 'opulentia' ),
+				'section' => 'opulentia_lifterlms',
+				'type'    => 'select',
+				'choices' => array(
+					1 => 1,
+					2 => 2,
+					3 => 3,
+					4 => 4,
+				),
+			)
+		);
 
-        $wp_customize->add_setting( 'lifterlms-header-color', array(
-            'default'           => 'var(--color-gold)',
-            'sanitize_callback' => 'sanitize_text_field',
-            'transport'         => 'postMessage',
-        ) );
-        $wp_customize->add_control( 'lifterlms-header-color', array(
-            'label'       => __( 'Course / Lesson Title Color', 'opulentia' ),
-            'section'     => 'opulentia_lifterlms',
-            'type'        => 'text',
-            'input_attrs' => array( 'placeholder' => 'var(--color-gold)' ),
-        ) );
+		$wp_customize->add_setting(
+			'lifterlms-header-color',
+			array(
+				'default'           => 'var(--color-gold)',
+				'sanitize_callback' => 'sanitize_text_field',
+				'transport'         => 'postMessage',
+			)
+		);
+		$wp_customize->add_control(
+			'lifterlms-header-color',
+			array(
+				'label'       => __( 'Course / Lesson Title Color', 'opulentia' ),
+				'section'     => 'opulentia_lifterlms',
+				'type'        => 'text',
+				'input_attrs' => array( 'placeholder' => 'var(--color-gold)' ),
+			)
+		);
 
-        $wp_customize->add_setting( 'lifterlms-accent-color', array(
-            'default'           => 'var(--color-gold)',
-            'sanitize_callback' => 'sanitize_text_field',
-            'transport'         => 'postMessage',
-        ) );
-        $wp_customize->add_control( 'lifterlms-accent-color', array(
-            'label'       => __( 'Accent Color (Buttons, Progress)', 'opulentia' ),
-            'section'     => 'opulentia_lifterlms',
-            'type'        => 'text',
-            'input_attrs' => array( 'placeholder' => 'var(--color-gold)' ),
-        ) );
+		$wp_customize->add_setting(
+			'lifterlms-accent-color',
+			array(
+				'default'           => 'var(--color-gold)',
+				'sanitize_callback' => 'sanitize_text_field',
+				'transport'         => 'postMessage',
+			)
+		);
+		$wp_customize->add_control(
+			'lifterlms-accent-color',
+			array(
+				'label'       => __( 'Accent Color (Buttons, Progress)', 'opulentia' ),
+				'section'     => 'opulentia_lifterlms',
+				'type'        => 'text',
+				'input_attrs' => array( 'placeholder' => 'var(--color-gold)' ),
+			)
+		);
 
-        $wp_customize->add_setting( 'lifterlms-card-bg', array(
-            'default'           => 'var(--color-secondary-dark)',
-            'sanitize_callback' => 'sanitize_text_field',
-            'transport'         => 'postMessage',
-        ) );
-        $wp_customize->add_control( 'lifterlms-card-bg', array(
-            'label'       => __( 'Course Card Background', 'opulentia' ),
-            'section'     => 'opulentia_lifterlms',
-            'type'        => 'text',
-            'input_attrs' => array( 'placeholder' => 'var(--color-secondary-dark)' ),
-        ) );
+		$wp_customize->add_setting(
+			'lifterlms-card-bg',
+			array(
+				'default'           => 'var(--color-secondary-dark)',
+				'sanitize_callback' => 'sanitize_text_field',
+				'transport'         => 'postMessage',
+			)
+		);
+		$wp_customize->add_control(
+			'lifterlms-card-bg',
+			array(
+				'label'       => __( 'Course Card Background', 'opulentia' ),
+				'section'     => 'opulentia_lifterlms',
+				'type'        => 'text',
+				'input_attrs' => array( 'placeholder' => 'var(--color-secondary-dark)' ),
+			)
+		);
 
-        $wp_customize->add_setting( 'lifterlms-hide-syllabus', array(
-            'default'           => false,
-            'sanitize_callback' => 'wp_validate_boolean',
-            'transport'         => 'refresh',
-        ) );
-        $wp_customize->add_control( 'lifterlms-hide-syllabus', array(
-            'label'       => __( 'Hide Syllabus on Course Page', 'opulentia' ),
-            'section'     => 'opulentia_lifterlms',
-            'type'        => 'checkbox',
-        ) );
-    }
+		$wp_customize->add_setting(
+			'lifterlms-hide-syllabus',
+			array(
+				'default'           => false,
+				'sanitize_callback' => 'wp_validate_boolean',
+				'transport'         => 'refresh',
+			)
+		);
+		$wp_customize->add_control(
+			'lifterlms-hide-syllabus',
+			array(
+				'label'   => __( 'Hide Syllabus on Course Page', 'opulentia' ),
+				'section' => 'opulentia_lifterlms',
+				'type'    => 'checkbox',
+			)
+		);
+	}
 
-    public function loop_columns( $defaults ) {
-        $cols = Opulentia_get_option( 'lifterlms-course-columns', 3 );
-        $defaults['cols'] = absint( $cols );
-        return $defaults;
-    }
+	public function loop_columns( $defaults ) {
+		$cols             = Opulentia_get_option( 'lifterlms-course-columns', 3 );
+		$defaults['cols'] = absint( $cols );
+		return $defaults;
+	}
 
-    public function body_class( $classes ) {
-        if ( function_exists( 'llms' ) ) {
-            $classes[] = 'lifterlms-themed';
-        }
-        return $classes;
-    }
+	public function body_class( $classes ) {
+		if ( function_exists( 'llms' ) ) {
+			$classes[] = 'lifterlms-themed';
+		}
+		return $classes;
+	}
 
-    public function inline_css() {
-        if ( ! function_exists( 'llms' ) ) {
-            return;
-        }
+	public function inline_css() {
+		if ( ! function_exists( 'llms' ) ) {
+			return;
+		}
 
-        $header_color = Opulentia_get_option( 'lifterlms-header-color', 'var(--color-gold)' );
-        $accent_color = Opulentia_get_option( 'lifterlms-accent-color', 'var(--color-gold)' );
-        $card_bg      = Opulentia_get_option( 'lifterlms-card-bg', 'var(--color-secondary-dark)' );
+		$header_color = Opulentia_get_option( 'lifterlms-header-color', 'var(--color-gold)' );
+		$accent_color = Opulentia_get_option( 'lifterlms-accent-color', 'var(--color-gold)' );
+		$card_bg      = Opulentia_get_option( 'lifterlms-card-bg', 'var(--color-secondary-dark)' );
 
-        $css = '
+		$css = '
         .lifterlms-themed .llms-loop-item-content {
             background: ' . $card_bg . ';
             border: 1px solid var(--color-border);
@@ -240,6 +278,6 @@ class Opulentia_LifterLMS {
         }
         ';
 
-        wp_add_inline_style( 'opulentia-style', $css );
-    }
+		wp_add_inline_style( 'opulentia-style', $css );
+	}
 }

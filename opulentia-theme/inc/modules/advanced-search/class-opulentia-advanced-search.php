@@ -9,7 +9,7 @@
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
-    exit;
+	exit;
 }
 
 /**
@@ -17,125 +17,156 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Opulentia_Advanced_Search {
 
-    /**
-     * Singleton instance.
-     *
-     * @var self|null
-     */
-    private static $instance = null;
+	/**
+	 * Singleton instance.
+	 *
+	 * @var self|null
+	 */
+	private static $instance = null;
 
-    /**
-     * Returns the singleton instance.
-     *
-     * @return self
-     */
-    public static function get_instance() {
-        if ( is_null( self::$instance ) ) {
-            self::$instance = new self();
-        }
-        return self::$instance;
-    }
+	/**
+	 * Returns the singleton instance.
+	 *
+	 * @return self
+	 */
+	public static function get_instance() {
+		if ( is_null( self::$instance ) ) {
+			self::$instance = new self();
+		}
+		return self::$instance;
+	}
 
-    /**
-     * Constructor — registers hooks.
-     */
-    private function __construct() {
-        add_action( 'customize_register', array( $this, 'customize_register' ) );
-        add_action( 'wp_enqueue_scripts', array( $this, 'inline_css' ) );
-        add_shortcode( 'op_search', array( $this, 'render_shortcode' ) );
-        add_action( 'wp_ajax_op_advanced_search', array( $this, 'ajax_search' ) );
-        add_action( 'wp_ajax_nopriv_op_advanced_search', array( $this, 'ajax_search' ) );
-    }
+	/**
+	 * Constructor — registers hooks.
+	 */
+	private function __construct() {
+		add_action( 'customize_register', array( $this, 'customize_register' ) );
+		add_action( 'wp_enqueue_scripts', array( $this, 'inline_css' ) );
+		add_shortcode( 'op_search', array( $this, 'render_shortcode' ) );
+		add_action( 'wp_ajax_op_advanced_search', array( $this, 'ajax_search' ) );
+		add_action( 'wp_ajax_nopriv_op_advanced_search', array( $this, 'ajax_search' ) );
+	}
 
-    // -------------------------------------------------------------------------
-    // Customizer Controls
-    // -------------------------------------------------------------------------
+	// -------------------------------------------------------------------------
+	// Customizer Controls
+	// -------------------------------------------------------------------------
 
-    /**
-     * Register customizer controls for the Advanced Search section.
-     *
-     * @param WP_Customize_Manager $wp_customize Customizer manager instance.
-     */
-    public function customize_register( $wp_customize ) {
-        $wp_customize->add_section( 'Opulentia_advanced_search', array(
-            'title'    => __( 'Advanced Search', 'opulentia' ),
-            'panel'    => 'Opulentia_header_nav',
-            'priority' => 55,
-        ) );
+	/**
+	 * Register customizer controls for the Advanced Search section.
+	 *
+	 * @param WP_Customize_Manager $wp_customize Customizer manager instance.
+	 */
+	public function customize_register( $wp_customize ) {
+		$wp_customize->add_section(
+			'Opulentia_advanced_search',
+			array(
+				'title'    => __( 'Advanced Search', 'opulentia' ),
+				'panel'    => 'Opulentia_header_nav',
+				'priority' => 55,
+			)
+		);
 
-        $wp_customize->add_setting( 'advanced_search_placeholder', array(
-            'default'           => __( 'Search...', 'opulentia' ),
-            'sanitize_callback' => 'sanitize_text_field',
-            'type'              => 'theme_mod',
-        ) );
+		$wp_customize->add_setting(
+			'advanced_search_placeholder',
+			array(
+				'default'           => __( 'Search...', 'opulentia' ),
+				'sanitize_callback' => 'sanitize_text_field',
+				'type'              => 'theme_mod',
+			)
+		);
 
-        $wp_customize->add_control( 'advanced_search_placeholder', array(
-            'label'    => __( 'Search Placeholder Text', 'opulentia' ),
-            'section'  => 'Opulentia_advanced_search',
-            'type'     => 'text',
-            'priority' => 10,
-        ) );
+		$wp_customize->add_control(
+			'advanced_search_placeholder',
+			array(
+				'label'    => __( 'Search Placeholder Text', 'opulentia' ),
+				'section'  => 'Opulentia_advanced_search',
+				'type'     => 'text',
+				'priority' => 10,
+			)
+		);
 
-        $wp_customize->add_setting( 'advanced_search_max_results', array(
-            'default'           => 5,
-            'sanitize_callback' => 'absint',
-            'type'              => 'theme_mod',
-        ) );
+		$wp_customize->add_setting(
+			'advanced_search_max_results',
+			array(
+				'default'           => 5,
+				'sanitize_callback' => 'absint',
+				'type'              => 'theme_mod',
+			)
+		);
 
-        $wp_customize->add_control( 'advanced_search_max_results', array(
-            'label'       => __( 'Max Results Per Type', 'opulentia' ),
-            'section'     => 'Opulentia_advanced_search',
-            'type'        => 'number',
-            'input_attrs' => array( 'min' => 1, 'max' => 20, 'step' => 1 ),
-            'priority'    => 20,
-        ) );
+		$wp_customize->add_control(
+			'advanced_search_max_results',
+			array(
+				'label'       => __( 'Max Results Per Type', 'opulentia' ),
+				'section'     => 'Opulentia_advanced_search',
+				'type'        => 'number',
+				'input_attrs' => array(
+					'min'  => 1,
+					'max'  => 20,
+					'step' => 1,
+				),
+				'priority'    => 20,
+			)
+		);
 
-        $wp_customize->add_setting( 'advanced_search_products_tab', array(
-            'default'           => true,
-            'sanitize_callback' => array( $this, 'sanitize_checkbox' ),
-            'type'              => 'theme_mod',
-        ) );
+		$wp_customize->add_setting(
+			'advanced_search_products_tab',
+			array(
+				'default'           => true,
+				'sanitize_callback' => array( $this, 'sanitize_checkbox' ),
+				'type'              => 'theme_mod',
+			)
+		);
 
-        $wp_customize->add_control( 'advanced_search_products_tab', array(
-            'label'    => __( 'Show Products Tab (WooCommerce)', 'opulentia' ),
-            'section'  => 'Opulentia_advanced_search',
-            'type'     => 'checkbox',
-            'priority' => 30,
-        ) );
+		$wp_customize->add_control(
+			'advanced_search_products_tab',
+			array(
+				'label'    => __( 'Show Products Tab (WooCommerce)', 'opulentia' ),
+				'section'  => 'Opulentia_advanced_search',
+				'type'     => 'checkbox',
+				'priority' => 30,
+			)
+		);
 
-        $wp_customize->add_setting( 'advanced_search_history', array(
-            'default'           => true,
-            'sanitize_callback' => array( $this, 'sanitize_checkbox' ),
-            'type'              => 'theme_mod',
-        ) );
+		$wp_customize->add_setting(
+			'advanced_search_history',
+			array(
+				'default'           => true,
+				'sanitize_callback' => array( $this, 'sanitize_checkbox' ),
+				'type'              => 'theme_mod',
+			)
+		);
 
-        $wp_customize->add_control( 'advanced_search_history', array(
-            'label'    => __( 'Enable Search History', 'opulentia' ),
-            'section'  => 'Opulentia_advanced_search',
-            'type'     => 'checkbox',
-            'priority' => 40,
-        ) );
-    }
+		$wp_customize->add_control(
+			'advanced_search_history',
+			array(
+				'label'    => __( 'Enable Search History', 'opulentia' ),
+				'section'  => 'Opulentia_advanced_search',
+				'type'     => 'checkbox',
+				'priority' => 40,
+			)
+		);
+	}
 
-    /**
-     * Sanitize checkbox value.
-     *
-     * @param mixed $value Input value.
-     * @return bool
-     */
-    public function sanitize_checkbox( $value ) {
-        return (bool) $value;
-    }
+	/**
+	 * Sanitize checkbox value.
+	 *
+	 * @param mixed $value Input value.
+	 * @return bool
+	 */
+	public function sanitize_checkbox( $value ) {
+		return (bool) $value;
+	}
 
-    // -------------------------------------------------------------------------
-    // Inline CSS
-    // -------------------------------------------------------------------------
+	// -------------------------------------------------------------------------
+	// Inline CSS
+	// -------------------------------------------------------------------------
 
-    /**
-     * Output inline CSS for the advanced search dropdown.
-     */
-    public function inline_css() {
-        $css = '
+	/**
+	 * Output inline CSS for the advanced search dropdown.
+	 */
+	public function inline_css() {
+		$css = '
 .op-search-wrap {
     position: relative;
     max-width: 600px;
@@ -415,112 +446,116 @@ class Opulentia_Advanced_Search {
     }
 }
 ';
-        wp_add_inline_style( 'opulentia-style', $css );
-    }
+		wp_add_inline_style( 'opulentia-style', $css );
+	}
 
-    // -------------------------------------------------------------------------
-    // Shortcode
-    // -------------------------------------------------------------------------
+	// -------------------------------------------------------------------------
+	// Shortcode
+	// -------------------------------------------------------------------------
 
-    /**
-     * Render the [op_search] shortcode.
-     *
-     * @param array  $atts Shortcode attributes.
-     * @param string $content Shortcode content.
-     * @return string
-     */
-    public function render_shortcode( $atts, $content = '' ) {
-        $atts = shortcode_atts( array(
-            'placeholder' => get_theme_mod( 'advanced_search_placeholder', __( 'Search...', 'opulentia' ) ),
-            'post_types'  => 'post,page',
-        ), $atts, 'op_search' );
+	/**
+	 * Render the [op_search] shortcode.
+	 *
+	 * @param array  $atts Shortcode attributes.
+	 * @param string $content Shortcode content.
+	 * @return string
+	 */
+	public function render_shortcode( $atts, $content = '' ) {
+		$atts = shortcode_atts(
+			array(
+				'placeholder' => get_theme_mod( 'advanced_search_placeholder', __( 'Search...', 'opulentia' ) ),
+				'post_types'  => 'post,page',
+			),
+			$atts,
+			'op_search'
+		);
 
-        $placeholder = esc_attr( $atts['placeholder'] );
-        $post_types  = array_map( 'trim', explode( ',', $atts['post_types'] ) );
+		$placeholder = esc_attr( $atts['placeholder'] );
+		$post_types  = array_map( 'trim', explode( ',', $atts['post_types'] ) );
 
-        $show_products = get_theme_mod( 'advanced_search_products_tab', true );
-        $show_history  = get_theme_mod( 'advanced_search_history', true );
-        $max_results   = absint( get_theme_mod( 'advanced_search_max_results', 5 ) );
+		$show_products = get_theme_mod( 'advanced_search_products_tab', true );
+		$show_history  = get_theme_mod( 'advanced_search_history', true );
+		$max_results   = absint( get_theme_mod( 'advanced_search_max_results', 5 ) );
 
-        $tabs = array(
-            'all'  => __( 'All', 'opulentia' ),
-            'post' => __( 'Posts', 'opulentia' ),
-            'page' => __( 'Pages', 'opulentia' ),
-        );
+		$tabs = array(
+			'all'  => __( 'All', 'opulentia' ),
+			'post' => __( 'Posts', 'opulentia' ),
+			'page' => __( 'Pages', 'opulentia' ),
+		);
 
-        if ( class_exists( 'WooCommerce' ) && $show_products && in_array( 'product', $post_types, true ) ) {
-            $tabs['product'] = __( 'Products', 'opulentia' );
-        }
+		if ( class_exists( 'WooCommerce' ) && $show_products && in_array( 'product', $post_types, true ) ) {
+			$tabs['product'] = __( 'Products', 'opulentia' );
+		}
 
-        ob_start();
-        ?>
-        <div class="op-search-wrap" data-max-results="<?php echo esc_attr( $max_results ); ?>" data-show-history="<?php echo esc_attr( $show_history ? '1' : '0' ); ?>">
-            <div class="op-search-input-wrap">
-                <input
-                    type="text"
-                    class="op-search-input"
-                    placeholder="<?php echo esc_attr( $placeholder ); ?>"
-                    autocomplete="off"
-                    aria-label="<?php esc_attr_e( 'Search', 'opulentia' ); ?>"
-                />
-                <svg class="op-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="11" cy="11" r="8"></circle>
-                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                </svg>
-            </div>
-            <div class="op-search-dropdown">
-                <ul class="op-search-tabs" role="tablist">
-                    <?php foreach ( $tabs as $key => $label ) : ?>
-                        <li
-                            class="op-search-tab<?php echo 'all' === $key ? ' active' : ''; ?>"
-                            data-type="<?php echo esc_attr( $key ); ?>"
-                            role="tab"
-                            tabindex="0"
-                        ><?php echo esc_html( $label ); ?></li>
-                    <?php endforeach; ?>
-                </ul>
-                <?php if ( $show_history ) : ?>
-                    <div class="op-search-history" style="display:none;">
-                        <p class="op-search-history-title">
-                            <?php esc_html_e( 'Recent Searches', 'opulentia' ); ?>
-                            <span class="op-search-history-clear"><?php esc_html_e( 'Clear', 'opulentia' ); ?></span>
-                        </p>
-                        <ul class="op-search-history-list"></ul>
-                    </div>
-                <?php endif; ?>
-                <div class="op-search-results-wrap">
-                    <ul class="op-search-results"></ul>
-                    <div class="op-search-no-results" style="display:none;"><?php esc_html_e( 'No results found.', 'opulentia' ); ?></div>
-                </div>
-            </div>
-        </div>
-        <?php
-        $html = ob_get_clean();
+		ob_start();
+		?>
+		<div class="op-search-wrap" data-max-results="<?php echo esc_attr( $max_results ); ?>" data-show-history="<?php echo esc_attr( $show_history ? '1' : '0' ); ?>">
+			<div class="op-search-input-wrap">
+				<input
+					type="text"
+					class="op-search-input"
+					placeholder="<?php echo esc_attr( $placeholder ); ?>"
+					autocomplete="off"
+					aria-label="<?php esc_attr_e( 'Search', 'opulentia' ); ?>"
+				/>
+				<svg class="op-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+					<circle cx="11" cy="11" r="8"></circle>
+					<line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+				</svg>
+			</div>
+			<div class="op-search-dropdown">
+				<ul class="op-search-tabs" role="tablist">
+					<?php foreach ( $tabs as $key => $label ) : ?>
+						<li
+							class="op-search-tab<?php echo 'all' === $key ? ' active' : ''; ?>"
+							data-type="<?php echo esc_attr( $key ); ?>"
+							role="tab"
+							tabindex="0"
+						><?php echo esc_html( $label ); ?></li>
+					<?php endforeach; ?>
+				</ul>
+				<?php if ( $show_history ) : ?>
+					<div class="op-search-history" style="display:none;">
+						<p class="op-search-history-title">
+							<?php esc_html_e( 'Recent Searches', 'opulentia' ); ?>
+							<span class="op-search-history-clear"><?php esc_html_e( 'Clear', 'opulentia' ); ?></span>
+						</p>
+						<ul class="op-search-history-list"></ul>
+					</div>
+				<?php endif; ?>
+				<div class="op-search-results-wrap">
+					<ul class="op-search-results"></ul>
+					<div class="op-search-no-results" style="display:none;"><?php esc_html_e( 'No results found.', 'opulentia' ); ?></div>
+				</div>
+			</div>
+		</div>
+		<?php
+		$html = ob_get_clean();
 
-        $this->enqueue_search_script( $post_types );
+		$this->enqueue_search_script( $post_types );
 
-        return $html;
-    }
+		return $html;
+	}
 
-    /**
-     * Enqueue the advanced search JavaScript — inline in page.
-     *
-     * @param array $post_types Allowed post types.
-     */
-    private function enqueue_search_script( $post_types ) {
-        wp_register_script(
-            'opulentia-advanced-search',
-            '',
-            array(),
-            Opulentia_VERSION,
-            true
-        );
-        wp_enqueue_script( 'opulentia-advanced-search' );
+	/**
+	 * Enqueue the advanced search JavaScript — inline in page.
+	 *
+	 * @param array $post_types Allowed post types.
+	 */
+	private function enqueue_search_script( $post_types ) {
+		wp_register_script(
+			'opulentia-advanced-search',
+			'',
+			array(),
+			Opulentia_VERSION,
+			true
+		);
+		wp_enqueue_script( 'opulentia-advanced-search' );
 
-        $max_results = absint( get_theme_mod( 'advanced_search_max_results', 5 ) );
-        $show_history = (bool) get_theme_mod( 'advanced_search_history', true );
+		$max_results  = absint( get_theme_mod( 'advanced_search_max_results', 5 ) );
+		$show_history = (bool) get_theme_mod( 'advanced_search_history', true );
 
-        $script = '
+		$script = '
 (function() {
     var opSearch = {
         ajaxUrl: ' . wp_json_encode( admin_url( 'admin-ajax.php' ) ) . ',
@@ -805,104 +840,108 @@ class Opulentia_Advanced_Search {
     }
 })();';
 
-        wp_add_inline_script( 'opulentia-advanced-search', $script );
-    }
+		wp_add_inline_script( 'opulentia-advanced-search', $script );
+	}
 
-    // -------------------------------------------------------------------------
-    // AJAX Handler
-    // -------------------------------------------------------------------------
+	// -------------------------------------------------------------------------
+	// AJAX Handler
+	// -------------------------------------------------------------------------
 
-    /**
-     * Handle AJAX search request.
-     */
-    public function ajax_search() {
-        if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'op_advanced_search_nonce' ) ) {
-            wp_send_json_error( array( 'message' => __( 'Invalid nonce.', 'opulentia' ) ) );
-        }
+	/**
+	 * Handle AJAX search request.
+	 */
+	public function ajax_search() {
+		if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'op_advanced_search_nonce' ) ) {
+			wp_send_json_error( array( 'message' => __( 'Invalid nonce.', 'opulentia' ) ) );
+		}
 
-        $search_term = isset( $_POST['search'] ) ? sanitize_text_field( wp_unslash( $_POST['search'] ) ) : '';
-        $type        = isset( $_POST['type'] ) ? sanitize_text_field( wp_unslash( $_POST['type'] ) ) : 'all';
-        $max_results = absint( get_theme_mod( 'advanced_search_max_results', 5 ) );
+		$search_term = isset( $_POST['search'] ) ? sanitize_text_field( wp_unslash( $_POST['search'] ) ) : '';
+		$type        = isset( $_POST['type'] ) ? sanitize_text_field( wp_unslash( $_POST['type'] ) ) : 'all';
+		$max_results = absint( get_theme_mod( 'advanced_search_max_results', 5 ) );
 
-        if ( empty( $search_term ) || mb_strlen( $search_term ) < 2 ) {
-            wp_send_json_error( array( 'message' => __( 'Search term too short.', 'opulentia' ) ) );
-        }
+		if ( empty( $search_term ) || mb_strlen( $search_term ) < 2 ) {
+			wp_send_json_error( array( 'message' => __( 'Search term too short.', 'opulentia' ) ) );
+		}
 
-        $post_types = array( 'post', 'page' );
+		$post_types = array( 'post', 'page' );
 
-        if ( class_exists( 'WooCommerce' ) && get_theme_mod( 'advanced_search_products_tab', true ) ) {
-            $post_types[] = 'product';
-        }
+		if ( class_exists( 'WooCommerce' ) && get_theme_mod( 'advanced_search_products_tab', true ) ) {
+			$post_types[] = 'product';
+		}
 
-        if ( 'all' !== $type && in_array( $type, $post_types, true ) ) {
-            $query_post_types = array( $type );
-        } elseif ( 'all' === $type ) {
-            $query_post_types = $post_types;
-        } else {
-            $query_post_types = $post_types;
-        }
+		if ( 'all' !== $type && in_array( $type, $post_types, true ) ) {
+			$query_post_types = array( $type );
+		} elseif ( 'all' === $type ) {
+			$query_post_types = $post_types;
+		} else {
+			$query_post_types = $post_types;
+		}
 
-        $query = new WP_Query( array(
-            's'              => $search_term,
-            'post_type'      => $query_post_types,
-            'posts_per_page' => $max_results,
-            'post_status'    => 'publish',
-            'no_found_rows'  => true,
-        ) );
+		$query = new WP_Query(
+			array(
+				's'              => $search_term,
+				'post_type'      => $query_post_types,
+				'posts_per_page' => $max_results,
+				'post_status'    => 'publish',
+				'no_found_rows'  => true,
+			)
+		);
 
-        $results = array();
+		$results = array();
 
-        if ( $query->have_posts() ) {
-            while ( $query->have_posts() ) {
-                $query->the_post();
+		if ( $query->have_posts() ) {
+			while ( $query->have_posts() ) {
+				$query->the_post();
 
-                $thumbnail = '';
-                if ( has_post_thumbnail() ) {
-                    $thumb_id  = get_post_thumbnail_id();
-                    $thumb_src = wp_get_attachment_image_src( $thumb_id, array( 44, 44 ) );
-                    if ( $thumb_src ) {
-                        $thumbnail = $thumb_src[0];
-                    }
-                }
+				$thumbnail = '';
+				if ( has_post_thumbnail() ) {
+					$thumb_id  = get_post_thumbnail_id();
+					$thumb_src = wp_get_attachment_image_src( $thumb_id, array( 44, 44 ) );
+					if ( $thumb_src ) {
+						$thumbnail = $thumb_src[0];
+					}
+				}
 
-                $excerpt = get_the_excerpt();
-                if ( ! empty( $excerpt ) ) {
-                    $excerpt = wp_trim_words( $excerpt, 15, '' );
-                }
+				$excerpt = get_the_excerpt();
+				if ( ! empty( $excerpt ) ) {
+					$excerpt = wp_trim_words( $excerpt, 15, '' );
+				}
 
-                $results[] = array(
-                    'id'        => get_the_ID(),
-                    'title'     => get_the_title(),
-                    'excerpt'   => $excerpt,
-                    'permalink' => get_permalink(),
-                    'thumbnail' => $thumbnail,
-                    'type'      => get_post_type(),
-                    'type_label' => $this->get_post_type_label( get_post_type() ),
-                );
-            }
-        }
+				$results[] = array(
+					'id'         => get_the_ID(),
+					'title'      => get_the_title(),
+					'excerpt'    => $excerpt,
+					'permalink'  => get_permalink(),
+					'thumbnail'  => $thumbnail,
+					'type'       => get_post_type(),
+					'type_label' => $this->get_post_type_label( get_post_type() ),
+				);
+			}
+		}
 
-        wp_reset_postdata();
+		wp_reset_postdata();
 
-        wp_send_json_success( array(
-            'results' => $results,
-            'count'   => count( $results ),
-        ) );
-    }
+		wp_send_json_success(
+			array(
+				'results' => $results,
+				'count'   => count( $results ),
+			)
+		);
+	}
 
-    /**
-     * Get human-readable post type label.
-     *
-     * @param string $post_type Post type slug.
-     * @return string
-     */
-    private function get_post_type_label( $post_type ) {
-        $labels = array(
-            'post'    => __( 'Post', 'opulentia' ),
-            'page'    => __( 'Page', 'opulentia' ),
-            'product' => __( 'Product', 'opulentia' ),
-        );
+	/**
+	 * Get human-readable post type label.
+	 *
+	 * @param string $post_type Post type slug.
+	 * @return string
+	 */
+	private function get_post_type_label( $post_type ) {
+		$labels = array(
+			'post'    => __( 'Post', 'opulentia' ),
+			'page'    => __( 'Page', 'opulentia' ),
+			'product' => __( 'Product', 'opulentia' ),
+		);
 
-        return isset( $labels[ $post_type ] ) ? $labels[ $post_type ] : $post_type;
-    }
+		return isset( $labels[ $post_type ] ) ? $labels[ $post_type ] : $post_type;
+	}
 }

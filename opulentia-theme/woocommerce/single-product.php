@@ -6,18 +6,18 @@
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
-    exit;
+	exit;
 }
 
 get_header( 'shop' );
 ?>
 
 <div class="woocommerce-single-product">
-    <?php while ( have_posts() ) : ?>
-        <?php the_post(); ?>
+	<?php while ( have_posts() ) : ?>
+		<?php the_post(); ?>
 
-        <?php wc_get_template_part( 'content', 'single-product' ); ?>
-    <?php endwhile; ?>
+		<?php wc_get_template_part( 'content', 'single-product' ); ?>
+	<?php endwhile; ?>
 </div>
 
 <?php

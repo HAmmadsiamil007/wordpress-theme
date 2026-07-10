@@ -1,137 +1,181 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) {
-    exit;
+	exit;
 }
 
 class Opulentia_LearnDash {
 
-    private static $instance = null;
+	private static $instance = null;
 
-    public static function get_instance() {
-        if ( is_null( self::$instance ) ) {
-            self::$instance = new self();
-        }
-        return self::$instance;
-    }
+	public static function get_instance() {
+		if ( is_null( self::$instance ) ) {
+			self::$instance = new self();
+		}
+		return self::$instance;
+	}
 
-    private function __construct() {
-        if ( ! defined( 'LEARNDASH_VERSION' ) ) {
-            return;
-        }
-        add_action( 'after_setup_theme', array( $this, 'add_theme_support' ) );
-        add_action( 'customize_register', array( $this, 'register_customizer' ), 30 );
-        add_action( 'wp_enqueue_scripts', array( $this, 'inline_css' ), 120 );
-        add_filter( 'body_class', array( $this, 'body_class' ) );
-        add_filter( 'learndash_course_grid_columns', array( $this, 'grid_columns' ) );
-    }
+	private function __construct() {
+		if ( ! defined( 'LEARNDASH_VERSION' ) ) {
+			return;
+		}
+		add_action( 'after_setup_theme', array( $this, 'add_theme_support' ) );
+		add_action( 'customize_register', array( $this, 'register_customizer' ), 30 );
+		add_action( 'wp_enqueue_scripts', array( $this, 'inline_css' ), 120 );
+		add_filter( 'body_class', array( $this, 'body_class' ) );
+		add_filter( 'learndash_course_grid_columns', array( $this, 'grid_columns' ) );
+	}
 
-    public function add_theme_support() {
-        add_theme_support( 'learndash-theme-support' );
-    }
+	public function add_theme_support() {
+		add_theme_support( 'learndash-theme-support' );
+	}
 
-    public function register_customizer( $wp_customize ) {
-        $wp_customize->add_section( 'opulentia_learndash', array(
-            'title'    => __( 'LearnDash', 'opulentia' ),
-            'panel'    => 'Opulentia_global_settings',
-            'priority' => 86,
-        ) );
+	public function register_customizer( $wp_customize ) {
+		$wp_customize->add_section(
+			'opulentia_learndash',
+			array(
+				'title'    => __( 'LearnDash', 'opulentia' ),
+				'panel'    => 'Opulentia_global_settings',
+				'priority' => 86,
+			)
+		);
 
-        $wp_customize->add_setting( 'learndash-course-columns', array(
-            'default'           => 3,
-            'sanitize_callback' => 'absint',
-            'transport'         => 'refresh',
-        ) );
-        $wp_customize->add_control( 'learndash-course-columns', array(
-            'label'       => __( 'Course Grid Columns', 'opulentia' ),
-            'section'     => 'opulentia_learndash',
-            'type'        => 'select',
-            'choices'     => array( 1 => 1, 2 => 2, 3 => 3, 4 => 4 ),
-        ) );
+		$wp_customize->add_setting(
+			'learndash-course-columns',
+			array(
+				'default'           => 3,
+				'sanitize_callback' => 'absint',
+				'transport'         => 'refresh',
+			)
+		);
+		$wp_customize->add_control(
+			'learndash-course-columns',
+			array(
+				'label'   => __( 'Course Grid Columns', 'opulentia' ),
+				'section' => 'opulentia_learndash',
+				'type'    => 'select',
+				'choices' => array(
+					1 => 1,
+					2 => 2,
+					3 => 3,
+					4 => 4,
+				),
+			)
+		);
 
-        $wp_customize->add_setting( 'learndash-header-color', array(
-            'default'           => 'var(--color-gold)',
-            'sanitize_callback' => 'sanitize_text_field',
-            'transport'         => 'postMessage',
-        ) );
-        $wp_customize->add_control( 'learndash-header-color', array(
-            'label'       => __( 'Course / Lesson Title Color', 'opulentia' ),
-            'section'     => 'opulentia_learndash',
-            'type'        => 'text',
-            'input_attrs' => array( 'placeholder' => 'var(--color-gold)' ),
-        ) );
+		$wp_customize->add_setting(
+			'learndash-header-color',
+			array(
+				'default'           => 'var(--color-gold)',
+				'sanitize_callback' => 'sanitize_text_field',
+				'transport'         => 'postMessage',
+			)
+		);
+		$wp_customize->add_control(
+			'learndash-header-color',
+			array(
+				'label'       => __( 'Course / Lesson Title Color', 'opulentia' ),
+				'section'     => 'opulentia_learndash',
+				'type'        => 'text',
+				'input_attrs' => array( 'placeholder' => 'var(--color-gold)' ),
+			)
+		);
 
-        $wp_customize->add_setting( 'learndash-accent-color', array(
-            'default'           => 'var(--color-gold)',
-            'sanitize_callback' => 'sanitize_text_field',
-            'transport'         => 'postMessage',
-        ) );
-        $wp_customize->add_control( 'learndash-accent-color', array(
-            'label'       => __( 'Accent Color (Buttons, Progress)', 'opulentia' ),
-            'section'     => 'opulentia_learndash',
-            'type'        => 'text',
-            'input_attrs' => array( 'placeholder' => 'var(--color-gold)' ),
-        ) );
+		$wp_customize->add_setting(
+			'learndash-accent-color',
+			array(
+				'default'           => 'var(--color-gold)',
+				'sanitize_callback' => 'sanitize_text_field',
+				'transport'         => 'postMessage',
+			)
+		);
+		$wp_customize->add_control(
+			'learndash-accent-color',
+			array(
+				'label'       => __( 'Accent Color (Buttons, Progress)', 'opulentia' ),
+				'section'     => 'opulentia_learndash',
+				'type'        => 'text',
+				'input_attrs' => array( 'placeholder' => 'var(--color-gold)' ),
+			)
+		);
 
-        $wp_customize->add_setting( 'learndash-card-bg', array(
-            'default'           => 'var(--color-secondary-dark)',
-            'sanitize_callback' => 'sanitize_text_field',
-            'transport'         => 'postMessage',
-        ) );
-        $wp_customize->add_control( 'learndash-card-bg', array(
-            'label'       => __( 'Course Card Background', 'opulentia' ),
-            'section'     => 'opulentia_learndash',
-            'type'        => 'text',
-            'input_attrs' => array( 'placeholder' => 'var(--color-secondary-dark)' ),
-        ) );
+		$wp_customize->add_setting(
+			'learndash-card-bg',
+			array(
+				'default'           => 'var(--color-secondary-dark)',
+				'sanitize_callback' => 'sanitize_text_field',
+				'transport'         => 'postMessage',
+			)
+		);
+		$wp_customize->add_control(
+			'learndash-card-bg',
+			array(
+				'label'       => __( 'Course Card Background', 'opulentia' ),
+				'section'     => 'opulentia_learndash',
+				'type'        => 'text',
+				'input_attrs' => array( 'placeholder' => 'var(--color-secondary-dark)' ),
+			)
+		);
 
-        $wp_customize->add_setting( 'learndash-focus-mode', array(
-            'default'           => true,
-            'sanitize_callback' => 'wp_validate_boolean',
-            'transport'         => 'refresh',
-        ) );
-        $wp_customize->add_control( 'learndash-focus-mode', array(
-            'label'       => __( 'Enable Focus Mode', 'opulentia' ),
-            'section'     => 'opulentia_learndash',
-            'type'        => 'checkbox',
-        ) );
+		$wp_customize->add_setting(
+			'learndash-focus-mode',
+			array(
+				'default'           => true,
+				'sanitize_callback' => 'wp_validate_boolean',
+				'transport'         => 'refresh',
+			)
+		);
+		$wp_customize->add_control(
+			'learndash-focus-mode',
+			array(
+				'label'   => __( 'Enable Focus Mode', 'opulentia' ),
+				'section' => 'opulentia_learndash',
+				'type'    => 'checkbox',
+			)
+		);
 
-        $wp_customize->add_setting( 'learndash-hide-breadcrumbs', array(
-            'default'           => false,
-            'sanitize_callback' => 'wp_validate_boolean',
-            'transport'         => 'refresh',
-        ) );
-        $wp_customize->add_control( 'learndash-hide-breadcrumbs', array(
-            'label'       => __( 'Hide Breadcrumbs on Course Pages', 'opulentia' ),
-            'section'     => 'opulentia_learndash',
-            'type'        => 'checkbox',
-        ) );
-    }
+		$wp_customize->add_setting(
+			'learndash-hide-breadcrumbs',
+			array(
+				'default'           => false,
+				'sanitize_callback' => 'wp_validate_boolean',
+				'transport'         => 'refresh',
+			)
+		);
+		$wp_customize->add_control(
+			'learndash-hide-breadcrumbs',
+			array(
+				'label'   => __( 'Hide Breadcrumbs on Course Pages', 'opulentia' ),
+				'section' => 'opulentia_learndash',
+				'type'    => 'checkbox',
+			)
+		);
+	}
 
-    public function grid_columns( $columns ) {
-        $cols = Opulentia_get_option( 'learndash-course-columns', 3 );
-        return absint( $cols );
-    }
+	public function grid_columns( $columns ) {
+		$cols = Opulentia_get_option( 'learndash-course-columns', 3 );
+		return absint( $cols );
+	}
 
-    public function body_class( $classes ) {
-        if ( defined( 'LEARNDASH_VERSION' ) ) {
-            $classes[] = 'learndash-themed';
-            if ( Opulentia_get_option( 'learndash-focus-mode', true ) ) {
-                $classes[] = 'learndash-focus-enabled';
-            }
-        }
-        return $classes;
-    }
+	public function body_class( $classes ) {
+		if ( defined( 'LEARNDASH_VERSION' ) ) {
+			$classes[] = 'learndash-themed';
+			if ( Opulentia_get_option( 'learndash-focus-mode', true ) ) {
+				$classes[] = 'learndash-focus-enabled';
+			}
+		}
+		return $classes;
+	}
 
-    public function inline_css() {
-        if ( ! defined( 'LEARNDASH_VERSION' ) ) {
-            return;
-        }
+	public function inline_css() {
+		if ( ! defined( 'LEARNDASH_VERSION' ) ) {
+			return;
+		}
 
-        $header_color = Opulentia_get_option( 'learndash-header-color', 'var(--color-gold)' );
-        $accent_color = Opulentia_get_option( 'learndash-accent-color', 'var(--color-gold)' );
-        $card_bg      = Opulentia_get_option( 'learndash-card-bg', 'var(--color-secondary-dark)' );
+		$header_color = Opulentia_get_option( 'learndash-header-color', 'var(--color-gold)' );
+		$accent_color = Opulentia_get_option( 'learndash-accent-color', 'var(--color-gold)' );
+		$card_bg      = Opulentia_get_option( 'learndash-card-bg', 'var(--color-secondary-dark)' );
 
-        $css = '
+		$css = '
         .learndash-themed .ld-course-list-items .ld_course_grid .thumbnail.course {
             border: 1px solid var(--color-border);
             background: ' . $card_bg . ';
@@ -243,6 +287,6 @@ class Opulentia_LearnDash {
         }
         ';
 
-        wp_add_inline_style( 'opulentia-style', $css );
-    }
+		wp_add_inline_style( 'opulentia-style', $css );
+	}
 }

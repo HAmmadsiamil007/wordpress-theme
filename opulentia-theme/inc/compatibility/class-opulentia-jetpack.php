@@ -14,7 +14,7 @@
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
-    exit;
+	exit;
 }
 
 /**
@@ -22,104 +22,110 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Opulentia_Jetpack {
 
-    /**
-     * Singleton instance.
-     *
-     * @var self|null
-     */
-    private static $instance = null;
+	/**
+	 * Singleton instance.
+	 *
+	 * @var self|null
+	 */
+	private static $instance = null;
 
-    /**
-     * Returns the singleton instance.
-     *
-     * @return self
-     */
-    public static function get_instance() {
-        if ( is_null( self::$instance ) ) {
-            self::$instance = new self();
-        }
-        return self::$instance;
-    }
+	/**
+	 * Returns the singleton instance.
+	 *
+	 * @return self
+	 */
+	public static function get_instance() {
+		if ( is_null( self::$instance ) ) {
+			self::$instance = new self();
+		}
+		return self::$instance;
+	}
 
-    /**
-     * Constructor — registers hooks.
-     */
-    private function __construct() {
-        add_action( 'after_setup_theme', array( $this, 'init' ), 20 );
-    }
+	/**
+	 * Constructor — registers hooks.
+	 */
+	private function __construct() {
+		add_action( 'after_setup_theme', array( $this, 'init' ), 20 );
+	}
 
-    /**
-     * Initialize Jetpack compatibility.
-     */
-    public function init() {
-        if ( ! defined( 'JETPACK__VERSION' ) ) {
-            return;
-        }
+	/**
+	 * Initialize Jetpack compatibility.
+	 */
+	public function init() {
+		if ( ! defined( 'JETPACK__VERSION' ) ) {
+			return;
+		}
 
-        // Infinite Scroll.
-        add_theme_support( 'infinite-scroll', array(
-            'container'      => 'main-content',
-            'render'         => array( $this, 'infinite_scroll_render' ),
-            'footer'         => 'page',
-            'wrapper'        => false,
-            'posts_per_page' => (int) Opulentia_get_option( 'blog_posts_per_page', 6 ),
-        ) );
+		// Infinite Scroll.
+		add_theme_support(
+			'infinite-scroll',
+			array(
+				'container'      => 'main-content',
+				'render'         => array( $this, 'infinite_scroll_render' ),
+				'footer'         => 'page',
+				'wrapper'        => false,
+				'posts_per_page' => (int) Opulentia_get_option( 'blog_posts_per_page', 6 ),
+			)
+		);
 
-        // Responsive Videos.
-        add_theme_support( 'jetpack-responsive-videos' );
+		// Responsive Videos.
+		add_theme_support( 'jetpack-responsive-videos' );
 
-        // Content Options.
-        add_theme_support( 'jetpack-content-options', array(
-            'blog-display'    => 'content',
-            'author-bio'      => true,
-            'post-details'    => array(
-                'stylesheet' => 'opulentia-style',
-                'date'       => '.posted-on',
-                'categories' => '.cat-links',
-                'tags'       => '.tags-links',
-                'author'     => '.byline',
-                'comment'    => '.comments-link,.comment-count',
-            ),
-            'featured-images' => array(
-                'archive' => true,
-                'post'    => true,
-                'page'    => true,
-            ),
-        ) );
+		// Content Options.
+		add_theme_support(
+			'jetpack-content-options',
+			array(
+				'blog-display'    => 'content',
+				'author-bio'      => true,
+				'post-details'    => array(
+					'stylesheet' => 'opulentia-style',
+					'date'       => '.posted-on',
+					'categories' => '.cat-links',
+					'tags'       => '.tags-links',
+					'author'     => '.byline',
+					'comment'    => '.comments-link,.comment-count',
+				),
+				'featured-images' => array(
+					'archive' => true,
+					'post'    => true,
+					'page'    => true,
+				),
+			)
+		);
 
-        // Sharing & related posts styling.
-        add_action( 'wp_enqueue_scripts', array( $this, 'inline_css' ), 100 );
+		// Sharing & related posts styling.
+		add_action( 'wp_enqueue_scripts', array( $this, 'inline_css' ), 100 );
 
-        // Tiled Gallery / Carousel integration.
-        add_filter( 'jetpack_tiled_gallery_cell_class', array( $this, 'tiled_gallery_classes' ) );
-    }
+		// Tiled Gallery / Carousel integration.
+		add_filter( 'jetpack_tiled_gallery_cell_class', array( $this, 'tiled_gallery_classes' ) );
+	}
 
-    /**
-     * Infinite scroll render callback.
-     *
-     * Renders blog posts for Jetpack Infinite Scroll.
-     */
-    public function infinite_scroll_render() {
-        while ( have_posts() ) {
-            the_post();
+	/**
+	 * Infinite scroll render callback.
+	 *
+	 * Renders blog posts for Jetpack Infinite Scroll.
+	 */
+	public function infinite_scroll_render() {
+		while ( have_posts() ) {
+			the_post();
 
-            $layout = Opulentia_get_option( 'blog_layout', 'grid' );
+			$layout = Opulentia_get_option( 'blog_layout', 'grid' );
 
-            if ( 'classic' === $layout ) {
-                get_template_part( 'template-parts/blog/layout', 'classic' );
-            } elseif ( 'list' === $layout ) {
-                get_template_part( 'template-parts/blog/layout', 'list' );
-            } else {
-                get_template_part( 'template-parts/blog/layout', 'grid' );
-            }
-        }
-    }
+			if ( 'classic' === $layout ) {
+				get_template_part( 'template-parts/blog/layout', 'classic' );
+			} elseif ( 'list' === $layout ) {
+				get_template_part( 'template-parts/blog/layout', 'list' );
+			} else {
+				get_template_part( 'template-parts/blog/layout', 'grid' );
+			}
+		}
+	}
 
-    /**
-     * Output Jetpack-specific inline CSS.
-     */
-    public function inline_css() {
-        $css = '
+	/**
+	 * Output Jetpack-specific inline CSS.
+	 */
+	public function inline_css() {
+		$css = '
             /* ── Infinite Scroll ── */
             .infinite-scroll .site-content .infinite-wrap {
                 padding-top: 0;
@@ -241,17 +247,17 @@ class Opulentia_Jetpack {
             }
         ';
 
-        wp_add_inline_style( 'opulentia-style', $css );
-    }
+		wp_add_inline_style( 'opulentia-style', $css );
+	}
 
-    /**
-     * Add custom class to tiled gallery cells.
-     *
-     * @param string $class Cell class string.
-     * @return string
-     */
-    public function tiled_gallery_classes( $class ) {
-        $class .= ' opulentia-gallery-cell';
-        return $class;
-    }
+	/**
+	 * Add custom class to tiled gallery cells.
+	 *
+	 * @param string $class Cell class string.
+	 * @return string
+	 */
+	public function tiled_gallery_classes( $class ) {
+		$class .= ' opulentia-gallery-cell';
+		return $class;
+	}
 }

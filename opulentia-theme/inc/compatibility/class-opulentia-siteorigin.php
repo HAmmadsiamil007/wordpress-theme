@@ -13,7 +13,7 @@
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
-    exit;
+	exit;
 }
 
 /**
@@ -21,114 +21,117 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Opulentia_SiteOrigin {
 
-    /**
-     * Singleton instance.
-     *
-     * @var self|null
-     */
-    private static $instance = null;
+	/**
+	 * Singleton instance.
+	 *
+	 * @var self|null
+	 */
+	private static $instance = null;
 
-    /**
-     * Returns the singleton instance.
-     *
-     * @return self
-     */
-    public static function get_instance() {
-        if ( is_null( self::$instance ) ) {
-            self::$instance = new self();
-        }
-        return self::$instance;
-    }
+	/**
+	 * Returns the singleton instance.
+	 *
+	 * @return self
+	 */
+	public static function get_instance() {
+		if ( is_null( self::$instance ) ) {
+			self::$instance = new self();
+		}
+		return self::$instance;
+	}
 
-    /**
-     * Constructor — registers hooks.
-     */
-    private function __construct() {
-        add_action( 'after_setup_theme', array( $this, 'init' ), 20 );
-    }
+	/**
+	 * Constructor — registers hooks.
+	 */
+	private function __construct() {
+		add_action( 'after_setup_theme', array( $this, 'init' ), 20 );
+	}
 
-    /**
-     * Initialize SiteOrigin compatibility.
-     */
-    public function init() {
-        if ( ! $this->is_siteorigin_active() ) {
-            return;
-        }
+	/**
+	 * Initialize SiteOrigin compatibility.
+	 */
+	public function init() {
+		if ( ! $this->is_siteorigin_active() ) {
+			return;
+		}
 
-        // Register theme support.
-        add_theme_support( 'siteorigin-panels', array(
-            'home-page'     => true,
-            'tablet-layout' => true,
-        ) );
+		// Register theme support.
+		add_theme_support(
+			'siteorigin-panels',
+			array(
+				'home-page'     => true,
+				'tablet-layout' => true,
+			)
+		);
 
-        // Suppress theme dynamic CSS when SiteOrigin is active on the page.
-        add_filter( 'opulentia_dynamic_css_enabled', array( $this, 'maybe_suppress_theme_css' ) );
+		// Suppress theme dynamic CSS when SiteOrigin is active on the page.
+		add_filter( 'opulentia_dynamic_css_enabled', array( $this, 'maybe_suppress_theme_css' ) );
 
-        // Add SiteOrigin-specific body classes.
-        add_filter( 'body_class', array( $this, 'body_classes' ) );
+		// Add SiteOrigin-specific body classes.
+		add_filter( 'body_class', array( $this, 'body_classes' ) );
 
-        // Ensure full-width layouts work with SiteOrigin rows.
-        add_action( 'wp', array( $this, 'support_full_width' ) );
+		// Ensure full-width layouts work with SiteOrigin rows.
+		add_action( 'wp', array( $this, 'support_full_width' ) );
 
-        // Enqueue theme-compatible SiteOrigin styles.
-        add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_styles' ), 20 );
-    }
+		// Enqueue theme-compatible SiteOrigin styles.
+		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_styles' ), 20 );
+	}
 
-    /**
-     * Check if SiteOrigin Page Builder is active.
-     *
-     * @return bool
-     */
-    private function is_siteorigin_active() {
-        return class_exists( 'SiteOrigin_Panels' )
-            || defined( 'SITEORIGIN_PANELS_VERSION' );
-    }
+	/**
+	 * Check if SiteOrigin Page Builder is active.
+	 *
+	 * @return bool
+	 */
+	private function is_siteorigin_active() {
+		return class_exists( 'SiteOrigin_Panels' )
+			|| defined( 'SITEORIGIN_PANELS_VERSION' );
+	}
 
-    /**
-     * Suppress theme dynamic CSS when SiteOrigin is active on the page.
-     *
-     * @param bool $enabled Whether dynamic CSS is enabled.
-     * @return bool
-     */
-    public function maybe_suppress_theme_css( $enabled ) {
-        if ( is_singular() ) {
-            $post = get_post();
-            if ( $post && function_exists( 'siteorigin_panels_is_panel' ) && siteorigin_panels_is_panel( $post->ID ) ) {
-                return false;
-            }
-        }
+	/**
+	 * Suppress theme dynamic CSS when SiteOrigin is active on the page.
+	 *
+	 * @param bool $enabled Whether dynamic CSS is enabled.
+	 * @return bool
+	 */
+	public function maybe_suppress_theme_css( $enabled ) {
+		if ( is_singular() ) {
+			$post = get_post();
+			if ( $post && function_exists( 'siteorigin_panels_is_panel' ) && siteorigin_panels_is_panel( $post->ID ) ) {
+				return false;
+			}
+		}
 
-        return $enabled;
-    }
+		return $enabled;
+	}
 
-    /**
-     * Add full-width support for SiteOrigin Page Builder.
-     *
-     * When a page uses SiteOrigin, removes theme content
-     * constraints so rows can span the full viewport width.
-     */
-    public function support_full_width() {
-        if ( ! is_singular() ) {
-            return;
-        }
+	/**
+	 * Add full-width support for SiteOrigin Page Builder.
+	 *
+	 * When a page uses SiteOrigin, removes theme content
+	 * constraints so rows can span the full viewport width.
+	 */
+	public function support_full_width() {
+		if ( ! is_singular() ) {
+			return;
+		}
 
-        $post = get_post();
-        if ( ! $post ) {
-            return;
-        }
+		$post = get_post();
+		if ( ! $post ) {
+			return;
+		}
 
-        if ( function_exists( 'siteorigin_panels_is_panel' ) && siteorigin_panels_is_panel( $post->ID ) ) {
-            add_filter( 'Opulentia_layout_content_layout', '__return_false' );
-        }
-    }
+		if ( function_exists( 'siteorigin_panels_is_panel' ) && siteorigin_panels_is_panel( $post->ID ) ) {
+			add_filter( 'Opulentia_layout_content_layout', '__return_false' );
+		}
+	}
 
-    /**
-     * Enqueue theme-compatible SiteOrigin styles.
-     */
-    public function enqueue_styles() {
-        wp_add_inline_style(
-            'opulentia-style',
-            '
+	/**
+	 * Enqueue theme-compatible SiteOrigin styles.
+	 */
+	public function enqueue_styles() {
+		wp_add_inline_style(
+			'opulentia-style',
+			'
                 /* ── SiteOrigin Page Builder Theme Integration ── */
 
                 /* SiteOrigin row with theme styling */
@@ -183,25 +186,25 @@ class Opulentia_SiteOrigin {
                     }
                 }
             '
-        );
-    }
+		);
+	}
 
-    /**
-     * Add SiteOrigin-specific body classes.
-     *
-     * @param array $classes Body classes.
-     * @return array
-     */
-    public function body_classes( $classes ) {
-        $classes[] = 'opulentia-siteorigin-compat';
+	/**
+	 * Add SiteOrigin-specific body classes.
+	 *
+	 * @param array $classes Body classes.
+	 * @return array
+	 */
+	public function body_classes( $classes ) {
+		$classes[] = 'opulentia-siteorigin-compat';
 
-        if ( is_singular() ) {
-            $post = get_post();
-            if ( $post && function_exists( 'siteorigin_panels_is_panel' ) && siteorigin_panels_is_panel( $post->ID ) ) {
-                $classes[] = 'siteorigin-panels-active';
-            }
-        }
+		if ( is_singular() ) {
+			$post = get_post();
+			if ( $post && function_exists( 'siteorigin_panels_is_panel' ) && siteorigin_panels_is_panel( $post->ID ) ) {
+				$classes[] = 'siteorigin-panels-active';
+			}
+		}
 
-        return $classes;
-    }
+		return $classes;
+	}
 }

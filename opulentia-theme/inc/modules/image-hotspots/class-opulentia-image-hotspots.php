@@ -1,175 +1,207 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) {
-    exit;
+	exit;
 }
 
 class Opulentia_Image_Hotspots {
 
-    private static $instance = null;
+	private static $instance = null;
 
-    public static function get_instance() {
-        if ( is_null( self::$instance ) ) {
-            self::$instance = new self();
-        }
-        return self::$instance;
-    }
+	public static function get_instance() {
+		if ( is_null( self::$instance ) ) {
+			self::$instance = new self();
+		}
+		return self::$instance;
+	}
 
-    private function __construct() {
-        add_action( 'customize_register', array( $this, 'register_customizer' ), 30 );
-        add_action( 'wp_enqueue_scripts', array( $this, 'inline_css' ), 120 );
-        add_shortcode( 'op_hotspots', array( $this, 'render_hotspots' ) );
-        add_shortcode( 'op_hotspot', array( $this, 'render_hotspot' ) );
-    }
+	private function __construct() {
+		add_action( 'customize_register', array( $this, 'register_customizer' ), 30 );
+		add_action( 'wp_enqueue_scripts', array( $this, 'inline_css' ), 120 );
+		add_shortcode( 'op_hotspots', array( $this, 'render_hotspots' ) );
+		add_shortcode( 'op_hotspot', array( $this, 'render_hotspot' ) );
+	}
 
-    public function register_customizer( $wp_customize ) {
-        $wp_customize->add_section( 'opulentia_hotspots', array(
-            'title'    => __( 'Image Hotspots', 'opulentia' ),
-            'panel'    => 'Opulentia_global_settings',
-            'priority' => 210,
-        ) );
+	public function register_customizer( $wp_customize ) {
+		$wp_customize->add_section(
+			'opulentia_hotspots',
+			array(
+				'title'    => __( 'Image Hotspots', 'opulentia' ),
+				'panel'    => 'Opulentia_global_settings',
+				'priority' => 210,
+			)
+		);
 
-        $wp_customize->add_setting( 'hotspots_enable', array(
-            'default'           => true,
-            'sanitize_callback' => 'wp_validate_boolean',
-            'transport'         => 'refresh',
-        ) );
-        $wp_customize->add_control( 'hotspots_enable', array(
-            'label'   => __( 'Enable Image Hotspots', 'opulentia' ),
-            'section' => 'opulentia_hotspots',
-            'type'    => 'checkbox',
-        ) );
+		$wp_customize->add_setting(
+			'hotspots_enable',
+			array(
+				'default'           => true,
+				'sanitize_callback' => 'wp_validate_boolean',
+				'transport'         => 'refresh',
+			)
+		);
+		$wp_customize->add_control(
+			'hotspots_enable',
+			array(
+				'label'   => __( 'Enable Image Hotspots', 'opulentia' ),
+				'section' => 'opulentia_hotspots',
+				'type'    => 'checkbox',
+			)
+		);
 
-        $wp_customize->add_setting( 'hotspots_pin_size', array(
-            'default'           => 'medium',
-            'sanitize_callback' => 'sanitize_text_field',
-            'transport'         => 'refresh',
-        ) );
-        $wp_customize->add_control( 'hotspots_pin_size', array(
-            'label'   => __( 'Default Pin Size', 'opulentia' ),
-            'section' => 'opulentia_hotspots',
-            'type'    => 'select',
-            'choices' => array(
-                'small'  => __( 'Small', 'opulentia' ),
-                'medium' => __( 'Medium', 'opulentia' ),
-                'large'  => __( 'Large', 'opulentia' ),
-            ),
-        ) );
+		$wp_customize->add_setting(
+			'hotspots_pin_size',
+			array(
+				'default'           => 'medium',
+				'sanitize_callback' => 'sanitize_text_field',
+				'transport'         => 'refresh',
+			)
+		);
+		$wp_customize->add_control(
+			'hotspots_pin_size',
+			array(
+				'label'   => __( 'Default Pin Size', 'opulentia' ),
+				'section' => 'opulentia_hotspots',
+				'type'    => 'select',
+				'choices' => array(
+					'small'  => __( 'Small', 'opulentia' ),
+					'medium' => __( 'Medium', 'opulentia' ),
+					'large'  => __( 'Large', 'opulentia' ),
+				),
+			)
+		);
 
-        $wp_customize->add_setting( 'hotspots_pin_color', array(
-            'default'           => '#c9a96e',
-            'sanitize_callback' => 'sanitize_hex_color',
-            'transport'         => 'refresh',
-        ) );
-        $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'hotspots_pin_color', array(
-            'label'   => __( 'Pin Color', 'opulentia' ),
-            'section' => 'opulentia_hotspots',
-        ) ) );
-    }
+		$wp_customize->add_setting(
+			'hotspots_pin_color',
+			array(
+				'default'           => '#c9a96e',
+				'sanitize_callback' => 'sanitize_hex_color',
+				'transport'         => 'refresh',
+			)
+		);
+		$wp_customize->add_control(
+			new WP_Customize_Color_Control(
+				$wp_customize,
+				'hotspots_pin_color',
+				array(
+					'label'   => __( 'Pin Color', 'opulentia' ),
+					'section' => 'opulentia_hotspots',
+				)
+			)
+		);
+	}
 
-    private function is_enabled() {
-        return (bool) get_theme_mod( 'hotspots_enable', true );
-    }
+	private function is_enabled() {
+		return (bool) get_theme_mod( 'hotspots_enable', true );
+	}
 
-    private function get_pin_size() {
-        return get_theme_mod( 'hotspots_pin_size', 'medium' );
-    }
+	private function get_pin_size() {
+		return get_theme_mod( 'hotspots_pin_size', 'medium' );
+	}
 
-    private function get_pin_color() {
-        return get_theme_mod( 'hotspots_pin_color', '#c9a96e' );
-    }
+	private function get_pin_color() {
+		return get_theme_mod( 'hotspots_pin_color', '#c9a96e' );
+	}
 
-    public function render_hotspots( $atts, $content = '' ) {
-        if ( ! $this->is_enabled() ) {
-            return '';
-        }
+	public function render_hotspots( $atts, $content = '' ) {
+		if ( ! $this->is_enabled() ) {
+			return '';
+		}
 
-        $atts = shortcode_atts( array(
-            'image'    => '',
-            'width'    => '',
-            'height'   => '',
-            'pin_size' => $this->get_pin_size(),
-        ), $atts, 'op_hotspots' );
+		$atts = shortcode_atts(
+			array(
+				'image'    => '',
+				'width'    => '',
+				'height'   => '',
+				'pin_size' => $this->get_pin_size(),
+			),
+			$atts,
+			'op_hotspots'
+		);
 
-        if ( empty( $atts['image'] ) ) {
-            return '';
-        }
+		if ( empty( $atts['image'] ) ) {
+			return '';
+		}
 
-        $pin_size = in_array( $atts['pin_size'], array( 'small', 'medium', 'large' ), true ) ? $atts['pin_size'] : $this->get_pin_size();
-        $size_class = 'medium' !== $pin_size ? ' op-hotspot--' . $pin_size : '';
+		$pin_size   = in_array( $atts['pin_size'], array( 'small', 'medium', 'large' ), true ) ? $atts['pin_size'] : $this->get_pin_size();
+		$size_class = 'medium' !== $pin_size ? ' op-hotspot--' . $pin_size : '';
 
-        $id = 'op-hotspots-' . uniqid();
+		$id = 'op-hotspots-' . uniqid();
 
-        $output = '<div id="' . esc_attr( $id ) . '" class="op-hotspots">';
+		$output = '<div id="' . esc_attr( $id ) . '" class="op-hotspots">';
 
-        $img_attrs = 'src="' . esc_url( $atts['image'] ) . '" alt=""';
-        if ( ! empty( $atts['width'] ) ) {
-            $img_attrs .= ' width="' . intval( $atts['width'] ) . '"';
-        }
-        if ( ! empty( $atts['height'] ) ) {
-            $img_attrs .= ' height="' . intval( $atts['height'] ) . '"';
-        }
-        $img_attrs .= ' loading="lazy"';
+		$img_attrs = 'src="' . esc_url( $atts['image'] ) . '" alt=""';
+		if ( ! empty( $atts['width'] ) ) {
+			$img_attrs .= ' width="' . intval( $atts['width'] ) . '"';
+		}
+		if ( ! empty( $atts['height'] ) ) {
+			$img_attrs .= ' height="' . intval( $atts['height'] ) . '"';
+		}
+		$img_attrs .= ' loading="lazy"';
 
-        $output .= '<img ' . $img_attrs . '>';
+		$output .= '<img ' . $img_attrs . '>';
 
-        $output .= '<div class="op-hotspots__pins">';
+		$output .= '<div class="op-hotspots__pins">';
 
-        if ( ! empty( $content ) ) {
-            $content = do_shortcode( $content );
-            $content = str_replace( 'class="op-hotspot"', 'class="op-hotspot' . esc_attr( $size_class ) . '"', $content );
-            $output .= $content;
-        }
+		if ( ! empty( $content ) ) {
+			$content = do_shortcode( $content );
+			$content = str_replace( 'class="op-hotspot"', 'class="op-hotspot' . esc_attr( $size_class ) . '"', $content );
+			$output .= $content;
+		}
 
-        $output .= '</div></div>';
+		$output .= '</div></div>';
 
-        $output .= $this->inline_js( $id );
+		$output .= $this->inline_js( $id );
 
-        return $output;
-    }
+		return $output;
+	}
 
-    public function render_hotspot( $atts ) {
-        $atts = shortcode_atts( array(
-            'x'           => '50',
-            'y'           => '50',
-            'title'       => '',
-            'description' => '',
-            'link'        => '',
-        ), $atts, 'op_hotspot' );
+	public function render_hotspot( $atts ) {
+		$atts = shortcode_atts(
+			array(
+				'x'           => '50',
+				'y'           => '50',
+				'title'       => '',
+				'description' => '',
+				'link'        => '',
+			),
+			$atts,
+			'op_hotspot'
+		);
 
-        $x = floatval( $atts['x'] );
-        $y = floatval( $atts['y'] );
-        $x = max( 0, min( 100, $x ) );
-        $y = max( 0, min( 100, $y ) );
+		$x = floatval( $atts['x'] );
+		$y = floatval( $atts['y'] );
+		$x = max( 0, min( 100, $x ) );
+		$y = max( 0, min( 100, $y ) );
 
-        $pin = '<span class="op-hotspot-pin">+</span>';
+		$pin = '<span class="op-hotspot-pin">+</span>';
 
-        $popup = '';
-        if ( ! empty( $atts['title'] ) || ! empty( $atts['description'] ) ) {
-            $popup .= '<div class="op-hotspot-popup">';
-            if ( ! empty( $atts['title'] ) ) {
-                $popup .= '<div class="op-hotspot-popup-title">' . esc_html( $atts['title'] ) . '</div>';
-            }
-            if ( ! empty( $atts['description'] ) ) {
-                $popup .= '<div class="op-hotspot-popup-desc">' . esc_html( $atts['description'] ) . '</div>';
-            }
-            $popup .= '</div>';
-        }
+		$popup = '';
+		if ( ! empty( $atts['title'] ) || ! empty( $atts['description'] ) ) {
+			$popup .= '<div class="op-hotspot-popup">';
+			if ( ! empty( $atts['title'] ) ) {
+				$popup .= '<div class="op-hotspot-popup-title">' . esc_html( $atts['title'] ) . '</div>';
+			}
+			if ( ! empty( $atts['description'] ) ) {
+				$popup .= '<div class="op-hotspot-popup-desc">' . esc_html( $atts['description'] ) . '</div>';
+			}
+			$popup .= '</div>';
+		}
 
-        $has_link = ! empty( $atts['link'] );
-        $tag = $has_link ? 'a' : 'span';
-        $link_attr = $has_link ? ' href="' . esc_url( $atts['link'] ) . '" target="_blank" rel="noopener noreferrer"' : '';
-        $style = 'left:' . $x . '%;top:' . $y . '%;';
+		$has_link  = ! empty( $atts['link'] );
+		$tag       = $has_link ? 'a' : 'span';
+		$link_attr = $has_link ? ' href="' . esc_url( $atts['link'] ) . '" target="_blank" rel="noopener noreferrer"' : '';
+		$style     = 'left:' . $x . '%;top:' . $y . '%;';
 
-        $output = '<' . $tag . ' class="op-hotspot" style="' . $style . '"' . $link_attr . '>';
-        $output .= $pin;
-        $output .= $popup;
-        $output .= '</' . $tag . '>';
+		$output  = '<' . $tag . ' class="op-hotspot" style="' . $style . '"' . $link_attr . '>';
+		$output .= $pin;
+		$output .= $popup;
+		$output .= '</' . $tag . '>';
 
-        return $output;
-    }
+		return $output;
+	}
 
-    private function inline_js( $id ) {
-        return '<script>
+	private function inline_js( $id ) {
+		return '<script>
         (function() {
             var container = document.getElementById("' . $id . '");
             if (!container) return;
@@ -195,15 +227,15 @@ class Opulentia_Image_Hotspots {
             });
         })();
         </script>';
-    }
+	}
 
-    public function inline_css() {
-        $pin_color = $this->get_pin_color();
+	public function inline_css() {
+		$pin_color = $this->get_pin_color();
 
-        $pin_color_rgb = $this->hex_to_rgb( $pin_color );
-        $shadow_rgba = $pin_color_rgb ? 'rgba(' . $pin_color_rgb . ',0.4)' : 'rgba(201, 169, 110, 0.4)';
+		$pin_color_rgb = $this->hex_to_rgb( $pin_color );
+		$shadow_rgba   = $pin_color_rgb ? 'rgba(' . $pin_color_rgb . ',0.4)' : 'rgba(201, 169, 110, 0.4)';
 
-        $css = '
+		$css = '
         .op-hotspots {
             position: relative;
             display: inline-block;
@@ -317,20 +349,20 @@ class Opulentia_Image_Hotspots {
         }
         ';
 
-        wp_add_inline_style( 'opulentia-style', $css );
-    }
+		wp_add_inline_style( 'opulentia-style', $css );
+	}
 
-    private function hex_to_rgb( $hex ) {
-        $hex = ltrim( $hex, '#' );
-        if ( strlen( $hex ) === 3 ) {
-            $hex = $hex[0] . $hex[0] . $hex[1] . $hex[1] . $hex[2] . $hex[2];
-        }
-        if ( strlen( $hex ) !== 6 ) {
-            return '';
-        }
-        $r = hexdec( substr( $hex, 0, 2 ) );
-        $g = hexdec( substr( $hex, 2, 2 ) );
-        $b = hexdec( substr( $hex, 4, 2 ) );
-        return $r . ',' . $g . ',' . $b;
-    }
+	private function hex_to_rgb( $hex ) {
+		$hex = ltrim( $hex, '#' );
+		if ( strlen( $hex ) === 3 ) {
+			$hex = $hex[0] . $hex[0] . $hex[1] . $hex[1] . $hex[2] . $hex[2];
+		}
+		if ( strlen( $hex ) !== 6 ) {
+			return '';
+		}
+		$r = hexdec( substr( $hex, 0, 2 ) );
+		$g = hexdec( substr( $hex, 2, 2 ) );
+		$b = hexdec( substr( $hex, 4, 2 ) );
+		return $r . ',' . $g . ',' . $b;
+	}
 }

@@ -1,121 +1,148 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) {
-    exit;
+	exit;
 }
 
 class Opulentia_RTL {
 
-    private static $instance = null;
+	private static $instance = null;
 
-    public static function get_instance() {
-        if ( is_null( self::$instance ) ) {
-            self::$instance = new self();
-        }
-        return self::$instance;
-    }
+	public static function get_instance() {
+		if ( is_null( self::$instance ) ) {
+			self::$instance = new self();
+		}
+		return self::$instance;
+	}
 
-    private function __construct() {
-        add_action( 'customize_register', array( $this, 'register_customizer' ), 30 );
-        add_action( 'wp_enqueue_scripts', array( $this, 'inline_rtl_css' ), 120 );
-        add_filter( 'body_class', array( $this, 'body_class' ) );
-        add_filter( 'language_attributes', array( $this, 'rtl_dir_attribute' ) );
-        add_filter( 'stylesheet_uri', array( $this, 'rtl_stylesheet' ), 10, 2 );
-    }
+	private function __construct() {
+		add_action( 'customize_register', array( $this, 'register_customizer' ), 30 );
+		add_action( 'wp_enqueue_scripts', array( $this, 'inline_rtl_css' ), 120 );
+		add_filter( 'body_class', array( $this, 'body_class' ) );
+		add_filter( 'language_attributes', array( $this, 'rtl_dir_attribute' ) );
+		add_filter( 'stylesheet_uri', array( $this, 'rtl_stylesheet' ), 10, 2 );
+	}
 
-    public function register_customizer( $wp_customize ) {
-        $wp_customize->add_section( 'opulentia_rtl', array(
-            'title'    => __( 'RTL Language Support', 'opulentia' ),
-            'panel'    => 'Opulentia_global_settings',
-            'priority' => 95,
-        ) );
+	public function register_customizer( $wp_customize ) {
+		$wp_customize->add_section(
+			'opulentia_rtl',
+			array(
+				'title'    => __( 'RTL Language Support', 'opulentia' ),
+				'panel'    => 'Opulentia_global_settings',
+				'priority' => 95,
+			)
+		);
 
-        $wp_customize->add_setting( 'rtl-force', array(
-            'default'           => false,
-            'sanitize_callback' => 'wp_validate_boolean',
-            'transport'         => 'refresh',
-        ) );
-        $wp_customize->add_control( 'rtl-force', array(
-            'label'       => __( 'Force RTL Mode', 'opulentia' ),
-            'description' => __( 'Enable RTL even when site language is LTR. Useful for testing.', 'opulentia' ),
-            'section'     => 'opulentia_rtl',
-            'type'        => 'checkbox',
-        ) );
+		$wp_customize->add_setting(
+			'rtl-force',
+			array(
+				'default'           => false,
+				'sanitize_callback' => 'wp_validate_boolean',
+				'transport'         => 'refresh',
+			)
+		);
+		$wp_customize->add_control(
+			'rtl-force',
+			array(
+				'label'       => __( 'Force RTL Mode', 'opulentia' ),
+				'description' => __( 'Enable RTL even when site language is LTR. Useful for testing.', 'opulentia' ),
+				'section'     => 'opulentia_rtl',
+				'type'        => 'checkbox',
+			)
+		);
 
-        $wp_customize->add_setting( 'rtl-font-family', array(
-            'default'           => '',
-            'sanitize_callback' => 'sanitize_text_field',
-            'transport'         => 'postMessage',
-        ) );
-        $wp_customize->add_control( 'rtl-font-family', array(
-            'label'       => __( 'RTL Font Family', 'opulentia' ),
-            'description' => __( 'Font family for RTL text (e.g., "Noto Naskh Arabic", "Vazirmatn"). Leave empty to use default.', 'opulentia' ),
-            'section'     => 'opulentia_rtl',
-            'type'        => 'text',
-        ) );
+		$wp_customize->add_setting(
+			'rtl-font-family',
+			array(
+				'default'           => '',
+				'sanitize_callback' => 'sanitize_text_field',
+				'transport'         => 'postMessage',
+			)
+		);
+		$wp_customize->add_control(
+			'rtl-font-family',
+			array(
+				'label'       => __( 'RTL Font Family', 'opulentia' ),
+				'description' => __( 'Font family for RTL text (e.g., "Noto Naskh Arabic", "Vazirmatn"). Leave empty to use default.', 'opulentia' ),
+				'section'     => 'opulentia_rtl',
+				'type'        => 'text',
+			)
+		);
 
-        $wp_customize->add_setting( 'rtl-font-size-base', array(
-            'default'           => '',
-            'sanitize_callback' => 'sanitize_text_field',
-            'transport'         => 'postMessage',
-        ) );
-        $wp_customize->add_control( 'rtl-font-size-base', array(
-            'label'       => __( 'RTL Base Font Size', 'opulentia' ),
-            'description' => __( 'Base font size for RTL text (e.g., "16px", "0.95rem").', 'opulentia' ),
-            'section'     => 'opulentia_rtl',
-            'type'        => 'text',
-        ) );
+		$wp_customize->add_setting(
+			'rtl-font-size-base',
+			array(
+				'default'           => '',
+				'sanitize_callback' => 'sanitize_text_field',
+				'transport'         => 'postMessage',
+			)
+		);
+		$wp_customize->add_control(
+			'rtl-font-size-base',
+			array(
+				'label'       => __( 'RTL Base Font Size', 'opulentia' ),
+				'description' => __( 'Base font size for RTL text (e.g., "16px", "0.95rem").', 'opulentia' ),
+				'section'     => 'opulentia_rtl',
+				'type'        => 'text',
+			)
+		);
 
-        $wp_customize->add_setting( 'rtl-line-height', array(
-            'default'           => '',
-            'sanitize_callback' => 'sanitize_text_field',
-            'transport'         => 'postMessage',
-        ) );
-        $wp_customize->add_control( 'rtl-line-height', array(
-            'label'       => __( 'RTL Line Height', 'opulentia' ),
-            'description' => __( 'Line height for RTL text (e.g., "1.8").', 'opulentia' ),
-            'section'     => 'opulentia_rtl',
-            'type'        => 'text',
-        ) );
-    }
+		$wp_customize->add_setting(
+			'rtl-line-height',
+			array(
+				'default'           => '',
+				'sanitize_callback' => 'sanitize_text_field',
+				'transport'         => 'postMessage',
+			)
+		);
+		$wp_customize->add_control(
+			'rtl-line-height',
+			array(
+				'label'       => __( 'RTL Line Height', 'opulentia' ),
+				'description' => __( 'Line height for RTL text (e.g., "1.8").', 'opulentia' ),
+				'section'     => 'opulentia_rtl',
+				'type'        => 'text',
+			)
+		);
+	}
 
-    public function body_class( $classes ) {
-        if ( $this->is_rtl() ) {
-            $classes[] = 'opulentia-rtl';
-        }
-        return $classes;
-    }
+	public function body_class( $classes ) {
+		if ( $this->is_rtl() ) {
+			$classes[] = 'opulentia-rtl';
+		}
+		return $classes;
+	}
 
-    public function rtl_dir_attribute( $output ) {
-        if ( $this->is_rtl() ) {
-            $output = str_replace( 'dir="ltr"', 'dir="rtl"', $output );
-        }
-        return $output;
-    }
+	public function rtl_dir_attribute( $output ) {
+		if ( $this->is_rtl() ) {
+			$output = str_replace( 'dir="ltr"', 'dir="rtl"', $output );
+		}
+		return $output;
+	}
 
-    public function rtl_stylesheet( $stylesheet_uri, $stylesheet_dir_uri ) {
-        return $stylesheet_uri;
-    }
+	public function rtl_stylesheet( $stylesheet_uri, $stylesheet_dir_uri ) {
+		return $stylesheet_uri;
+	}
 
-    private function is_rtl() {
-        if ( Opulentia_get_option( 'rtl-force', false ) ) {
-            return true;
-        }
-        if ( is_rtl() ) {
-            return true;
-        }
-        return false;
-    }
+	private function is_rtl() {
+		if ( Opulentia_get_option( 'rtl-force', false ) ) {
+			return true;
+		}
+		if ( is_rtl() ) {
+			return true;
+		}
+		return false;
+	}
 
-    public function inline_rtl_css() {
-        if ( ! $this->is_rtl() ) {
-            return;
-        }
+	public function inline_rtl_css() {
+		if ( ! $this->is_rtl() ) {
+			return;
+		}
 
-        $font_family = Opulentia_get_option( 'rtl-font-family', '' );
-        $font_size   = Opulentia_get_option( 'rtl-font-size-base', '' );
-        $line_height = Opulentia_get_option( 'rtl-line-height', '' );
+		$font_family = Opulentia_get_option( 'rtl-font-family', '' );
+		$font_size   = Opulentia_get_option( 'rtl-font-size-base', '' );
+		$line_height = Opulentia_get_option( 'rtl-line-height', '' );
 
-        $css = '
+		$css = '
         body.opulentia-rtl {
             direction: rtl;
             unicode-bidi: embed;
@@ -266,8 +293,8 @@ class Opulentia_RTL {
         }
         ';
 
-        if ( ! empty( $font_family ) ) {
-            $css .= '
+		if ( ! empty( $font_family ) ) {
+			$css .= '
             body.opulentia-rtl,
             body.opulentia-rtl p,
             body.opulentia-rtl .entry-content,
@@ -275,25 +302,25 @@ class Opulentia_RTL {
                 font-family: ' . $font_family . ', sans-serif;
             }
             ';
-        }
+		}
 
-        if ( ! empty( $font_size ) ) {
-            $css .= '
+		if ( ! empty( $font_size ) ) {
+			$css .= '
             body.opulentia-rtl {
                 font-size: ' . $font_size . ';
             }
             ';
-        }
+		}
 
-        if ( ! empty( $line_height ) ) {
-            $css .= '
+		if ( ! empty( $line_height ) ) {
+			$css .= '
             body.opulentia-rtl p,
             body.opulentia-rtl .entry-content {
                 line-height: ' . $line_height . ';
             }
             ';
-        }
+		}
 
-        wp_add_inline_style( 'opulentia-style', $css );
-    }
+		wp_add_inline_style( 'opulentia-style', $css );
+	}
 }

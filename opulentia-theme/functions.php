@@ -7,7 +7,7 @@
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
-    exit;
+	exit;
 }
 
 // -----------------------------------------------------------------------------
@@ -413,7 +413,7 @@ require Opulentia_DIR . '/inc/template-functions.php';
  * Commands: wp opulentia option get/set, wp opulentia module list/enable/disable, wp opulentia cloner run
  */
 if ( defined( 'WP_CLI' ) && WP_CLI ) {
-    require Opulentia_DIR . '/inc/class-opulentia-cli.php';
+	require Opulentia_DIR . '/inc/class-opulentia-cli.php';
 }
 
 // -----------------------------------------------------------------------------
@@ -430,619 +430,619 @@ if ( defined( 'WP_CLI' ) && WP_CLI ) {
  * the Module Manager's own init at 'after_setup_theme' priority 20.
  */
 function Opulentia_register_system_modules() {
-    $modules = array(
-        'core'              => array(
-            'name'         => __( 'Core Foundation', 'opulentia' ),
-            'description'  => __( 'Theme options API, common functions, attribute builder.', 'opulentia' ),
-            'default'      => true,
-            'priority'     => 1,
-            'category'     => 'core',
-        ),
-        'header-builder'    => array(
-            'name'         => __( 'Header Builder', 'opulentia' ),
-            'description'  => __( '3-row header builder with logo, nav, search, cart components.', 'opulentia' ),
-            'default'      => true,
-            'priority'     => 10,
-            'category'     => 'builder',
-            'dependencies' => array( 'core' ),
-        ),
-        'footer-builder'    => array(
-            'name'         => __( 'Footer Builder', 'opulentia' ),
-            'description'  => __( 'Configurable footer columns, widgets, social icons.', 'opulentia' ),
-            'default'      => true,
-            'priority'     => 20,
-            'category'     => 'builder',
-            'dependencies' => array( 'core' ),
-        ),
-        'blog-layouts'      => array(
-            'name'         => __( 'Blog & Archive Layouts', 'opulentia' ),
-            'description'  => __( 'Classic, grid, and list layouts for blog archives.', 'opulentia' ),
-            'default'      => true,
-            'priority'     => 30,
-            'category'     => 'content',
-            'dependencies' => array( 'core' ),
-        ),
-        'blog-pro'          => array(
-            'name'         => __( 'Blog Pro', 'opulentia' ),
-            'description'  => __( 'Infinite scroll, read time, author box, related posts.', 'opulentia' ),
-            'default'      => true,
-            'priority'     => 35,
-            'category'     => 'content',
-            'dependencies' => array( 'core', 'blog-layouts' ),
-        ),
-        'woocommerce'       => array(
-            'name'         => __( 'WooCommerce Enhancements', 'opulentia' ),
-            'description'  => __( 'Product grid, quick view, cart/checkout styling, variation swatches.', 'opulentia' ),
-            'default'      => true,
-            'priority'     => 40,
-            'category'     => 'ecommerce',
-            'dependencies' => array( 'core' ),
-        ),
-        'dynamic-css'       => array(
-            'name'         => __( 'Dynamic CSS Engine', 'opulentia' ),
-            'description'  => __( 'Real-time CSS generation from customizer settings.', 'opulentia' ),
-            'default'      => true,
-            'priority'     => 5,
-            'category'     => 'core',
-            'dependencies' => array( 'core' ),
-        ),
-        'customizer'        => array(
-            'name'         => __( 'Customizer Controls', 'opulentia' ),
-            'description'  => __( 'Config-driven customizer sections, settings, and controls.', 'opulentia' ),
-            'default'      => true,
-            'priority'     => 15,
-            'category'     => 'core',
-            'dependencies' => array( 'core' ),
-        ),
-        'performance'       => array(
-            'name'         => __( 'Performance Optimizations', 'opulentia' ),
-            'description'  => __( 'CSS minification, font optimization, lazy loading, defer JS.', 'opulentia' ),
-            'default'      => true,
-            'priority'     => 50,
-            'category'     => 'optimization',
-            'dependencies' => array( 'core' ),
-        ),
-        'security'          => array(
-            'name'         => __( 'Security Hardening', 'opulentia' ),
-            'description'  => __( 'CSRF tokens, security headers, login hardening, sanitization.', 'opulentia' ),
-            'default'      => true,
-            'priority'     => 60,
-            'category'     => 'optimization',
-            'dependencies' => array( 'core' ),
-        ),
-        'accessibility'     => array(
-            'name'         => __( 'Accessibility', 'opulentia' ),
-            'description'  => __( 'Focus styles, ARIA landmarks, keyboard navigation, skip link.', 'opulentia' ),
-            'default'      => true,
-            'priority'     => 13,
-            'category'     => 'core',
-            'dependencies' => array( 'core' ),
-        ),
-        'schema'            => array(
-            'name'         => __( 'Schema Markup', 'opulentia' ),
-            'description'  => __( 'JSON-LD structured data for SEO (Article, Product, Organization, etc.).', 'opulentia' ),
-            'default'      => true,
-            'priority'     => 65,
-            'category'     => 'seo',
-            'dependencies' => array( 'core' ),
-        ),
-        'advanced-headers'  => array(
-            'name'         => __( 'Advanced Page Headers', 'opulentia' ),
-            'description'  => __( 'Custom page banners with background images, overlays, breadcrumbs.', 'opulentia' ),
-            'default'      => true,
-            'priority'     => 25,
-            'category'     => 'builder',
-            'dependencies' => array( 'core' ),
-        ),
-        'mega-menu'         => array(
-            'name'         => __( 'Mega Menu', 'opulentia' ),
-            'description'  => __( 'Multi-column mega dropdowns, menu badges, icons, animations.', 'opulentia' ),
-            'default'      => false,
-            'priority'     => 12,
-            'category'     => 'builder',
-            'dependencies' => array( 'core' ),
-        ),
-        'live-search'       => array(
-            'name'         => __( 'Live Search', 'opulentia' ),
-            'description'  => __( 'AJAX live search with results dropdown for posts and products.', 'opulentia' ),
-            'default'      => true,
-            'priority'     => 45,
-            'category'     => 'content',
-            'dependencies' => array( 'core' ),
-        ),
-        'scroll-to-top'     => array(
-            'name'         => __( 'Scroll to Top', 'opulentia' ),
-            'description'  => __( 'Customizable back-to-top button.', 'opulentia' ),
-            'default'      => true,
-            'priority'     => 55,
-            'category'     => 'ui',
-            'dependencies' => array( 'core' ),
-        ),
-        'transparent-header' => array(
-            'name'         => __( 'Transparent Header', 'opulentia' ),
-            'description'  => __( 'Transparent header with conditional page display.', 'opulentia' ),
-            'default'      => true,
-            'priority'     => 11,
-            'category'     => 'builder',
-            'dependencies' => array( 'core' ),
-        ),
-        'sticky-header'     => array(
-            'name'         => __( 'Sticky Header', 'opulentia' ),
-            'description'  => __( 'Sticky header with scroll behavior, separate logo, animation styles, and hide-on-scroll-up.', 'opulentia' ),
-            'default'      => true,
-            'priority'     => 9,
-            'category'     => 'builder',
-            'dependencies' => array( 'core', 'header-builder' ),
-        ),
-        'breadcrumbs'       => array(
-            'name'         => __( 'Breadcrumbs', 'opulentia' ),
-            'description'  => __( 'Native breadcrumbs with Yoast SEO & Rank Math integration, customizer controls, and Schema.org markup.', 'opulentia' ),
-            'default'      => true,
-            'priority'     => 8,
-            'category'     => 'seo',
-            'dependencies' => array( 'core' ),
-        ),
-        'site-layouts'       => array(
-            'name'         => __( 'Site Layouts', 'opulentia' ),
-            'description'  => __( 'Full-width, boxed, and padded layout options with container width control and per-page override meta box.', 'opulentia' ),
-            'default'      => true,
-            'priority'     => 6,
-            'category'     => 'layout',
-            'dependencies' => array( 'core' ),
-        ),
-        'spacing'           => array(
-            'name'         => __( 'Spacing System', 'opulentia' ),
-            'description'  => __( 'Per-element padding/margin controls for containers, header, footer, content, blog, sections, and widgets with responsive breakpoints.', 'opulentia' ),
-            'default'      => true,
-            'priority'     => 7,
-            'category'     => 'layout',
-            'dependencies' => array( 'core' ),
-        ),
-        'dark-mode'         => array(
-            'name'         => __( 'Dark Mode', 'opulentia' ),
-            'description'  => __( 'Automatic and manual dark mode with toggle.', 'opulentia' ),
-            'default'      => false,
-            'priority'     => 75,
-            'category'     => 'ui',
-            'dependencies' => array( 'core' ),
-        ),
-        'meta-boxes'        => array(
-            'name'         => __( 'Page/Post Meta Boxes', 'opulentia' ),
-            'description'  => __( 'Per-page overrides for layout, sidebar, header, breadcrumbs.', 'opulentia' ),
-            'default'      => true,
-            'priority'     => 14,
-            'category'     => 'core',
-            'dependencies' => array( 'core' ),
-        ),
-        'integrations'      => array(
-            'name'         => __( 'Third-Party Integrations', 'opulentia' ),
-            'description'  => __( 'Mailchimp, Elementor, Gutenberg, Yoast SEO, Rank Math, LearnDash, LifterLMS, Beaver Builder, AMP compatibility.', 'opulentia' ),
-            'default'      => true,
-            'priority'     => 70,
-            'category'     => 'compatibility',
-            'dependencies' => array( 'core' ),
-        ),
-        'site-cloner'       => array(
-            'name'         => __( 'Site Cloner', 'opulentia' ),
-            'description'  => __( 'AI-powered website cloner: capture, analyze, and apply any site design into your theme.', 'opulentia' ),
-            'default'      => true,
-            'priority'     => 80,
-            'category'     => 'tools',
-            'dependencies' => array( 'core' ),
-        ),
-        'animation-presets' => array(
-            'name'         => __( 'Animation Presets', 'opulentia' ),
-            'description'  => __( 'GSAP-powered scroll reveals, parallax, counters, stagger, and text split animations with full customizer controls.', 'opulentia' ),
-            'default'      => true,
-            'priority'     => 12,
-            'category'     => 'ui',
-            'dependencies' => array( 'core' ),
-        ),
-        'layout-library' => array(
-            'name'         => __( 'Layout Library', 'opulentia' ),
-            'description'  => __( '20+ pre-built sections with one-click import as reusable blocks. Category and industry filtering.', 'opulentia' ),
-            'default'      => true,
-            'priority'     => 22,
-            'category'     => 'builder',
-            'dependencies' => array( 'core' ),
-        ),
-        'popup-builder' => array(
-            'name'         => __( 'Popup Builder', 'opulentia' ),
-            'description'  => __( 'Modal, notification bar, slide-in, and fullscreen popups with time/scroll/exit/click triggers, frequency control, and display conditions.', 'opulentia' ),
-            'default'      => false,
-            'priority'     => 24,
-            'category'     => 'builder',
-            'dependencies' => array( 'core' ),
-        ),
-        'conditional-display' => array(
-            'name'         => __( 'Conditional Display', 'opulentia' ),
-            'description'  => __( 'Per-page element visibility (header, footer, sidebar, breadcrumbs, scroll-to-top) with user role, device, and reusable condition set rules.', 'opulentia' ),
-            'default'      => true,
-            'priority'     => 26,
-            'category'     => 'layout',
-            'dependencies' => array( 'core' ),
-        ),
-        'demo-importer' => array(
-            'name'         => __( 'Demo Importer', 'opulentia' ),
-            'description'  => __( '5 one-click demo imports (Business, Portfolio, Shop, Agency, Landing) with content, widgets, and customizer settings.', 'opulentia' ),
-            'default'      => true,
-            'priority'     => 28,
-            'category'     => 'tools',
-            'dependencies' => array( 'core' ),
-        ),
-        'customizer-presets' => array(
-            'name'         => __( 'Customizer Presets', 'opulentia' ),
-            'description'  => __( '6 built-in design presets (Dark Luxury, Light Elegance, Midnight Blue, Forest Green, Rose Gold, Ocean Deep) with save, apply, import, and export.', 'opulentia' ),
-            'default'      => true,
-            'priority'     => 4,
-            'category'     => 'core',
-            'dependencies' => array( 'core' ),
-        ),
-        'performance-dashboard' => array(
-            'name'         => __( 'Performance Dashboard', 'opulentia' ),
-            'description'  => __( 'Asset weight tracking, PageSpeed Insights integration, module impact report, lazy load, minification, preload, and recommendations.', 'opulentia' ),
-            'default'      => true,
-            'priority'     => 130,
-            'category'     => 'optimization',
-            'dependencies' => array( 'core' ),
-        ),
-        'product-viewer-3d' => array(
-            'name'         => __( '3D Product Viewer', 'opulentia' ),
-            'description'  => __( 'GLB/GLTF 3D model viewer for WooCommerce products using <model-viewer> web component.', 'opulentia' ),
-            'default'      => false,
-            'priority'     => 42,
-            'category'     => 'ecommerce',
-            'dependencies' => array( 'core', 'woocommerce' ),
-        ),
-        'custom-fonts-uploader' => array(
-            'name'         => __( 'Custom Fonts Uploader', 'opulentia' ),
-            'description'  => __( 'Upload WOFF2/WOFF/TTF/OTF fonts, generate @font-face CSS, preload hints, and integrate with font selectors.', 'opulentia' ),
-            'default'      => true,
-            'priority'     => 3,
-            'category'     => 'core',
-            'dependencies' => array( 'core' ),
-        ),
-        'icon-manager' => array(
-            'name'         => __( 'Icon Manager', 'opulentia' ),
-            'description'  => __( 'Upload, organize, and output custom SVG icons. Shortcode and PHP function output with color/size control.', 'opulentia' ),
-            'default'      => true,
-            'priority'     => 11,
-            'category'     => 'ui',
-            'dependencies' => array( 'core' ),
-        ),
-        'color-palette' => array(
-            'name'         => __( 'Color Palette Generator', 'opulentia' ),
-            'description'  => __( 'Generate 5-color palettes using harmony rules, extract colors from images, and check WCAG contrast ratios.', 'opulentia' ),
-            'default'      => true,
-            'priority'     => 2,
-            'category'     => 'ui',
-            'dependencies' => array( 'core' ),
-        ),
-        'maintenance-mode' => array(
-            'name'         => __( 'Maintenance Mode', 'opulentia' ),
-            'description'  => __( 'Coming-soon / 503 maintenance page with countdown timer, subscribe form, social links, and custom backgrounds.', 'opulentia' ),
-            'default'      => true,
-            'priority'     => 40,
-            'category'     => 'utility',
-            'dependencies' => array( 'core' ),
-        ),
-        'gdpr-cookie-consent' => array(
-            'name'         => __( 'GDPR / Cookie Consent', 'opulentia' ),
-            'description'  => __( 'Customizable cookie consent bar with category opt-in (necessary, analytics, marketing), Cookie Policy page linking, and consent persistence.', 'opulentia' ),
-            'default'      => false,
-            'priority'     => 45,
-            'category'     => 'utility',
-            'dependencies' => array( 'core' ),
-        ),
-        'css-js-injection' => array(
-            'name'         => __( 'CSS / JS Injection', 'opulentia' ),
-            'description'  => __( 'Add custom CSS and JavaScript globally via the customizer, plus per-page CSS/JS via meta boxes. Includes responsive media query zones.', 'opulentia' ),
-            'default'      => true,
-            'priority'     => 50,
-            'category'     => 'developer',
-            'dependencies' => array( 'core' ),
-        ),
-        'responsive-controls' => array(
-            'name'         => __( 'Responsive Controls Enhancement', 'opulentia' ),
-            'description'  => __( 'Per-device typography (body, H1–H3 sizes), device visibility toggles (hide header/footer/sidebar on mobile/tablet/desktop), custom breakpoint editor, and responsive content width control.', 'opulentia' ),
-            'default'      => true,
-            'priority'     => 55,
-            'category'     => 'layout',
-            'dependencies' => array( 'core' ),
-        ),
-        'form-styler' => array(
-            'name'         => __( 'Form Styler', 'opulentia' ),
-            'description'  => __( 'Customizer-driven form styling for Contact Form 7, Gravity Forms, WPForms, and Elementor Forms. Controls inputs, labels, buttons, messages, and checkboxes.', 'opulentia' ),
-            'default'      => true,
-            'priority'     => 60,
-            'category'     => 'compatibility',
-            'dependencies' => array( 'core' ),
-        ),
-        'white-label' => array(
-            'name'         => __( 'White Label', 'opulentia' ),
-            'description'  => __( 'Rebrand the theme for client delivery — custom brand name, author, admin footer, dashboard icon, hide theme page, and client-ready mode.', 'opulentia' ),
-            'default'      => false,
-            'priority'     => 100,
-            'category'     => 'developer',
-            'dependencies' => array( 'core' ),
-        ),
-        'docs-generator' => array(
-            'name'         => __( 'Documentation Generator', 'opulentia' ),
-            'description'  => __( 'Auto-generate theme documentation from code: module inventory, shortcode reference, filter/hook list, template hierarchy, and customizer panels. Downloadable HTML export.', 'opulentia' ),
-            'default'      => true,
-            'priority'     => 110,
-            'category'     => 'developer',
-            'dependencies' => array( 'core' ),
-        ),
-        'mobile-header' => array(
-            'name'         => __( 'Mobile Header', 'opulentia' ),
-            'description'  => __( 'Dedicated mobile header with separate logo, hamburger/text toggle, slide/fade/dropdown animations, sticky option, and per-device breakpoint control.', 'opulentia' ),
-            'default'      => true,
-            'priority'     => 8,
-            'category'     => 'builder',
-            'dependencies' => array( 'core' ),
-        ),
-        'lifterlms' => array(
-            'name'         => __( 'LifterLMS Integration', 'opulentia' ),
-            'description'  => __( 'Full LifterLMS styling: course grid columns, color controls, styled cards, progress bars, access plans, lesson previews, checkout, student dashboard.', 'opulentia' ),
-            'default'      => true,
-            'priority'     => 72,
-            'category'     => 'compatibility',
-            'dependencies' => array( 'core' ),
-        ),
-        'learndash' => array(
-            'name'         => __( 'LearnDash Integration', 'opulentia' ),
-            'description'  => __( 'Full LearnDash styling: course grid columns, color controls, focus mode, progress bars, quizzes, lesson/topic item lists, styled cards.', 'opulentia' ),
-            'default'      => true,
-            'priority'     => 73,
-            'category'     => 'compatibility',
-            'dependencies' => array( 'core' ),
-        ),
-        'amp-support' => array(
-            'name'         => __( 'AMP Support', 'opulentia' ),
-            'description'  => __( 'AMP compatibility: disables non-AMP JS, replaces nav with amp-sidebar, custom AMP logo, AMP-specific CSS sanitization, customizer controls.', 'opulentia' ),
-            'default'      => true,
-            'priority'     => 74,
-            'category'     => 'compatibility',
-            'dependencies' => array( 'core' ),
-        ),
-        'rtl' => array(
-            'name'         => __( 'RTL Language Support', 'opulentia' ),
-            'description'  => __( 'Full RTL direction support: flips navigation, header, footer, sidebar, WooCommerce, forms, widgets. Custom RTL font family, base font size, and line height controls.', 'opulentia' ),
-            'default'      => true,
-            'priority'     => 75,
-            'category'     => 'compatibility',
-            'dependencies' => array( 'core' ),
-        ),
-        'custom-404' => array(
-            'name'         => __( 'Custom 404 Page', 'opulentia' ),
-            'description'  => __( 'Full custom 404 page builder: centered/split/minimal/illustrated layouts, custom title/subtitle/message, illustration upload, search form, recent posts, popular pages, CTA button, background image.', 'opulentia' ),
-            'default'      => true,
-            'priority'     => 76,
-            'category'     => 'builder',
-            'dependencies' => array( 'core' ),
-        ),
-        'social-sharing' => array(
-            'name'         => __( 'Social Sharing', 'opulentia' ),
-            'description'  => __( 'Share buttons for Facebook, X/Twitter, LinkedIn, Pinterest, WhatsApp, Email, and Copy Link on posts, pages, and products. Customizer: position, style, per-network toggle, accent color.', 'opulentia' ),
-            'default'      => true,
-            'priority'     => 77,
-            'category'     => 'content',
-            'dependencies' => array( 'core' ),
-        ),
-        'woocommerce-catalog' => array(
-            'name'         => __( 'WooCommerce Catalog Mode', 'opulentia' ),
-            'description'  => __( 'Turn your store into a catalog: hide prices, remove add-to-cart buttons, show inquiry/contact button, redirect cart/checkout. Full customizer control.', 'opulentia' ),
-            'default'      => false,
-            'priority'     => 41,
-            'category'     => 'ecommerce',
-            'dependencies' => array( 'core', 'woocommerce' ),
-        ),
-        'woocommerce-recently-viewed' => array(
-            'name'         => __( 'Recently Viewed Products', 'opulentia' ),
-            'description'  => __( 'Track and display recently viewed products via localStorage. Shortcode, widget, and auto-display on single product pages. Custom columns and count.', 'opulentia' ),
-            'default'      => true,
-            'priority'     => 42,
-            'category'     => 'ecommerce',
-            'dependencies' => array( 'core', 'woocommerce' ),
-        ),
-        'sidebar-manager' => array(
-            'name'         => __( 'Sidebar Manager', 'opulentia' ),
-            'description'  => __( 'Create unlimited custom widget areas, assign default sidebars per post type, and override per-page via meta box. Customizer textarea for sidebar names.', 'opulentia' ),
-            'default'      => true,
-            'priority'     => 78,
-            'category'     => 'layout',
-            'dependencies' => array( 'core' ),
-        ),
-        'table-of-contents' => array(
-            'name'         => __( 'Table of Contents', 'opulentia' ),
-            'description'  => __( 'Auto-generate TOC from h2/h3 headings on posts. Three display modes: inline, sticky sidebar, floating. Collapsible, smooth scroll, active heading highlight.', 'opulentia' ),
-            'default'      => true,
-            'priority'     => 79,
-            'category'     => 'content',
-            'dependencies' => array( 'core' ),
-        ),
-        'woocommerce-product-video' => array(
-            'name'         => __( 'Product Video', 'opulentia' ),
-            'description'  => __( 'Add YouTube, Vimeo, or self-hosted MP4 videos to WooCommerce products. Meta box on product edit. Display options: replace image, below image, or gallery thumbnail.', 'opulentia' ),
-            'default'      => false,
-            'priority'     => 43,
-            'category'     => 'ecommerce',
-            'dependencies' => array( 'core', 'woocommerce' ),
-        ),
-        'portfolio-cpt' => array(
-            'name'         => __( 'Portfolio CPT', 'opulentia' ),
-            'description'  => __( 'Portfolio custom post type with grid shortcode, taxonomy, hover effects, and single template. Customizer: columns, gap, hover style.', 'opulentia' ),
-            'default'      => true,
-            'priority'     => 82,
-            'category'     => 'content',
-            'dependencies' => array( 'core' ),
-        ),
-        'team-cpt' => array(
-            'name'         => __( 'Team CPT', 'opulentia' ),
-            'description'  => __( 'Team member custom post type with position, bio, email, social links. Grid shortcode with hover effects and category filtering.', 'opulentia' ),
-            'default'      => true,
-            'priority'     => 83,
-            'category'     => 'content',
-            'dependencies' => array( 'core' ),
-        ),
-        'testimonial-cpt' => array(
-            'name'         => __( 'Testimonial CPT', 'opulentia' ),
-            'description'  => __( 'Testimonial custom post type with rating, company attribution. Grid/slider shortcode with scroll-snap carousel, star ratings, auto-play.', 'opulentia' ),
-            'default'      => true,
-            'priority'     => 84,
-            'category'     => 'content',
-            'dependencies' => array( 'core' ),
-        ),
-        'faq-cpt' => array(
-            'name'         => __( 'FAQ CPT', 'opulentia' ),
-            'description'  => __( 'FAQ custom post type with category taxonomy. Accordion/toggle/grouped display shortcode. FAQPage schema.org markup. Live search filter.', 'opulentia' ),
-            'default'      => true,
-            'priority'     => 85,
-            'category'     => 'content',
-            'dependencies' => array( 'core' ),
-        ),
-        'wishlist-compare' => array(
-            'name'         => __( 'Wishlist & Compare', 'opulentia' ),
-            'description'  => __( 'Wishlist with session/cookie storage and comparison table with max product limit. AJAX toggle buttons on product pages and shortcodes.', 'opulentia' ),
-            'default'      => true,
-            'priority'     => 44,
-            'category'     => 'ecommerce',
-            'dependencies' => array( 'core', 'woocommerce' ),
-        ),
-        'ajax-filtering' => array(
-            'name'         => __( 'AJAX Product Filtering', 'opulentia' ),
-            'description'  => __( 'AJAX-powered product filtering by category, price range, and attributes on shop archives. Customizer position and filter controls.', 'opulentia' ),
-            'default'      => true,
-            'priority'     => 45,
-            'category'     => 'ecommerce',
-            'dependencies' => array( 'core', 'woocommerce' ),
-        ),
-        'content-restriction' => array(
-            'name'         => __( 'Content Restriction', 'opulentia' ),
-            'description'  => __( 'Restrict content by user role or login status via shortcodes and per-post meta box. Customizable restriction notice and redirect options.', 'opulentia' ),
-            'default'      => true,
-            'priority'     => 81,
-            'category'     => 'content',
-            'dependencies' => array( 'core' ),
-        ),
-        'nav-menu-roles' => array(
-            'name'         => __( 'Nav Menu Roles', 'opulentia' ),
-            'description'  => __( 'Restrict menu item visibility by user role via custom walker and meta box. Customizer toggle for enable/disable and default fallback behavior.', 'opulentia' ),
-            'default'      => true,
-            'priority'     => 93,
-            'category'     => 'ui',
-            'dependencies' => array( 'core' ),
-        ),
-        'advanced-search' => array(
-            'name'         => __( 'Advanced Search', 'opulentia' ),
-            'description'  => __( 'AJAX-powered search form with post type tabs, keyboard navigation, search history via localStorage, and WooCommerce product tab support.', 'opulentia' ),
-            'default'      => true,
-            'priority'     => 94,
-            'category'     => 'content',
-            'dependencies' => array( 'core' ),
-        ),
-        'custom-widgets' => array(
-            'name'         => __( 'Custom Widgets', 'opulentia' ),
-            'description'  => __( 'Premium widget pack: Social Icons, Recent Posts with thumbnails, Author Bio, and Contact Info widgets with Opulentia dark styling.', 'opulentia' ),
-            'default'      => true,
-            'priority'     => 95,
-            'category'     => 'content',
-            'dependencies' => array( 'core' ),
-        ),
-        'scroll-reveal' => array(
-            'name'         => __( 'Scroll Reveal', 'opulentia' ),
-            'description'  => __( 'IntersectionObserver-based content reveal on scroll. Shortcode wrapper, auto-reveal on post content, 7 effects, respects reduced-motion.', 'opulentia' ),
-            'default'      => true,
-            'priority'     => 96,
-            'category'     => 'content',
-            'dependencies' => array( 'core' ),
-        ),
-        'reading-progress' => array(
-            'name'         => __( 'Reading Progress', 'opulentia' ),
-            'description'  => __( 'Thin gold progress bar at page top showing reading progress on posts. Customizable height, color, gradient, and position.', 'opulentia' ),
-            'default'      => true,
-            'priority'     => 97,
-            'category'     => 'content',
-            'dependencies' => array( 'core' ),
-        ),
-        'pricing-tables' => array(
-            'name'         => __( 'Pricing Tables', 'opulentia' ),
-            'description'  => __( 'Pricing table shortcode with multiple columns, featured plan highlight, checkmark feature list, and responsive card layout.', 'opulentia' ),
-            'default'      => true,
-            'priority'     => 98,
-            'category'     => 'content',
-            'dependencies' => array( 'core' ),
-        ),
-        'count-up' => array(
-            'name'         => __( 'Count-up Numbers', 'opulentia' ),
-            'description'  => __( 'Animated number counter shortcode with IntersectionObserver, easeOutQuad easing, prefix/suffix, labels, and prefers-reduced-motion support.', 'opulentia' ),
-            'default'      => true,
-            'priority'     => 99,
-            'category'     => 'content',
-            'dependencies' => array( 'core' ),
-        ),
-        'image-hotspots' => array(
-            'name'         => __( 'Image Hotspots', 'opulentia' ),
-            'description'  => __( 'Interactive image hotspots with clickable gold pins showing popup tooltips. Percentage-based positioning for responsive layouts.', 'opulentia' ),
-            'default'      => true,
-            'priority'     => 100,
-            'category'     => 'content',
-            'dependencies' => array( 'core' ),
-        ),
-        'gradient-builder' => array(
-            'name'         => __( 'Gradient Builder', 'opulentia' ),
-            'description'  => __( 'Customizer gradient presets with CSS variable output, gradient background shortcode, and gradient button shortcode. Gold/dark/accent presets.', 'opulentia' ),
-            'default'      => true,
-            'priority'     => 101,
-            'category'     => 'ui',
-            'dependencies' => array( 'core' ),
-        ),
-        'author-box' => array(
-            'name'         => __( 'Author Box', 'opulentia' ),
-            'description'  => __( 'Enhanced author box on single posts with avatar, bio, social links, user profile fields, and recent posts list. Shortcode support.', 'opulentia' ),
-            'default'      => true,
-            'priority'     => 102,
-            'category'     => 'content',
-            'dependencies' => array( 'core' ),
-        ),
-        'login-customizer' => array(
-            'name'         => __( 'Login Customizer', 'opulentia' ),
-            'description'  => __( 'Customize the WordPress login page: upload logo, set background color/image, form background/text colors, button colors, custom CSS. Brand the entire login experience.', 'opulentia' ),
-            'default'      => true,
-            'priority'     => 80,
-            'category'     => 'ui',
-            'dependencies' => array( 'core' ),
-        ),
-        'google-maps' => array(
-            'name'         => __( 'Google Maps', 'opulentia' ),
-            'description'  => __( 'Leaflet-based interactive maps via shortcode. Customizer controls for default address, coordinates, zoom, height, and marker icon. Responsive 16:9/4:3 container, no API key required.', 'opulentia' ),
-            'default'      => true,
-            'priority'     => 90,
-            'category'     => 'content',
-            'dependencies' => array( 'core' ),
-        ),
-        'countdown-timer' => array(
-            'name'         => __( 'Countdown Timer', 'opulentia' ),
-            'description'  => __( 'Countdown timer shortcode with days/hours/minutes/seconds. WooCommerce sale end date integration. Gutenberg block. Customizer: default style, size, WC toggle, expiry text. Dark/light/inline styles with gold accent.', 'opulentia' ),
-            'default'      => true,
-            'priority'     => 91,
-            'category'     => 'content',
-            'dependencies' => array( 'core' ),
-        ),
-        'social-login' => array(
-            'name'         => __( 'Social Login', 'opulentia' ),
-            'description'  => __( 'Google OAuth and Facebook login buttons on login, registration, and comment forms. Customizer controls for client ID/secret, button style, and per-form visibility toggles.', 'opulentia' ),
-            'default'      => false,
-            'priority'     => 92,
-            'category'     => 'content',
-            'dependencies' => array( 'core' ),
-        ),
-    );
+	$modules = array(
+		'core'                        => array(
+			'name'        => __( 'Core Foundation', 'opulentia' ),
+			'description' => __( 'Theme options API, common functions, attribute builder.', 'opulentia' ),
+			'default'     => true,
+			'priority'    => 1,
+			'category'    => 'core',
+		),
+		'header-builder'              => array(
+			'name'         => __( 'Header Builder', 'opulentia' ),
+			'description'  => __( '3-row header builder with logo, nav, search, cart components.', 'opulentia' ),
+			'default'      => true,
+			'priority'     => 10,
+			'category'     => 'builder',
+			'dependencies' => array( 'core' ),
+		),
+		'footer-builder'              => array(
+			'name'         => __( 'Footer Builder', 'opulentia' ),
+			'description'  => __( 'Configurable footer columns, widgets, social icons.', 'opulentia' ),
+			'default'      => true,
+			'priority'     => 20,
+			'category'     => 'builder',
+			'dependencies' => array( 'core' ),
+		),
+		'blog-layouts'                => array(
+			'name'         => __( 'Blog & Archive Layouts', 'opulentia' ),
+			'description'  => __( 'Classic, grid, and list layouts for blog archives.', 'opulentia' ),
+			'default'      => true,
+			'priority'     => 30,
+			'category'     => 'content',
+			'dependencies' => array( 'core' ),
+		),
+		'blog-pro'                    => array(
+			'name'         => __( 'Blog Pro', 'opulentia' ),
+			'description'  => __( 'Infinite scroll, read time, author box, related posts.', 'opulentia' ),
+			'default'      => true,
+			'priority'     => 35,
+			'category'     => 'content',
+			'dependencies' => array( 'core', 'blog-layouts' ),
+		),
+		'woocommerce'                 => array(
+			'name'         => __( 'WooCommerce Enhancements', 'opulentia' ),
+			'description'  => __( 'Product grid, quick view, cart/checkout styling, variation swatches.', 'opulentia' ),
+			'default'      => true,
+			'priority'     => 40,
+			'category'     => 'ecommerce',
+			'dependencies' => array( 'core' ),
+		),
+		'dynamic-css'                 => array(
+			'name'         => __( 'Dynamic CSS Engine', 'opulentia' ),
+			'description'  => __( 'Real-time CSS generation from customizer settings.', 'opulentia' ),
+			'default'      => true,
+			'priority'     => 5,
+			'category'     => 'core',
+			'dependencies' => array( 'core' ),
+		),
+		'customizer'                  => array(
+			'name'         => __( 'Customizer Controls', 'opulentia' ),
+			'description'  => __( 'Config-driven customizer sections, settings, and controls.', 'opulentia' ),
+			'default'      => true,
+			'priority'     => 15,
+			'category'     => 'core',
+			'dependencies' => array( 'core' ),
+		),
+		'performance'                 => array(
+			'name'         => __( 'Performance Optimizations', 'opulentia' ),
+			'description'  => __( 'CSS minification, font optimization, lazy loading, defer JS.', 'opulentia' ),
+			'default'      => true,
+			'priority'     => 50,
+			'category'     => 'optimization',
+			'dependencies' => array( 'core' ),
+		),
+		'security'                    => array(
+			'name'         => __( 'Security Hardening', 'opulentia' ),
+			'description'  => __( 'CSRF tokens, security headers, login hardening, sanitization.', 'opulentia' ),
+			'default'      => true,
+			'priority'     => 60,
+			'category'     => 'optimization',
+			'dependencies' => array( 'core' ),
+		),
+		'accessibility'               => array(
+			'name'         => __( 'Accessibility', 'opulentia' ),
+			'description'  => __( 'Focus styles, ARIA landmarks, keyboard navigation, skip link.', 'opulentia' ),
+			'default'      => true,
+			'priority'     => 13,
+			'category'     => 'core',
+			'dependencies' => array( 'core' ),
+		),
+		'schema'                      => array(
+			'name'         => __( 'Schema Markup', 'opulentia' ),
+			'description'  => __( 'JSON-LD structured data for SEO (Article, Product, Organization, etc.).', 'opulentia' ),
+			'default'      => true,
+			'priority'     => 65,
+			'category'     => 'seo',
+			'dependencies' => array( 'core' ),
+		),
+		'advanced-headers'            => array(
+			'name'         => __( 'Advanced Page Headers', 'opulentia' ),
+			'description'  => __( 'Custom page banners with background images, overlays, breadcrumbs.', 'opulentia' ),
+			'default'      => true,
+			'priority'     => 25,
+			'category'     => 'builder',
+			'dependencies' => array( 'core' ),
+		),
+		'mega-menu'                   => array(
+			'name'         => __( 'Mega Menu', 'opulentia' ),
+			'description'  => __( 'Multi-column mega dropdowns, menu badges, icons, animations.', 'opulentia' ),
+			'default'      => false,
+			'priority'     => 12,
+			'category'     => 'builder',
+			'dependencies' => array( 'core' ),
+		),
+		'live-search'                 => array(
+			'name'         => __( 'Live Search', 'opulentia' ),
+			'description'  => __( 'AJAX live search with results dropdown for posts and products.', 'opulentia' ),
+			'default'      => true,
+			'priority'     => 45,
+			'category'     => 'content',
+			'dependencies' => array( 'core' ),
+		),
+		'scroll-to-top'               => array(
+			'name'         => __( 'Scroll to Top', 'opulentia' ),
+			'description'  => __( 'Customizable back-to-top button.', 'opulentia' ),
+			'default'      => true,
+			'priority'     => 55,
+			'category'     => 'ui',
+			'dependencies' => array( 'core' ),
+		),
+		'transparent-header'          => array(
+			'name'         => __( 'Transparent Header', 'opulentia' ),
+			'description'  => __( 'Transparent header with conditional page display.', 'opulentia' ),
+			'default'      => true,
+			'priority'     => 11,
+			'category'     => 'builder',
+			'dependencies' => array( 'core' ),
+		),
+		'sticky-header'               => array(
+			'name'         => __( 'Sticky Header', 'opulentia' ),
+			'description'  => __( 'Sticky header with scroll behavior, separate logo, animation styles, and hide-on-scroll-up.', 'opulentia' ),
+			'default'      => true,
+			'priority'     => 9,
+			'category'     => 'builder',
+			'dependencies' => array( 'core', 'header-builder' ),
+		),
+		'breadcrumbs'                 => array(
+			'name'         => __( 'Breadcrumbs', 'opulentia' ),
+			'description'  => __( 'Native breadcrumbs with Yoast SEO & Rank Math integration, customizer controls, and Schema.org markup.', 'opulentia' ),
+			'default'      => true,
+			'priority'     => 8,
+			'category'     => 'seo',
+			'dependencies' => array( 'core' ),
+		),
+		'site-layouts'                => array(
+			'name'         => __( 'Site Layouts', 'opulentia' ),
+			'description'  => __( 'Full-width, boxed, and padded layout options with container width control and per-page override meta box.', 'opulentia' ),
+			'default'      => true,
+			'priority'     => 6,
+			'category'     => 'layout',
+			'dependencies' => array( 'core' ),
+		),
+		'spacing'                     => array(
+			'name'         => __( 'Spacing System', 'opulentia' ),
+			'description'  => __( 'Per-element padding/margin controls for containers, header, footer, content, blog, sections, and widgets with responsive breakpoints.', 'opulentia' ),
+			'default'      => true,
+			'priority'     => 7,
+			'category'     => 'layout',
+			'dependencies' => array( 'core' ),
+		),
+		'dark-mode'                   => array(
+			'name'         => __( 'Dark Mode', 'opulentia' ),
+			'description'  => __( 'Automatic and manual dark mode with toggle.', 'opulentia' ),
+			'default'      => false,
+			'priority'     => 75,
+			'category'     => 'ui',
+			'dependencies' => array( 'core' ),
+		),
+		'meta-boxes'                  => array(
+			'name'         => __( 'Page/Post Meta Boxes', 'opulentia' ),
+			'description'  => __( 'Per-page overrides for layout, sidebar, header, breadcrumbs.', 'opulentia' ),
+			'default'      => true,
+			'priority'     => 14,
+			'category'     => 'core',
+			'dependencies' => array( 'core' ),
+		),
+		'integrations'                => array(
+			'name'         => __( 'Third-Party Integrations', 'opulentia' ),
+			'description'  => __( 'Mailchimp, Elementor, Gutenberg, Yoast SEO, Rank Math, LearnDash, LifterLMS, Beaver Builder, AMP compatibility.', 'opulentia' ),
+			'default'      => true,
+			'priority'     => 70,
+			'category'     => 'compatibility',
+			'dependencies' => array( 'core' ),
+		),
+		'site-cloner'                 => array(
+			'name'         => __( 'Site Cloner', 'opulentia' ),
+			'description'  => __( 'AI-powered website cloner: capture, analyze, and apply any site design into your theme.', 'opulentia' ),
+			'default'      => true,
+			'priority'     => 80,
+			'category'     => 'tools',
+			'dependencies' => array( 'core' ),
+		),
+		'animation-presets'           => array(
+			'name'         => __( 'Animation Presets', 'opulentia' ),
+			'description'  => __( 'GSAP-powered scroll reveals, parallax, counters, stagger, and text split animations with full customizer controls.', 'opulentia' ),
+			'default'      => true,
+			'priority'     => 12,
+			'category'     => 'ui',
+			'dependencies' => array( 'core' ),
+		),
+		'layout-library'              => array(
+			'name'         => __( 'Layout Library', 'opulentia' ),
+			'description'  => __( '20+ pre-built sections with one-click import as reusable blocks. Category and industry filtering.', 'opulentia' ),
+			'default'      => true,
+			'priority'     => 22,
+			'category'     => 'builder',
+			'dependencies' => array( 'core' ),
+		),
+		'popup-builder'               => array(
+			'name'         => __( 'Popup Builder', 'opulentia' ),
+			'description'  => __( 'Modal, notification bar, slide-in, and fullscreen popups with time/scroll/exit/click triggers, frequency control, and display conditions.', 'opulentia' ),
+			'default'      => false,
+			'priority'     => 24,
+			'category'     => 'builder',
+			'dependencies' => array( 'core' ),
+		),
+		'conditional-display'         => array(
+			'name'         => __( 'Conditional Display', 'opulentia' ),
+			'description'  => __( 'Per-page element visibility (header, footer, sidebar, breadcrumbs, scroll-to-top) with user role, device, and reusable condition set rules.', 'opulentia' ),
+			'default'      => true,
+			'priority'     => 26,
+			'category'     => 'layout',
+			'dependencies' => array( 'core' ),
+		),
+		'demo-importer'               => array(
+			'name'         => __( 'Demo Importer', 'opulentia' ),
+			'description'  => __( '5 one-click demo imports (Business, Portfolio, Shop, Agency, Landing) with content, widgets, and customizer settings.', 'opulentia' ),
+			'default'      => true,
+			'priority'     => 28,
+			'category'     => 'tools',
+			'dependencies' => array( 'core' ),
+		),
+		'customizer-presets'          => array(
+			'name'         => __( 'Customizer Presets', 'opulentia' ),
+			'description'  => __( '6 built-in design presets (Dark Luxury, Light Elegance, Midnight Blue, Forest Green, Rose Gold, Ocean Deep) with save, apply, import, and export.', 'opulentia' ),
+			'default'      => true,
+			'priority'     => 4,
+			'category'     => 'core',
+			'dependencies' => array( 'core' ),
+		),
+		'performance-dashboard'       => array(
+			'name'         => __( 'Performance Dashboard', 'opulentia' ),
+			'description'  => __( 'Asset weight tracking, PageSpeed Insights integration, module impact report, lazy load, minification, preload, and recommendations.', 'opulentia' ),
+			'default'      => true,
+			'priority'     => 130,
+			'category'     => 'optimization',
+			'dependencies' => array( 'core' ),
+		),
+		'product-viewer-3d'           => array(
+			'name'         => __( '3D Product Viewer', 'opulentia' ),
+			'description'  => __( 'GLB/GLTF 3D model viewer for WooCommerce products using <model-viewer> web component.', 'opulentia' ),
+			'default'      => false,
+			'priority'     => 42,
+			'category'     => 'ecommerce',
+			'dependencies' => array( 'core', 'woocommerce' ),
+		),
+		'custom-fonts-uploader'       => array(
+			'name'         => __( 'Custom Fonts Uploader', 'opulentia' ),
+			'description'  => __( 'Upload WOFF2/WOFF/TTF/OTF fonts, generate @font-face CSS, preload hints, and integrate with font selectors.', 'opulentia' ),
+			'default'      => true,
+			'priority'     => 3,
+			'category'     => 'core',
+			'dependencies' => array( 'core' ),
+		),
+		'icon-manager'                => array(
+			'name'         => __( 'Icon Manager', 'opulentia' ),
+			'description'  => __( 'Upload, organize, and output custom SVG icons. Shortcode and PHP function output with color/size control.', 'opulentia' ),
+			'default'      => true,
+			'priority'     => 11,
+			'category'     => 'ui',
+			'dependencies' => array( 'core' ),
+		),
+		'color-palette'               => array(
+			'name'         => __( 'Color Palette Generator', 'opulentia' ),
+			'description'  => __( 'Generate 5-color palettes using harmony rules, extract colors from images, and check WCAG contrast ratios.', 'opulentia' ),
+			'default'      => true,
+			'priority'     => 2,
+			'category'     => 'ui',
+			'dependencies' => array( 'core' ),
+		),
+		'maintenance-mode'            => array(
+			'name'         => __( 'Maintenance Mode', 'opulentia' ),
+			'description'  => __( 'Coming-soon / 503 maintenance page with countdown timer, subscribe form, social links, and custom backgrounds.', 'opulentia' ),
+			'default'      => true,
+			'priority'     => 40,
+			'category'     => 'utility',
+			'dependencies' => array( 'core' ),
+		),
+		'gdpr-cookie-consent'         => array(
+			'name'         => __( 'GDPR / Cookie Consent', 'opulentia' ),
+			'description'  => __( 'Customizable cookie consent bar with category opt-in (necessary, analytics, marketing), Cookie Policy page linking, and consent persistence.', 'opulentia' ),
+			'default'      => false,
+			'priority'     => 45,
+			'category'     => 'utility',
+			'dependencies' => array( 'core' ),
+		),
+		'css-js-injection'            => array(
+			'name'         => __( 'CSS / JS Injection', 'opulentia' ),
+			'description'  => __( 'Add custom CSS and JavaScript globally via the customizer, plus per-page CSS/JS via meta boxes. Includes responsive media query zones.', 'opulentia' ),
+			'default'      => true,
+			'priority'     => 50,
+			'category'     => 'developer',
+			'dependencies' => array( 'core' ),
+		),
+		'responsive-controls'         => array(
+			'name'         => __( 'Responsive Controls Enhancement', 'opulentia' ),
+			'description'  => __( 'Per-device typography (body, H1–H3 sizes), device visibility toggles (hide header/footer/sidebar on mobile/tablet/desktop), custom breakpoint editor, and responsive content width control.', 'opulentia' ),
+			'default'      => true,
+			'priority'     => 55,
+			'category'     => 'layout',
+			'dependencies' => array( 'core' ),
+		),
+		'form-styler'                 => array(
+			'name'         => __( 'Form Styler', 'opulentia' ),
+			'description'  => __( 'Customizer-driven form styling for Contact Form 7, Gravity Forms, WPForms, and Elementor Forms. Controls inputs, labels, buttons, messages, and checkboxes.', 'opulentia' ),
+			'default'      => true,
+			'priority'     => 60,
+			'category'     => 'compatibility',
+			'dependencies' => array( 'core' ),
+		),
+		'white-label'                 => array(
+			'name'         => __( 'White Label', 'opulentia' ),
+			'description'  => __( 'Rebrand the theme for client delivery — custom brand name, author, admin footer, dashboard icon, hide theme page, and client-ready mode.', 'opulentia' ),
+			'default'      => false,
+			'priority'     => 100,
+			'category'     => 'developer',
+			'dependencies' => array( 'core' ),
+		),
+		'docs-generator'              => array(
+			'name'         => __( 'Documentation Generator', 'opulentia' ),
+			'description'  => __( 'Auto-generate theme documentation from code: module inventory, shortcode reference, filter/hook list, template hierarchy, and customizer panels. Downloadable HTML export.', 'opulentia' ),
+			'default'      => true,
+			'priority'     => 110,
+			'category'     => 'developer',
+			'dependencies' => array( 'core' ),
+		),
+		'mobile-header'               => array(
+			'name'         => __( 'Mobile Header', 'opulentia' ),
+			'description'  => __( 'Dedicated mobile header with separate logo, hamburger/text toggle, slide/fade/dropdown animations, sticky option, and per-device breakpoint control.', 'opulentia' ),
+			'default'      => true,
+			'priority'     => 8,
+			'category'     => 'builder',
+			'dependencies' => array( 'core' ),
+		),
+		'lifterlms'                   => array(
+			'name'         => __( 'LifterLMS Integration', 'opulentia' ),
+			'description'  => __( 'Full LifterLMS styling: course grid columns, color controls, styled cards, progress bars, access plans, lesson previews, checkout, student dashboard.', 'opulentia' ),
+			'default'      => true,
+			'priority'     => 72,
+			'category'     => 'compatibility',
+			'dependencies' => array( 'core' ),
+		),
+		'learndash'                   => array(
+			'name'         => __( 'LearnDash Integration', 'opulentia' ),
+			'description'  => __( 'Full LearnDash styling: course grid columns, color controls, focus mode, progress bars, quizzes, lesson/topic item lists, styled cards.', 'opulentia' ),
+			'default'      => true,
+			'priority'     => 73,
+			'category'     => 'compatibility',
+			'dependencies' => array( 'core' ),
+		),
+		'amp-support'                 => array(
+			'name'         => __( 'AMP Support', 'opulentia' ),
+			'description'  => __( 'AMP compatibility: disables non-AMP JS, replaces nav with amp-sidebar, custom AMP logo, AMP-specific CSS sanitization, customizer controls.', 'opulentia' ),
+			'default'      => true,
+			'priority'     => 74,
+			'category'     => 'compatibility',
+			'dependencies' => array( 'core' ),
+		),
+		'rtl'                         => array(
+			'name'         => __( 'RTL Language Support', 'opulentia' ),
+			'description'  => __( 'Full RTL direction support: flips navigation, header, footer, sidebar, WooCommerce, forms, widgets. Custom RTL font family, base font size, and line height controls.', 'opulentia' ),
+			'default'      => true,
+			'priority'     => 75,
+			'category'     => 'compatibility',
+			'dependencies' => array( 'core' ),
+		),
+		'custom-404'                  => array(
+			'name'         => __( 'Custom 404 Page', 'opulentia' ),
+			'description'  => __( 'Full custom 404 page builder: centered/split/minimal/illustrated layouts, custom title/subtitle/message, illustration upload, search form, recent posts, popular pages, CTA button, background image.', 'opulentia' ),
+			'default'      => true,
+			'priority'     => 76,
+			'category'     => 'builder',
+			'dependencies' => array( 'core' ),
+		),
+		'social-sharing'              => array(
+			'name'         => __( 'Social Sharing', 'opulentia' ),
+			'description'  => __( 'Share buttons for Facebook, X/Twitter, LinkedIn, Pinterest, WhatsApp, Email, and Copy Link on posts, pages, and products. Customizer: position, style, per-network toggle, accent color.', 'opulentia' ),
+			'default'      => true,
+			'priority'     => 77,
+			'category'     => 'content',
+			'dependencies' => array( 'core' ),
+		),
+		'woocommerce-catalog'         => array(
+			'name'         => __( 'WooCommerce Catalog Mode', 'opulentia' ),
+			'description'  => __( 'Turn your store into a catalog: hide prices, remove add-to-cart buttons, show inquiry/contact button, redirect cart/checkout. Full customizer control.', 'opulentia' ),
+			'default'      => false,
+			'priority'     => 41,
+			'category'     => 'ecommerce',
+			'dependencies' => array( 'core', 'woocommerce' ),
+		),
+		'woocommerce-recently-viewed' => array(
+			'name'         => __( 'Recently Viewed Products', 'opulentia' ),
+			'description'  => __( 'Track and display recently viewed products via localStorage. Shortcode, widget, and auto-display on single product pages. Custom columns and count.', 'opulentia' ),
+			'default'      => true,
+			'priority'     => 42,
+			'category'     => 'ecommerce',
+			'dependencies' => array( 'core', 'woocommerce' ),
+		),
+		'sidebar-manager'             => array(
+			'name'         => __( 'Sidebar Manager', 'opulentia' ),
+			'description'  => __( 'Create unlimited custom widget areas, assign default sidebars per post type, and override per-page via meta box. Customizer textarea for sidebar names.', 'opulentia' ),
+			'default'      => true,
+			'priority'     => 78,
+			'category'     => 'layout',
+			'dependencies' => array( 'core' ),
+		),
+		'table-of-contents'           => array(
+			'name'         => __( 'Table of Contents', 'opulentia' ),
+			'description'  => __( 'Auto-generate TOC from h2/h3 headings on posts. Three display modes: inline, sticky sidebar, floating. Collapsible, smooth scroll, active heading highlight.', 'opulentia' ),
+			'default'      => true,
+			'priority'     => 79,
+			'category'     => 'content',
+			'dependencies' => array( 'core' ),
+		),
+		'woocommerce-product-video'   => array(
+			'name'         => __( 'Product Video', 'opulentia' ),
+			'description'  => __( 'Add YouTube, Vimeo, or self-hosted MP4 videos to WooCommerce products. Meta box on product edit. Display options: replace image, below image, or gallery thumbnail.', 'opulentia' ),
+			'default'      => false,
+			'priority'     => 43,
+			'category'     => 'ecommerce',
+			'dependencies' => array( 'core', 'woocommerce' ),
+		),
+		'portfolio-cpt'               => array(
+			'name'         => __( 'Portfolio CPT', 'opulentia' ),
+			'description'  => __( 'Portfolio custom post type with grid shortcode, taxonomy, hover effects, and single template. Customizer: columns, gap, hover style.', 'opulentia' ),
+			'default'      => true,
+			'priority'     => 82,
+			'category'     => 'content',
+			'dependencies' => array( 'core' ),
+		),
+		'team-cpt'                    => array(
+			'name'         => __( 'Team CPT', 'opulentia' ),
+			'description'  => __( 'Team member custom post type with position, bio, email, social links. Grid shortcode with hover effects and category filtering.', 'opulentia' ),
+			'default'      => true,
+			'priority'     => 83,
+			'category'     => 'content',
+			'dependencies' => array( 'core' ),
+		),
+		'testimonial-cpt'             => array(
+			'name'         => __( 'Testimonial CPT', 'opulentia' ),
+			'description'  => __( 'Testimonial custom post type with rating, company attribution. Grid/slider shortcode with scroll-snap carousel, star ratings, auto-play.', 'opulentia' ),
+			'default'      => true,
+			'priority'     => 84,
+			'category'     => 'content',
+			'dependencies' => array( 'core' ),
+		),
+		'faq-cpt'                     => array(
+			'name'         => __( 'FAQ CPT', 'opulentia' ),
+			'description'  => __( 'FAQ custom post type with category taxonomy. Accordion/toggle/grouped display shortcode. FAQPage schema.org markup. Live search filter.', 'opulentia' ),
+			'default'      => true,
+			'priority'     => 85,
+			'category'     => 'content',
+			'dependencies' => array( 'core' ),
+		),
+		'wishlist-compare'            => array(
+			'name'         => __( 'Wishlist & Compare', 'opulentia' ),
+			'description'  => __( 'Wishlist with session/cookie storage and comparison table with max product limit. AJAX toggle buttons on product pages and shortcodes.', 'opulentia' ),
+			'default'      => true,
+			'priority'     => 44,
+			'category'     => 'ecommerce',
+			'dependencies' => array( 'core', 'woocommerce' ),
+		),
+		'ajax-filtering'              => array(
+			'name'         => __( 'AJAX Product Filtering', 'opulentia' ),
+			'description'  => __( 'AJAX-powered product filtering by category, price range, and attributes on shop archives. Customizer position and filter controls.', 'opulentia' ),
+			'default'      => true,
+			'priority'     => 45,
+			'category'     => 'ecommerce',
+			'dependencies' => array( 'core', 'woocommerce' ),
+		),
+		'content-restriction'         => array(
+			'name'         => __( 'Content Restriction', 'opulentia' ),
+			'description'  => __( 'Restrict content by user role or login status via shortcodes and per-post meta box. Customizable restriction notice and redirect options.', 'opulentia' ),
+			'default'      => true,
+			'priority'     => 81,
+			'category'     => 'content',
+			'dependencies' => array( 'core' ),
+		),
+		'nav-menu-roles'              => array(
+			'name'         => __( 'Nav Menu Roles', 'opulentia' ),
+			'description'  => __( 'Restrict menu item visibility by user role via custom walker and meta box. Customizer toggle for enable/disable and default fallback behavior.', 'opulentia' ),
+			'default'      => true,
+			'priority'     => 93,
+			'category'     => 'ui',
+			'dependencies' => array( 'core' ),
+		),
+		'advanced-search'             => array(
+			'name'         => __( 'Advanced Search', 'opulentia' ),
+			'description'  => __( 'AJAX-powered search form with post type tabs, keyboard navigation, search history via localStorage, and WooCommerce product tab support.', 'opulentia' ),
+			'default'      => true,
+			'priority'     => 94,
+			'category'     => 'content',
+			'dependencies' => array( 'core' ),
+		),
+		'custom-widgets'              => array(
+			'name'         => __( 'Custom Widgets', 'opulentia' ),
+			'description'  => __( 'Premium widget pack: Social Icons, Recent Posts with thumbnails, Author Bio, and Contact Info widgets with Opulentia dark styling.', 'opulentia' ),
+			'default'      => true,
+			'priority'     => 95,
+			'category'     => 'content',
+			'dependencies' => array( 'core' ),
+		),
+		'scroll-reveal'               => array(
+			'name'         => __( 'Scroll Reveal', 'opulentia' ),
+			'description'  => __( 'IntersectionObserver-based content reveal on scroll. Shortcode wrapper, auto-reveal on post content, 7 effects, respects reduced-motion.', 'opulentia' ),
+			'default'      => true,
+			'priority'     => 96,
+			'category'     => 'content',
+			'dependencies' => array( 'core' ),
+		),
+		'reading-progress'            => array(
+			'name'         => __( 'Reading Progress', 'opulentia' ),
+			'description'  => __( 'Thin gold progress bar at page top showing reading progress on posts. Customizable height, color, gradient, and position.', 'opulentia' ),
+			'default'      => true,
+			'priority'     => 97,
+			'category'     => 'content',
+			'dependencies' => array( 'core' ),
+		),
+		'pricing-tables'              => array(
+			'name'         => __( 'Pricing Tables', 'opulentia' ),
+			'description'  => __( 'Pricing table shortcode with multiple columns, featured plan highlight, checkmark feature list, and responsive card layout.', 'opulentia' ),
+			'default'      => true,
+			'priority'     => 98,
+			'category'     => 'content',
+			'dependencies' => array( 'core' ),
+		),
+		'count-up'                    => array(
+			'name'         => __( 'Count-up Numbers', 'opulentia' ),
+			'description'  => __( 'Animated number counter shortcode with IntersectionObserver, easeOutQuad easing, prefix/suffix, labels, and prefers-reduced-motion support.', 'opulentia' ),
+			'default'      => true,
+			'priority'     => 99,
+			'category'     => 'content',
+			'dependencies' => array( 'core' ),
+		),
+		'image-hotspots'              => array(
+			'name'         => __( 'Image Hotspots', 'opulentia' ),
+			'description'  => __( 'Interactive image hotspots with clickable gold pins showing popup tooltips. Percentage-based positioning for responsive layouts.', 'opulentia' ),
+			'default'      => true,
+			'priority'     => 100,
+			'category'     => 'content',
+			'dependencies' => array( 'core' ),
+		),
+		'gradient-builder'            => array(
+			'name'         => __( 'Gradient Builder', 'opulentia' ),
+			'description'  => __( 'Customizer gradient presets with CSS variable output, gradient background shortcode, and gradient button shortcode. Gold/dark/accent presets.', 'opulentia' ),
+			'default'      => true,
+			'priority'     => 101,
+			'category'     => 'ui',
+			'dependencies' => array( 'core' ),
+		),
+		'author-box'                  => array(
+			'name'         => __( 'Author Box', 'opulentia' ),
+			'description'  => __( 'Enhanced author box on single posts with avatar, bio, social links, user profile fields, and recent posts list. Shortcode support.', 'opulentia' ),
+			'default'      => true,
+			'priority'     => 102,
+			'category'     => 'content',
+			'dependencies' => array( 'core' ),
+		),
+		'login-customizer'            => array(
+			'name'         => __( 'Login Customizer', 'opulentia' ),
+			'description'  => __( 'Customize the WordPress login page: upload logo, set background color/image, form background/text colors, button colors, custom CSS. Brand the entire login experience.', 'opulentia' ),
+			'default'      => true,
+			'priority'     => 80,
+			'category'     => 'ui',
+			'dependencies' => array( 'core' ),
+		),
+		'google-maps'                 => array(
+			'name'         => __( 'Google Maps', 'opulentia' ),
+			'description'  => __( 'Leaflet-based interactive maps via shortcode. Customizer controls for default address, coordinates, zoom, height, and marker icon. Responsive 16:9/4:3 container, no API key required.', 'opulentia' ),
+			'default'      => true,
+			'priority'     => 90,
+			'category'     => 'content',
+			'dependencies' => array( 'core' ),
+		),
+		'countdown-timer'             => array(
+			'name'         => __( 'Countdown Timer', 'opulentia' ),
+			'description'  => __( 'Countdown timer shortcode with days/hours/minutes/seconds. WooCommerce sale end date integration. Gutenberg block. Customizer: default style, size, WC toggle, expiry text. Dark/light/inline styles with gold accent.', 'opulentia' ),
+			'default'      => true,
+			'priority'     => 91,
+			'category'     => 'content',
+			'dependencies' => array( 'core' ),
+		),
+		'social-login'                => array(
+			'name'         => __( 'Social Login', 'opulentia' ),
+			'description'  => __( 'Google OAuth and Facebook login buttons on login, registration, and comment forms. Customizer controls for client ID/secret, button style, and per-form visibility toggles.', 'opulentia' ),
+			'default'      => false,
+			'priority'     => 92,
+			'category'     => 'content',
+			'dependencies' => array( 'core' ),
+		),
+	);
 
-    foreach ( $modules as $slug => $args ) {
-        Opulentia_register_module( $slug, $args );
-    }
+	foreach ( $modules as $slug => $args ) {
+		Opulentia_register_module( $slug, $args );
+	}
 }
 add_action( 'init', 'Opulentia_register_system_modules', 1 );
 
@@ -1054,30 +1054,30 @@ add_action( 'init', 'Opulentia_register_system_modules', 1 );
  * AJAX: Load product HTML for quick view modal.
  */
 function Opulentia_ajax_quick_view() {
-    check_ajax_referer( 'Opulentia_wc_pro_nonce', 'nonce' );
+	check_ajax_referer( 'Opulentia_wc_pro_nonce', 'nonce' );
 
-    $product_id = absint( $_POST['product_id'] );
-    if ( ! $product_id ) {
-        wp_send_json_error( array( 'message' => __( 'Invalid product.', 'opulentia' ) ) );
-    }
+	$product_id = absint( $_POST['product_id'] );
+	if ( ! $product_id ) {
+		wp_send_json_error( array( 'message' => __( 'Invalid product.', 'opulentia' ) ) );
+	}
 
-    $product = wc_get_product( $product_id );
-    if ( ! $product ) {
-        wp_send_json_error( array( 'message' => __( 'Product not found.', 'opulentia' ) ) );
-    }
+	$product = wc_get_product( $product_id );
+	if ( ! $product ) {
+		wp_send_json_error( array( 'message' => __( 'Product not found.', 'opulentia' ) ) );
+	}
 
-    // Set global product and post data for template functions.
-    $GLOBALS['product'] = $product;
-    $GLOBALS['post']    = get_post( $product_id );
-    setup_postdata( $GLOBALS['post'] );
+	// Set global product and post data for template functions.
+	$GLOBALS['product'] = $product;
+	$GLOBALS['post']    = get_post( $product_id );
+	setup_postdata( $GLOBALS['post'] );
 
-    ob_start();
-    wc_get_template_part( 'quick-view' );
-    $html = ob_get_clean();
+	ob_start();
+	wc_get_template_part( 'quick-view' );
+	$html = ob_get_clean();
 
-    wp_reset_postdata();
+	wp_reset_postdata();
 
-    wp_send_json_success( array( 'html' => $html ) );
+	wp_send_json_success( array( 'html' => $html ) );
 }
 add_action( 'wp_ajax_Opulentia_quick_view', 'Opulentia_ajax_quick_view' );
 add_action( 'wp_ajax_nopriv_Opulentia_quick_view', 'Opulentia_ajax_quick_view' );
@@ -1086,39 +1086,43 @@ add_action( 'wp_ajax_nopriv_Opulentia_quick_view', 'Opulentia_ajax_quick_view' )
  * AJAX: Add product to cart without page refresh.
  */
 function Opulentia_ajax_add_to_cart() {
-    check_ajax_referer( 'Opulentia_wc_pro_nonce', 'nonce' );
+	check_ajax_referer( 'Opulentia_wc_pro_nonce', 'nonce' );
 
-    $product_id = absint( $_POST['product_id'] );
-    $quantity   = absint( $_POST['quantity'] );
+	$product_id = absint( $_POST['product_id'] );
+	$quantity   = absint( $_POST['quantity'] );
 
-    if ( ! $product_id ) {
-        wp_send_json_error( array( 'message' => __( 'Invalid product.', 'opulentia' ) ) );
-    }
+	if ( ! $product_id ) {
+		wp_send_json_error( array( 'message' => __( 'Invalid product.', 'opulentia' ) ) );
+	}
 
-    $product = wc_get_product( $product_id );
-    if ( ! $product ) {
-        wp_send_json_error( array( 'message' => __( 'Product not found.', 'opulentia' ) ) );
-    }
+	$product = wc_get_product( $product_id );
+	if ( ! $product ) {
+		wp_send_json_error( array( 'message' => __( 'Product not found.', 'opulentia' ) ) );
+	}
 
-    $cart_item_key = WC()->cart->add_to_cart( $product_id, $quantity );
+	$cart_item_key = WC()->cart->add_to_cart( $product_id, $quantity );
 
-    if ( $cart_item_key ) {
-        ob_start();
-        woocommerce_mini_cart();
-        $mini_cart = ob_get_clean();
+	if ( $cart_item_key ) {
+		ob_start();
+		woocommerce_mini_cart();
+		$mini_cart = ob_get_clean();
 
-        wp_send_json_success( array(
-            'cart_item_key' => $cart_item_key,
-            'fragments'     => array(
-                'div.widget_shopping_cart_content' => '<div class="widget_shopping_cart_content">' . $mini_cart . '</div>',
-            ),
-            'cart_hash'     => WC()->cart->get_cart_hash(),
-        ) );
-    } else {
-        wp_send_json_error( array(
-            'message' => wc_get_notices( 'error' ),
-        ) );
-    }
+		wp_send_json_success(
+			array(
+				'cart_item_key' => $cart_item_key,
+				'fragments'     => array(
+					'div.widget_shopping_cart_content' => '<div class="widget_shopping_cart_content">' . $mini_cart . '</div>',
+				),
+				'cart_hash'     => WC()->cart->get_cart_hash(),
+			)
+		);
+	} else {
+		wp_send_json_error(
+			array(
+				'message' => wc_get_notices( 'error' ),
+			)
+		);
+	}
 }
 add_action( 'wp_ajax_Opulentia_ajax_add_to_cart', 'Opulentia_ajax_add_to_cart' );
 add_action( 'wp_ajax_nopriv_Opulentia_ajax_add_to_cart', 'Opulentia_ajax_add_to_cart' );
@@ -1127,15 +1131,17 @@ add_action( 'wp_ajax_nopriv_Opulentia_ajax_add_to_cart', 'Opulentia_ajax_add_to_
  * AJAX: Get current cart count.
  */
 function Opulentia_ajax_cart_count() {
-    check_ajax_referer( 'Opulentia_wc_pro_nonce', 'nonce' );
+	check_ajax_referer( 'Opulentia_wc_pro_nonce', 'nonce' );
 
-    if ( ! WC()->cart ) {
-        wp_send_json_success( array( 'count' => 0 ) );
-    }
+	if ( ! WC()->cart ) {
+		wp_send_json_success( array( 'count' => 0 ) );
+	}
 
-    wp_send_json_success( array(
-        'count' => WC()->cart->get_cart_contents_count(),
-    ) );
+	wp_send_json_success(
+		array(
+			'count' => WC()->cart->get_cart_contents_count(),
+		)
+	);
 }
 add_action( 'wp_ajax_Opulentia_cart_count', 'Opulentia_ajax_cart_count' );
 add_action( 'wp_ajax_nopriv_Opulentia_cart_count', 'Opulentia_ajax_cart_count' );
@@ -1144,78 +1150,79 @@ add_action( 'wp_ajax_nopriv_Opulentia_cart_count', 'Opulentia_ajax_cart_count' )
  * AJAX: Get mini cart HTML.
  */
 function Opulentia_ajax_mini_cart() {
-    check_ajax_referer( 'Opulentia_wc_pro_nonce', 'nonce' );
+	check_ajax_referer( 'Opulentia_wc_pro_nonce', 'nonce' );
 
-    ob_start();
-    ?>
-    <div class="mini-cart-dropdown__header">
-        <?php
-        printf(
-            esc_html__( 'Shopping Cart (%d)', 'opulentia' ),
-            WC()->cart->get_cart_contents_count()
-        );
-        ?>
-    </div>
+	ob_start();
+	?>
+	<div class="mini-cart-dropdown__header">
+		<?php
+		printf(
+			esc_html__( 'Shopping Cart (%d)', 'opulentia' ),
+			WC()->cart->get_cart_contents_count()
+		);
+		?>
+	</div>
 
-    <?php if ( WC()->cart->is_empty() ) : ?>
-        <div class="mini-cart-dropdown__empty">
-            <?php esc_html_e( 'Your cart is currently empty.', 'opulentia' ); ?>
-        </div>
-    <?php else : ?>
-        <ul class="mini-cart-dropdown__items">
-            <?php foreach ( WC()->cart->get_cart() as $cart_item_key => $cart_item ) :
-                $_product = $cart_item['data'];
-                if ( ! $_product || ! $_product->exists() ) {
-                    continue;
-                }
-                ?>
-                <li class="mini-cart-dropdown__item">
-                    <div class="mini-cart-dropdown__item-image">
-                        <?php echo $_product->get_image( 'thumbnail' ); ?>
-                    </div>
-                    <div class="mini-cart-dropdown__item-details">
-                        <a href="<?php echo esc_url( $_product->get_permalink() ); ?>" class="mini-cart-dropdown__item-name">
-                            <?php echo esc_html( $_product->get_name() ); ?>
-                        </a>
-                        <div class="mini-cart-dropdown__item-quantity">
-                            <?php echo esc_html( $cart_item['quantity'] ); ?> &times;
-                            <?php echo WC()->cart->get_product_price( $_product ); ?>
-                        </div>
-                    </div>
-                    <?php
-                    echo wc_get_formatted_cart_item_data( $cart_item );
-                    ?>
-                    <div class="mini-cart-dropdown__item-price">
-                        <?php echo WC()->cart->get_product_subtotal( $_product, $cart_item['quantity'] ); ?>
-                    </div>
-                    <a href="<?php echo esc_url( wc_get_cart_remove_url( $cart_item_key ) ); ?>"
-                       class="mini-cart-dropdown__item-remove"
-                       aria-label="<?php esc_attr_e( 'Remove item', 'opulentia' ); ?>">
-                        &times;
-                    </a>
-                </li>
-            <?php endforeach; ?>
-        </ul>
+	<?php if ( WC()->cart->is_empty() ) : ?>
+		<div class="mini-cart-dropdown__empty">
+			<?php esc_html_e( 'Your cart is currently empty.', 'opulentia' ); ?>
+		</div>
+	<?php else : ?>
+		<ul class="mini-cart-dropdown__items">
+			<?php
+			foreach ( WC()->cart->get_cart() as $cart_item_key => $cart_item ) :
+				$_product = $cart_item['data'];
+				if ( ! $_product || ! $_product->exists() ) {
+					continue;
+				}
+				?>
+				<li class="mini-cart-dropdown__item">
+					<div class="mini-cart-dropdown__item-image">
+						<?php echo $_product->get_image( 'thumbnail' ); ?>
+					</div>
+					<div class="mini-cart-dropdown__item-details">
+						<a href="<?php echo esc_url( $_product->get_permalink() ); ?>" class="mini-cart-dropdown__item-name">
+							<?php echo esc_html( $_product->get_name() ); ?>
+						</a>
+						<div class="mini-cart-dropdown__item-quantity">
+							<?php echo esc_html( $cart_item['quantity'] ); ?> &times;
+							<?php echo WC()->cart->get_product_price( $_product ); ?>
+						</div>
+					</div>
+					<?php
+					echo wc_get_formatted_cart_item_data( $cart_item );
+					?>
+					<div class="mini-cart-dropdown__item-price">
+						<?php echo WC()->cart->get_product_subtotal( $_product, $cart_item['quantity'] ); ?>
+					</div>
+					<a href="<?php echo esc_url( wc_get_cart_remove_url( $cart_item_key ) ); ?>"
+						class="mini-cart-dropdown__item-remove"
+						aria-label="<?php esc_attr_e( 'Remove item', 'opulentia' ); ?>">
+						&times;
+					</a>
+				</li>
+			<?php endforeach; ?>
+		</ul>
 
-        <div class="mini-cart-dropdown__footer">
-            <div class="mini-cart-dropdown__subtotal">
-                <span class="mini-cart-dropdown__subtotal-label"><?php esc_html_e( 'Subtotal', 'opulentia' ); ?></span>
-                <span class="mini-cart-dropdown__subtotal-amount"><?php echo WC()->cart->get_cart_subtotal(); ?></span>
-            </div>
-            <div class="mini-cart-dropdown__buttons">
-                <a href="<?php echo esc_url( wc_get_cart_url() ); ?>" class="btn btn--primary">
-                    <?php esc_html_e( 'View Cart', 'opulentia' ); ?>
-                </a>
-                <a href="<?php echo esc_url( wc_get_checkout_url() ); ?>" class="btn btn--outline">
-                    <?php esc_html_e( 'Checkout', 'opulentia' ); ?>
-                </a>
-            </div>
-        </div>
-    <?php endif; ?>
-    <?php
-    $html = ob_get_clean();
+		<div class="mini-cart-dropdown__footer">
+			<div class="mini-cart-dropdown__subtotal">
+				<span class="mini-cart-dropdown__subtotal-label"><?php esc_html_e( 'Subtotal', 'opulentia' ); ?></span>
+				<span class="mini-cart-dropdown__subtotal-amount"><?php echo WC()->cart->get_cart_subtotal(); ?></span>
+			</div>
+			<div class="mini-cart-dropdown__buttons">
+				<a href="<?php echo esc_url( wc_get_cart_url() ); ?>" class="btn btn--primary">
+					<?php esc_html_e( 'View Cart', 'opulentia' ); ?>
+				</a>
+				<a href="<?php echo esc_url( wc_get_checkout_url() ); ?>" class="btn btn--outline">
+					<?php esc_html_e( 'Checkout', 'opulentia' ); ?>
+				</a>
+			</div>
+		</div>
+	<?php endif; ?>
+	<?php
+	$html = ob_get_clean();
 
-    wp_send_json_success( array( 'html' => $html ) );
+	wp_send_json_success( array( 'html' => $html ) );
 }
 add_action( 'wp_ajax_Opulentia_mini_cart', 'Opulentia_ajax_mini_cart' );
 add_action( 'wp_ajax_nopriv_Opulentia_mini_cart', 'Opulentia_ajax_mini_cart' );
@@ -1228,34 +1235,34 @@ add_action( 'wp_ajax_nopriv_Opulentia_mini_cart', 'Opulentia_ajax_mini_cart' );
  * Handle contact form submission via admin-post.
  */
 function Opulentia_handle_contact_form() {
-    // Verify nonce.
-    if ( ! Opulentia_Security::verify_nonce( 'Opulentia_contact_form', 'Opulentia_contact_nonce' ) ) {
-        wp_die( esc_html__( 'Security check failed. Please try again.', 'opulentia' ) );
-    }
+	// Verify nonce.
+	if ( ! Opulentia_Security::verify_nonce( 'Opulentia_contact_form', 'Opulentia_contact_nonce' ) ) {
+		wp_die( esc_html__( 'Security check failed. Please try again.', 'opulentia' ) );
+	}
 
-    // Sanitize inputs.
-    $name    = Opulentia_Security::sanitize_input( 'name', '' );
-    $email   = Opulentia_Security::sanitize_email_input( 'email', '' );
-    $subject = Opulentia_Security::sanitize_input( 'subject', '' );
-    $message = Opulentia_Security::sanitize_textarea_input( 'message', '' );
+	// Sanitize inputs.
+	$name    = Opulentia_Security::sanitize_input( 'name', '' );
+	$email   = Opulentia_Security::sanitize_email_input( 'email', '' );
+	$subject = Opulentia_Security::sanitize_input( 'subject', '' );
+	$message = Opulentia_Security::sanitize_textarea_input( 'message', '' );
 
-    // Validate required fields.
-    if ( empty( $name ) || empty( $email ) || empty( $subject ) || empty( $message ) ) {
-        wp_die( esc_html__( 'All fields are required.', 'opulentia' ) );
-    }
+	// Validate required fields.
+	if ( empty( $name ) || empty( $email ) || empty( $subject ) || empty( $message ) ) {
+		wp_die( esc_html__( 'All fields are required.', 'opulentia' ) );
+	}
 
-    if ( ! is_email( $email ) ) {
-        wp_die( esc_html__( 'Invalid email address.', 'opulentia' ) );
-    }
+	if ( ! is_email( $email ) ) {
+		wp_die( esc_html__( 'Invalid email address.', 'opulentia' ) );
+	}
 
-    // Redirect back with a success/error parameter.
-    $redirect_url = add_query_arg(
-        array( 'contact' => 'success' ),
-        wp_get_referer() ? wp_get_referer() : home_url( '/contact' )
-    );
+	// Redirect back with a success/error parameter.
+	$redirect_url = add_query_arg(
+		array( 'contact' => 'success' ),
+		wp_get_referer() ? wp_get_referer() : home_url( '/contact' )
+	);
 
-    wp_safe_redirect( $redirect_url );
-    exit;
+	wp_safe_redirect( $redirect_url );
+	exit;
 }
 add_action( 'admin_post_Opulentia_contact_form', 'Opulentia_handle_contact_form' );
 add_action( 'admin_post_nopriv_Opulentia_contact_form', 'Opulentia_handle_contact_form' );
@@ -1267,51 +1274,51 @@ add_action( 'admin_post_nopriv_Opulentia_contact_form', 'Opulentia_handle_contac
  * Falls back gracefully if Mailchimp is not configured (logs the email to an option).
  */
 function Opulentia_handle_newsletter_signup() {
-    // Verify nonce.
-    if ( ! Opulentia_Security::verify_nonce( 'Opulentia_newsletter', 'Opulentia_newsletter_nonce' ) ) {
-        wp_die( esc_html__( 'Security check failed. Please try again.', 'opulentia' ) );
-    }
+	// Verify nonce.
+	if ( ! Opulentia_Security::verify_nonce( 'Opulentia_newsletter', 'Opulentia_newsletter_nonce' ) ) {
+		wp_die( esc_html__( 'Security check failed. Please try again.', 'opulentia' ) );
+	}
 
-    // Sanitize email.
-    $email = Opulentia_Security::sanitize_email_input( 'email', '' );
+	// Sanitize email.
+	$email = Opulentia_Security::sanitize_email_input( 'email', '' );
 
-    if ( ! is_email( $email ) ) {
-        wp_die( esc_html__( 'Invalid email address.', 'opulentia' ) );
-    }
+	if ( ! is_email( $email ) ) {
+		wp_die( esc_html__( 'Invalid email address.', 'opulentia' ) );
+	}
 
-    // Capture optional name merge fields.
-    $merge_fields = array();
-    $fname = Opulentia_Security::sanitize_input( 'fname', '' );
-    $lname = Opulentia_Security::sanitize_input( 'lname', '' );
+	// Capture optional name merge fields.
+	$merge_fields = array();
+	$fname        = Opulentia_Security::sanitize_input( 'fname', '' );
+	$lname        = Opulentia_Security::sanitize_input( 'lname', '' );
 
-    if ( ! empty( $fname ) ) {
-        $merge_fields['FNAME'] = $fname;
-    }
-    if ( ! empty( $lname ) ) {
-        $merge_fields['LNAME'] = $lname;
-    }
+	if ( ! empty( $fname ) ) {
+		$merge_fields['FNAME'] = $fname;
+	}
+	if ( ! empty( $lname ) ) {
+		$merge_fields['LNAME'] = $lname;
+	}
 
-    // Attempt Mailchimp subscription with merge fields.
-    $mailchimp = Opulentia_Mailchimp::get_instance();
-    $result    = $mailchimp->subscribe( $email, $merge_fields );
+	// Attempt Mailchimp subscription with merge fields.
+	$mailchimp = Opulentia_Mailchimp::get_instance();
+	$result    = $mailchimp->subscribe( $email, $merge_fields );
 
-    if ( is_wp_error( $result ) ) {
-        // Mailchimp failed — fall back to local storage (option) for resilience.
-        $subscribers = get_option( 'Opulentia_newsletter_subscribers', array() );
-        if ( ! in_array( $email, $subscribers, true ) ) {
-            $subscribers[] = sanitize_email( $email );
-            update_option( 'Opulentia_newsletter_subscribers', $subscribers, false );
-        }
-    }
+	if ( is_wp_error( $result ) ) {
+		// Mailchimp failed — fall back to local storage (option) for resilience.
+		$subscribers = get_option( 'Opulentia_newsletter_subscribers', array() );
+		if ( ! in_array( $email, $subscribers, true ) ) {
+			$subscribers[] = sanitize_email( $email );
+			update_option( 'Opulentia_newsletter_subscribers', $subscribers, false );
+		}
+	}
 
-    // Redirect back with success message.
-    $redirect_url = add_query_arg(
-        array( 'newsletter' => 'success' ),
-        wp_get_referer() ? wp_get_referer() : home_url( '/' )
-    );
+	// Redirect back with success message.
+	$redirect_url = add_query_arg(
+		array( 'newsletter' => 'success' ),
+		wp_get_referer() ? wp_get_referer() : home_url( '/' )
+	);
 
-    wp_safe_redirect( $redirect_url );
-    exit;
+	wp_safe_redirect( $redirect_url );
+	exit;
 }
 add_action( 'admin_post_Opulentia_newsletter_signup', 'Opulentia_handle_newsletter_signup' );
 add_action( 'admin_post_nopriv_Opulentia_newsletter_signup', 'Opulentia_handle_newsletter_signup' );
@@ -1327,19 +1334,19 @@ add_action( 'admin_post_nopriv_Opulentia_newsletter_signup', 'Opulentia_handle_n
  * right after the billing fields (including the billing email).
  */
 function Opulentia_checkout_newsletter_field() {
-    ?>
-    <div class="woocommerce-checkout-newsletter">
-        <label class="woocommerce-form__label woocommerce-form__label-for-checkbox checkbox">
-            <input type="checkbox"
-                   class="woocommerce-form__input woocommerce-form__input-checkbox input-checkbox"
-                   name="Opulentia_newsletter_optin"
-                   id="Opulentia_newsletter_optin"
-                   value="1"
-                   checked>
-            <span><?php esc_html_e( 'Subscribe to our newsletter for exclusive offers and style insights.', 'opulentia' ); ?></span>
-        </label>
-    </div>
-    <?php
+	?>
+	<div class="woocommerce-checkout-newsletter">
+		<label class="woocommerce-form__label woocommerce-form__label-for-checkbox checkbox">
+			<input type="checkbox"
+					class="woocommerce-form__input woocommerce-form__input-checkbox input-checkbox"
+					name="Opulentia_newsletter_optin"
+					id="Opulentia_newsletter_optin"
+					value="1"
+					checked>
+			<span><?php esc_html_e( 'Subscribe to our newsletter for exclusive offers and style insights.', 'opulentia' ); ?></span>
+		</label>
+	</div>
+	<?php
 }
 add_action( 'woocommerce_after_checkout_billing_form', 'Opulentia_checkout_newsletter_field' );
 
@@ -1347,9 +1354,9 @@ add_action( 'woocommerce_after_checkout_billing_form', 'Opulentia_checkout_newsl
  * Save the newsletter opt-in preference as order meta.
  */
 function Opulentia_save_checkout_newsletter_optin( $order_id ) {
-    if ( isset( $_POST['Opulentia_newsletter_optin'] ) ) {
-        update_post_meta( $order_id, '_Opulentia_newsletter_optin', 'yes' );
-    }
+	if ( isset( $_POST['Opulentia_newsletter_optin'] ) ) {
+		update_post_meta( $order_id, '_Opulentia_newsletter_optin', 'yes' );
+	}
 }
 add_action( 'woocommerce_checkout_update_order_meta', 'Opulentia_save_checkout_newsletter_optin' );
 
@@ -1362,45 +1369,47 @@ add_action( 'woocommerce_checkout_update_order_meta', 'Opulentia_save_checkout_n
  * @param int $order_id The completed order ID.
  */
 function Opulentia_subscribe_checkout_customer( $order_id ) {
-    $optin = get_post_meta( $order_id, '_Opulentia_newsletter_optin', true );
+	$optin = get_post_meta( $order_id, '_Opulentia_newsletter_optin', true );
 
-    if ( 'yes' !== $optin ) {
-        return;
-    }
+	if ( 'yes' !== $optin ) {
+		return;
+	}
 
-    $order = wc_get_order( $order_id );
-    if ( ! $order ) {
-        return;
-    }
+	$order = wc_get_order( $order_id );
+	if ( ! $order ) {
+		return;
+	}
 
-    // Only subscribe for confirmed/completed orders.
-    // Prevents subscription for pending payment methods (e.g. bank transfers).
-    if ( ! $order->has_status( array( 'completed', 'processing' ) ) ) {
-        return;
-    }
+	// Only subscribe for confirmed/completed orders.
+	// Prevents subscription for pending payment methods (e.g. bank transfers).
+	if ( ! $order->has_status( array( 'completed', 'processing' ) ) ) {
+		return;
+	}
 
-    // One-shot guard — prevent redundant API calls on page refresh.
-    if ( get_post_meta( $order_id, '_Opulentia_newsletter_subscribed', true ) ) {
-        return;
-    }
+	// One-shot guard — prevent redundant API calls on page refresh.
+	if ( get_post_meta( $order_id, '_Opulentia_newsletter_subscribed', true ) ) {
+		return;
+	}
 
-    $email = $order->get_billing_email();
-    if ( ! is_email( $email ) ) {
-        return;
-    }
+	$email = $order->get_billing_email();
+	if ( ! is_email( $email ) ) {
+		return;
+	}
 
-    $mailchimp = Opulentia_Mailchimp::get_instance();
-    $result    = $mailchimp->subscribe( $email );
+	$mailchimp = Opulentia_Mailchimp::get_instance();
+	$result    = $mailchimp->subscribe( $email );
 
-    if ( is_wp_error( $result ) ) {
-        error_log( sprintf(
-            '[Opulentia Checkout] Mailchimp subscribe failed for order %d: %s',
-            $order_id,
-            $result->get_error_message()
-        ) );
-    } else {
-        update_post_meta( $order_id, '_Opulentia_newsletter_subscribed', 'yes' );
-    }
+	if ( is_wp_error( $result ) ) {
+		error_log(
+			sprintf(
+				'[Opulentia Checkout] Mailchimp subscribe failed for order %d: %s',
+				$order_id,
+				$result->get_error_message()
+			)
+		);
+	} else {
+		update_post_meta( $order_id, '_Opulentia_newsletter_subscribed', 'yes' );
+	}
 }
 add_action( 'woocommerce_thankyou', 'Opulentia_subscribe_checkout_customer' );
 
@@ -1410,51 +1419,51 @@ add_action( 'woocommerce_thankyou', 'Opulentia_subscribe_checkout_customer' );
  * Render sticky add-to-cart bar on single product pages.
  */
 function Opulentia_sticky_add_to_cart() {
-    if ( ! is_product() || ! class_exists( 'WooCommerce' ) ) {
-        return;
-    }
+	if ( ! is_product() || ! class_exists( 'WooCommerce' ) ) {
+		return;
+	}
 
-    if ( ! get_theme_mod( 'wc_sticky_add_to_cart', true ) ) {
-        return;
-    }
+	if ( ! get_theme_mod( 'wc_sticky_add_to_cart', true ) ) {
+		return;
+	}
 
-    global $product;
-    if ( ! $product || ! $product->is_visible() ) {
-        $product = wc_get_product( get_the_ID() );
-    }
+	global $product;
+	if ( ! $product || ! $product->is_visible() ) {
+		$product = wc_get_product( get_the_ID() );
+	}
 
-    if ( ! $product ) {
-        return;
-    }
+	if ( ! $product ) {
+		return;
+	}
 
-    $price_html = $product->get_price_html();
-    $image      = $product->get_image( 'thumbnail', array( 'class' => 'sticky-add-to-cart__thumb' ) );
-    $title      = $product->get_name();
-    ?>
-    <div class="sticky-add-to-cart" data-default-price="<?php echo esc_attr( $price_html ); ?>">
-        <div class="container">
-            <div class="sticky-add-to-cart__inner">
-                <div class="sticky-add-to-cart__info">
-                    <?php if ( $image ) : ?>
-                        <div class="sticky-add-to-cart__image">
-                            <?php echo $image; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-                        </div>
-                    <?php endif; ?>
-                    <span class="sticky-add-to-cart__title"><?php echo esc_html( $title ); ?></span>
-                    <span class="sticky-add-to-cart__price"><?php echo $price_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
-                </div>
-                <div class="sticky-add-to-cart__actions">
-                    <?php if ( $product->is_type( 'simple' ) && $product->is_purchasable() ) : ?>
-                        <input type="number" class="sticky-add-to-cart__qty" value="1" min="1" max="99" step="1">
-                    <?php endif; ?>
-                    <button type="button" class="sticky-add-to-cart__button">
-                        <?php esc_html_e( 'Add to Cart', 'opulentia' ); ?>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <?php
+	$price_html = $product->get_price_html();
+	$image      = $product->get_image( 'thumbnail', array( 'class' => 'sticky-add-to-cart__thumb' ) );
+	$title      = $product->get_name();
+	?>
+	<div class="sticky-add-to-cart" data-default-price="<?php echo esc_attr( $price_html ); ?>">
+		<div class="container">
+			<div class="sticky-add-to-cart__inner">
+				<div class="sticky-add-to-cart__info">
+					<?php if ( $image ) : ?>
+						<div class="sticky-add-to-cart__image">
+							<?php echo $image; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+						</div>
+					<?php endif; ?>
+					<span class="sticky-add-to-cart__title"><?php echo esc_html( $title ); ?></span>
+					<span class="sticky-add-to-cart__price"><?php echo $price_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
+				</div>
+				<div class="sticky-add-to-cart__actions">
+					<?php if ( $product->is_type( 'simple' ) && $product->is_purchasable() ) : ?>
+						<input type="number" class="sticky-add-to-cart__qty" value="1" min="1" max="99" step="1">
+					<?php endif; ?>
+					<button type="button" class="sticky-add-to-cart__button">
+						<?php esc_html_e( 'Add to Cart', 'opulentia' ); ?>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<?php
 }
 add_action( 'wp_footer', 'Opulentia_sticky_add_to_cart', 100 );
 
@@ -1464,18 +1473,22 @@ add_action( 'wp_footer', 'Opulentia_sticky_add_to_cart', 100 );
  * Localize WC Pro AJAX script.
  */
 function Opulentia_wc_pro_localize() {
-    if ( ! function_exists( 'is_woocommerce' ) ) {
-        return;
-    }
+	if ( ! function_exists( 'is_woocommerce' ) ) {
+		return;
+	}
 
-    wp_localize_script( 'Opulentia-woocommerce-pro', 'OpulentiaWcPro', array(
-        'ajaxUrl'                => admin_url( 'admin-ajax.php' ),
-        'nonce'                  => wp_create_nonce( 'Opulentia_wc_pro_nonce' ),
-        'closeText'              => __( 'Close', 'opulentia' ),
-        'errorText'              => __( 'Something went wrong. Please try again.', 'opulentia' ),
-        'addToWishlistText'      => __( 'Add to Wishlist', 'opulentia' ),
-        'removeFromWishlistText' => __( 'Remove from Wishlist', 'opulentia' ),
-    ) );
+	wp_localize_script(
+		'Opulentia-woocommerce-pro',
+		'OpulentiaWcPro',
+		array(
+			'ajaxUrl'                => admin_url( 'admin-ajax.php' ),
+			'nonce'                  => wp_create_nonce( 'Opulentia_wc_pro_nonce' ),
+			'closeText'              => __( 'Close', 'opulentia' ),
+			'errorText'              => __( 'Something went wrong. Please try again.', 'opulentia' ),
+			'addToWishlistText'      => __( 'Add to Wishlist', 'opulentia' ),
+			'removeFromWishlistText' => __( 'Remove from Wishlist', 'opulentia' ),
+		)
+	);
 }
 add_action( 'wp_enqueue_scripts', 'Opulentia_wc_pro_localize', 20 );
 

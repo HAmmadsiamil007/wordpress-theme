@@ -14,7 +14,7 @@
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
-    exit;
+	exit;
 }
 
 /**
@@ -22,102 +22,104 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Opulentia_Scroll_To_Top {
 
-    /**
-     * Singleton instance.
-     *
-     * @var self|null
-     */
-    private static $instance = null;
+	/**
+	 * Singleton instance.
+	 *
+	 * @var self|null
+	 */
+	private static $instance = null;
 
-    /**
-     * Returns the singleton instance.
-     *
-     * @return self
-     */
-    public static function get_instance() {
-        if ( is_null( self::$instance ) ) {
-            self::$instance = new self();
-        }
-        return self::$instance;
-    }
+	/**
+	 * Returns the singleton instance.
+	 *
+	 * @return self
+	 */
+	public static function get_instance() {
+		if ( is_null( self::$instance ) ) {
+			self::$instance = new self();
+		}
+		return self::$instance;
+	}
 
-    /**
-     * Constructor — registers hooks.
-     */
-    private function __construct() {
-        add_action( 'wp_footer', array( $this, 'render_button' ), 100 );
-        add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_script' ), 100 );
-    }
+	/**
+	 * Constructor — registers hooks.
+	 */
+	private function __construct() {
+		add_action( 'wp_footer', array( $this, 'render_button' ), 100 );
+		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_script' ), 100 );
+	}
 
-    /**
-     * Check if scroll to top should be rendered.
-     *
-     * @return bool
-     */
-    private function is_enabled() {
-        return (bool) Opulentia_get_option( 'enable-scroll-to-top', true );
-    }
+	/**
+	 * Check if scroll to top should be rendered.
+	 *
+	 * @return bool
+	 */
+	private function is_enabled() {
+		return (bool) Opulentia_get_option( 'enable-scroll-to-top', true );
+	}
 
-    /**
-     * Render the scroll-to-top button HTML.
-     */
-    public function render_button() {
-        if ( ! $this->is_enabled() ) {
-            return;
-        }
+	/**
+	 * Render the scroll-to-top button HTML.
+	 */
+	public function render_button() {
+		if ( ! $this->is_enabled() ) {
+			return;
+		}
 
-        $position = Opulentia_get_option( 'scroll-to-top-position', 'right' );
-        $threshold = (int) Opulentia_get_option( 'scroll-to-top-threshold', 300 );
-        $icon_type = Opulentia_get_option( 'scroll-to-top-icon', 'chevron-up' );
+		$position  = Opulentia_get_option( 'scroll-to-top-position', 'right' );
+		$threshold = (int) Opulentia_get_option( 'scroll-to-top-threshold', 300 );
+		$icon_type = Opulentia_get_option( 'scroll-to-top-icon', 'chevron-up' );
 
-        $classes = array(
-            'opulentia-scroll-to-top',
-            'opulentia-scroll-to-top--' . $position,
-        );
+		$classes = array(
+			'opulentia-scroll-to-top',
+			'opulentia-scroll-to-top--' . $position,
+		);
 
-        $style = '';
-        if ( 'right' === $position ) {
-            $style = 'right: 30px; left: auto;';
-        } else {
-            $style = 'left: 30px; right: auto;';
-        }
+		$style = '';
+		if ( 'right' === $position ) {
+			$style = 'right: 30px; left: auto;';
+		} else {
+			$style = 'left: 30px; right: auto;';
+		}
 
-        ?>
-        <button class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>"
-                style="<?php echo esc_attr( $style ); ?>"
-                data-threshold="<?php echo esc_attr( $threshold ); ?>"
-                aria-label="<?php esc_attr_e( 'Back to top', 'opulentia' ); ?>">
-            <?php $this->render_icon( $icon_type ); ?>
-        </button>
-        <?php
-    }
+		?>
+		<button class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>"
+				style="<?php echo esc_attr( $style ); ?>"
+				data-threshold="<?php echo esc_attr( $threshold ); ?>"
+				aria-label="<?php esc_attr_e( 'Back to top', 'opulentia' ); ?>">
+			<?php $this->render_icon( $icon_type ); ?>
+		</button>
+		<?php
+	}
 
-    /**
-     * Render the icon SVG.
-     *
-     * @param string $type Icon type.
-     */
-    private function render_icon( $type ) {
-        switch ( $type ) {
-            case 'arrow-up':
+	/**
+	 * Render the icon SVG.
+	 *
+	 * @param string $type Icon type.
+	 */
+	private function render_icon( $type ) {
+		switch ( $type ) {
+			case 'arrow-up':
                 ?><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24"><path d="M5 12h14M12 5l7 7-7 7"/></svg><?php // phpcs:ignore
-                break;
-            case 'chevron-up':
-            default:
+				break;
+			case 'chevron-up':
+			default:
                 ?><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24"><path d="M18 15l-6-6-6 6"/></svg><?php // phpcs:ignore
-                break;
-        }
-    }
+				break;
+		}
+	}
 
-    /**
-     * Enqueue the scroll-to-top script.
-     */
-    public function enqueue_script() {
-        if ( ! $this->is_enabled() ) {
-            return;
-        }
+	/**
+	 * Enqueue the scroll-to-top script.
+	 */
+	public function enqueue_script() {
+		if ( ! $this->is_enabled() ) {
+			return;
+		}
 
-        wp_add_inline_script( 'opulentia-navigation', '
+		wp_add_inline_script(
+			'opulentia-navigation',
+			'
             document.addEventListener("DOMContentLoaded", function() {
                 var btn = document.querySelector(".opulentia-scroll-to-top");
                 if (!btn) return;
@@ -133,6 +135,7 @@ class Opulentia_Scroll_To_Top {
                     window.scrollTo({ top: 0, behavior: "smooth" });
                 });
             });
-        ' );
-    }
+        '
+		);
+	}
 }

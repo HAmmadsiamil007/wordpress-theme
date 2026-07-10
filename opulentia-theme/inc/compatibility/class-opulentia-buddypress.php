@@ -13,7 +13,7 @@
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
-    exit;
+	exit;
 }
 
 /**
@@ -21,118 +21,118 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Opulentia_BuddyPress {
 
-    /**
-     * Singleton instance.
-     *
-     * @var self|null
-     */
-    private static $instance = null;
+	/**
+	 * Singleton instance.
+	 *
+	 * @var self|null
+	 */
+	private static $instance = null;
 
-    /**
-     * Returns the singleton instance.
-     *
-     * @return self
-     */
-    public static function get_instance() {
-        if ( is_null( self::$instance ) ) {
-            self::$instance = new self();
-        }
-        return self::$instance;
-    }
+	/**
+	 * Returns the singleton instance.
+	 *
+	 * @return self
+	 */
+	public static function get_instance() {
+		if ( is_null( self::$instance ) ) {
+			self::$instance = new self();
+		}
+		return self::$instance;
+	}
 
-    /**
-     * Constructor — registers hooks.
-     */
-    private function __construct() {
-        add_action( 'after_setup_theme', array( $this, 'init' ), 20 );
-    }
+	/**
+	 * Constructor — registers hooks.
+	 */
+	private function __construct() {
+		add_action( 'after_setup_theme', array( $this, 'init' ), 20 );
+	}
 
-    /**
-     * Initialize BuddyPress compatibility.
-     */
-    public function init() {
-        if ( ! $this->is_buddypress_active() ) {
-            return;
-        }
+	/**
+	 * Initialize BuddyPress compatibility.
+	 */
+	public function init() {
+		if ( ! $this->is_buddypress_active() ) {
+			return;
+		}
 
-        // Register theme support.
-        add_theme_support( 'buddypress' );
+		// Register theme support.
+		add_theme_support( 'buddypress' );
 
-        // Use theme compatibility template system.
-        add_action( 'bp_init', array( $this, 'set_template_stack' ), 5 );
+		// Use theme compatibility template system.
+		add_action( 'bp_init', array( $this, 'set_template_stack' ), 5 );
 
-        // Add body classes.
-        add_filter( 'body_class', array( $this, 'body_classes' ) );
+		// Add body classes.
+		add_filter( 'body_class', array( $this, 'body_classes' ) );
 
-        // Set full-width layout for BuddyPress pages.
-        add_action( 'wp', array( $this, 'support_full_width' ) );
+		// Set full-width layout for BuddyPress pages.
+		add_action( 'wp', array( $this, 'support_full_width' ) );
 
-        // Enqueue theme styles for BuddyPress components.
-        add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_styles' ), 20 );
-    }
+		// Enqueue theme styles for BuddyPress components.
+		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_styles' ), 20 );
+	}
 
-    /**
-     * Check if BuddyPress is active.
-     *
-     * @return bool
-     */
-    private function is_buddypress_active() {
-        return class_exists( 'BuddyPress' )
-            || defined( 'BP_VERSION' );
-    }
+	/**
+	 * Check if BuddyPress is active.
+	 *
+	 * @return bool
+	 */
+	private function is_buddypress_active() {
+		return class_exists( 'BuddyPress' )
+			|| defined( 'BP_VERSION' );
+	}
 
-    /**
-     * Set the BuddyPress template stack to use theme compatibility.
-     *
-     * Ensures BuddyPress looks for templates in the theme's directory
-     * and falls back to plugin templates appropriately.
-     */
-    public function set_template_stack() {
-        if ( ! function_exists( 'bp_register_template_stack' ) ) {
-            return;
-        }
+	/**
+	 * Set the BuddyPress template stack to use theme compatibility.
+	 *
+	 * Ensures BuddyPress looks for templates in the theme's directory
+	 * and falls back to plugin templates appropriately.
+	 */
+	public function set_template_stack() {
+		if ( ! function_exists( 'bp_register_template_stack' ) ) {
+			return;
+		}
 
-        bp_register_template_stack( array( $this, 'get_template_directory' ), 14 );
-    }
+		bp_register_template_stack( array( $this, 'get_template_directory' ), 14 );
+	}
 
-    /**
-     * Return the theme's BuddyPress template directory path.
-     *
-     * @return string
-     */
-    public function get_template_directory() {
-        return Opulentia_DIR . '/buddypress';
-    }
+	/**
+	 * Return the theme's BuddyPress template directory path.
+	 *
+	 * @return string
+	 */
+	public function get_template_directory() {
+		return Opulentia_DIR . '/buddypress';
+	}
 
-    /**
-     * Add full-width support for BuddyPress pages.
-     *
-     * Removes sidebar and content constraints so member/group
-     * profiles can use the full page width.
-     */
-    public function support_full_width() {
-        if ( ! function_exists( 'bp_is_buddypress' ) || ! bp_is_buddypress() ) {
-            return;
-        }
+	/**
+	 * Add full-width support for BuddyPress pages.
+	 *
+	 * Removes sidebar and content constraints so member/group
+	 * profiles can use the full page width.
+	 */
+	public function support_full_width() {
+		if ( ! function_exists( 'bp_is_buddypress' ) || ! bp_is_buddypress() ) {
+			return;
+		}
 
-        add_filter( 'Opulentia_layout_content_layout', '__return_false' );
-    }
+		add_filter( 'Opulentia_layout_content_layout', '__return_false' );
+	}
 
-    /**
-     * Enqueue theme-compatible BuddyPress styles.
-     *
-     * Applies the Opulentia design system to BuddyPress components
-     * (member profiles, groups, activity streams, notifications)
-     * via inline styles to avoid an additional HTTP request.
-     */
-    public function enqueue_styles() {
-        if ( ! function_exists( 'bp_is_buddypress' ) || ! bp_is_buddypress() ) {
-            return;
-        }
+	/**
+	 * Enqueue theme-compatible BuddyPress styles.
+	 *
+	 * Applies the Opulentia design system to BuddyPress components
+	 * (member profiles, groups, activity streams, notifications)
+	 * via inline styles to avoid an additional HTTP request.
+	 */
+	public function enqueue_styles() {
+		if ( ! function_exists( 'bp_is_buddypress' ) || ! bp_is_buddypress() ) {
+			return;
+		}
 
-        wp_add_inline_style(
-            'opulentia-style',
-            '
+		wp_add_inline_style(
+			'opulentia-style',
+			'
                 /* ── BuddyPress Theme Integration ── */
 
                 /* Member & Group profile headers */
@@ -317,30 +317,30 @@ class Opulentia_BuddyPress {
                     }
                 }
             '
-        );
-    }
+		);
+	}
 
-    /**
-     * Add BuddyPress-specific body classes.
-     *
-     * @param array $classes Body classes.
-     * @return array
-     */
-    public function body_classes( $classes ) {
-        $classes[] = 'opulentia-buddypress-compat';
+	/**
+	 * Add BuddyPress-specific body classes.
+	 *
+	 * @param array $classes Body classes.
+	 * @return array
+	 */
+	public function body_classes( $classes ) {
+		$classes[] = 'opulentia-buddypress-compat';
 
-        if ( function_exists( 'bp_is_group' ) && bp_is_group() ) {
-            $classes[] = 'bp-group-page';
-        }
+		if ( function_exists( 'bp_is_group' ) && bp_is_group() ) {
+			$classes[] = 'bp-group-page';
+		}
 
-        if ( function_exists( 'bp_is_user' ) && bp_is_user() ) {
-            $classes[] = 'bp-member-page';
-        }
+		if ( function_exists( 'bp_is_user' ) && bp_is_user() ) {
+			$classes[] = 'bp-member-page';
+		}
 
-        if ( function_exists( 'bp_is_activity_component' ) && bp_is_activity_component() ) {
-            $classes[] = 'bp-activity-page';
-        }
+		if ( function_exists( 'bp_is_activity_component' ) && bp_is_activity_component() ) {
+			$classes[] = 'bp-activity-page';
+		}
 
-        return $classes;
-    }
+		return $classes;
+	}
 }

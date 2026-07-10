@@ -1,160 +1,189 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) {
-    exit;
+	exit;
 }
 
 class Opulentia_Pricing_Tables {
 
-    private static $instance = null;
+	private static $instance = null;
 
-    public static function get_instance() {
-        if ( is_null( self::$instance ) ) {
-            self::$instance = new self();
-        }
-        return self::$instance;
-    }
+	public static function get_instance() {
+		if ( is_null( self::$instance ) ) {
+			self::$instance = new self();
+		}
+		return self::$instance;
+	}
 
-    private function __construct() {
-        add_action( 'customize_register', array( $this, 'register_customizer' ), 30 );
-        add_action( 'wp_enqueue_scripts', array( $this, 'inline_css' ), 120 );
-        add_shortcode( 'op_pricing', array( $this, 'render_shortcode' ) );
-        add_shortcode( 'op_pricing_plan', array( $this, 'render_plan_shortcode' ) );
-    }
+	private function __construct() {
+		add_action( 'customize_register', array( $this, 'register_customizer' ), 30 );
+		add_action( 'wp_enqueue_scripts', array( $this, 'inline_css' ), 120 );
+		add_shortcode( 'op_pricing', array( $this, 'render_shortcode' ) );
+		add_shortcode( 'op_pricing_plan', array( $this, 'render_plan_shortcode' ) );
+	}
 
-    public function register_customizer( $wp_customize ) {
-        $wp_customize->add_section( 'opulentia_pricing', array(
-            'title'    => __( 'Pricing Tables', 'opulentia' ),
-            'panel'    => 'Opulentia_global_settings',
-            'priority' => 210,
-        ) );
+	public function register_customizer( $wp_customize ) {
+		$wp_customize->add_section(
+			'opulentia_pricing',
+			array(
+				'title'    => __( 'Pricing Tables', 'opulentia' ),
+				'panel'    => 'Opulentia_global_settings',
+				'priority' => 210,
+			)
+		);
 
-        $wp_customize->add_setting( 'pricing-enable', array(
-            'default'           => true,
-            'sanitize_callback' => 'wp_validate_boolean',
-            'transport'         => 'refresh',
-        ) );
-        $wp_customize->add_control( 'pricing-enable', array(
-            'label'   => __( 'Enable Pricing Tables', 'opulentia' ),
-            'section' => 'opulentia_pricing',
-            'type'    => 'checkbox',
-        ) );
+		$wp_customize->add_setting(
+			'pricing-enable',
+			array(
+				'default'           => true,
+				'sanitize_callback' => 'wp_validate_boolean',
+				'transport'         => 'refresh',
+			)
+		);
+		$wp_customize->add_control(
+			'pricing-enable',
+			array(
+				'label'   => __( 'Enable Pricing Tables', 'opulentia' ),
+				'section' => 'opulentia_pricing',
+				'type'    => 'checkbox',
+			)
+		);
 
-        $wp_customize->add_setting( 'pricing-default-columns', array(
-            'default'           => '3',
-            'sanitize_callback' => 'sanitize_text_field',
-            'transport'         => 'refresh',
-        ) );
-        $wp_customize->add_control( 'pricing-default-columns', array(
-            'label'   => __( 'Default Columns', 'opulentia' ),
-            'section' => 'opulentia_pricing',
-            'type'    => 'select',
-            'choices' => array(
-                '2' => __( '2 Columns', 'opulentia' ),
-                '3' => __( '3 Columns', 'opulentia' ),
-                '4' => __( '4 Columns', 'opulentia' ),
-            ),
-        ) );
+		$wp_customize->add_setting(
+			'pricing-default-columns',
+			array(
+				'default'           => '3',
+				'sanitize_callback' => 'sanitize_text_field',
+				'transport'         => 'refresh',
+			)
+		);
+		$wp_customize->add_control(
+			'pricing-default-columns',
+			array(
+				'label'   => __( 'Default Columns', 'opulentia' ),
+				'section' => 'opulentia_pricing',
+				'type'    => 'select',
+				'choices' => array(
+					'2' => __( '2 Columns', 'opulentia' ),
+					'3' => __( '3 Columns', 'opulentia' ),
+					'4' => __( '4 Columns', 'opulentia' ),
+				),
+			)
+		);
 
-        $wp_customize->add_setting( 'pricing-default-style', array(
-            'default'           => 'cards',
-            'sanitize_callback' => 'sanitize_text_field',
-            'transport'         => 'refresh',
-        ) );
-        $wp_customize->add_control( 'pricing-default-style', array(
-            'label'   => __( 'Default Style', 'opulentia' ),
-            'section' => 'opulentia_pricing',
-            'type'    => 'select',
-            'choices' => array(
-                'cards'   => __( 'Cards', 'opulentia' ),
-                'minimal' => __( 'Minimal', 'opulentia' ),
-            ),
-        ) );
-    }
+		$wp_customize->add_setting(
+			'pricing-default-style',
+			array(
+				'default'           => 'cards',
+				'sanitize_callback' => 'sanitize_text_field',
+				'transport'         => 'refresh',
+			)
+		);
+		$wp_customize->add_control(
+			'pricing-default-style',
+			array(
+				'label'   => __( 'Default Style', 'opulentia' ),
+				'section' => 'opulentia_pricing',
+				'type'    => 'select',
+				'choices' => array(
+					'cards'   => __( 'Cards', 'opulentia' ),
+					'minimal' => __( 'Minimal', 'opulentia' ),
+				),
+			)
+		);
+	}
 
-    public function render_shortcode( $atts, $content = null ) {
-        if ( ! Opulentia_get_option( 'pricing-enable', true ) ) {
-            return '';
-        }
+	public function render_shortcode( $atts, $content = null ) {
+		if ( ! Opulentia_get_option( 'pricing-enable', true ) ) {
+			return '';
+		}
 
-        $atts = shortcode_atts( array(
-            'columns'   => Opulentia_get_option( 'pricing-default-columns', '3' ),
-            'style'     => Opulentia_get_option( 'pricing-default-style', 'cards' ),
-            'highlight' => '0',
-        ), $atts, 'op_pricing' );
+		$atts = shortcode_atts(
+			array(
+				'columns'   => Opulentia_get_option( 'pricing-default-columns', '3' ),
+				'style'     => Opulentia_get_option( 'pricing-default-style', 'cards' ),
+				'highlight' => '0',
+			),
+			$atts,
+			'op_pricing'
+		);
 
-        $columns   = in_array( $atts['columns'], array( '2', '3', '4' ) ) ? $atts['columns'] : '3';
-        $style     = in_array( $atts['style'], array( 'cards', 'minimal' ) ) ? $atts['style'] : 'cards';
-        $highlight = intval( $atts['highlight'] );
+		$columns   = in_array( $atts['columns'], array( '2', '3', '4' ) ) ? $atts['columns'] : '3';
+		$style     = in_array( $atts['style'], array( 'cards', 'minimal' ) ) ? $atts['style'] : 'cards';
+		$highlight = intval( $atts['highlight'] );
 
-        $output = '<div class="op-pricing-grid op-pricing-grid--' . esc_attr( $style ) . '" style="--op-columns: ' . esc_attr( $columns ) . ';" data-highlight="' . esc_attr( $highlight ) . '">';
-        $output .= do_shortcode( $content );
-        $output .= '</div>';
+		$output  = '<div class="op-pricing-grid op-pricing-grid--' . esc_attr( $style ) . '" style="--op-columns: ' . esc_attr( $columns ) . ';" data-highlight="' . esc_attr( $highlight ) . '">';
+		$output .= do_shortcode( $content );
+		$output .= '</div>';
 
-        return $output;
-    }
+		return $output;
+	}
 
-    public function render_plan_shortcode( $atts ) {
-        $atts = shortcode_atts( array(
-            'name'        => '',
-            'price'       => '',
-            'period'      => '',
-            'description' => '',
-            'btn_text'    => '',
-            'btn_url'     => '',
-            'features'    => '',
-            'featured'    => 'false',
-        ), $atts, 'op_pricing_plan' );
+	public function render_plan_shortcode( $atts ) {
+		$atts = shortcode_atts(
+			array(
+				'name'        => '',
+				'price'       => '',
+				'period'      => '',
+				'description' => '',
+				'btn_text'    => '',
+				'btn_url'     => '',
+				'features'    => '',
+				'featured'    => 'false',
+			),
+			$atts,
+			'op_pricing_plan'
+		);
 
-        if ( empty( $atts['name'] ) ) {
-            return '';
-        }
+		if ( empty( $atts['name'] ) ) {
+			return '';
+		}
 
-        $featured  = 'true' === $atts['featured'];
-        $features  = ! empty( $atts['features'] ) ? array_map( 'trim', explode( ',', $atts['features'] ) ) : array();
-        $card_class = 'op-pricing-card';
-        if ( $featured ) {
-            $card_class .= ' op-pricing-card--featured';
-        }
+		$featured   = 'true' === $atts['featured'];
+		$features   = ! empty( $atts['features'] ) ? array_map( 'trim', explode( ',', $atts['features'] ) ) : array();
+		$card_class = 'op-pricing-card';
+		if ( $featured ) {
+			$card_class .= ' op-pricing-card--featured';
+		}
 
-        $output = '<div class="' . esc_attr( $card_class ) . '">';
-        $output .= '<div class="op-pricing-header">';
-        $output .= '<h3 class="op-pricing-name">' . esc_html( $atts['name'] ) . '</h3>';
-        if ( ! empty( $atts['price'] ) ) {
-            $output .= '<div class="op-pricing-price-wrap">';
-            $output .= '<span class="op-pricing-price">' . esc_html( $atts['price'] ) . '</span>';
-            if ( ! empty( $atts['period'] ) ) {
-                $output .= '<span class="op-pricing-period">' . esc_html( $atts['period'] ) . '</span>';
-            }
-            $output .= '</div>';
-        }
-        if ( ! empty( $atts['description'] ) ) {
-            $output .= '<div class="op-pricing-desc">' . wp_kses_post( $atts['description'] ) . '</div>';
-        }
-        $output .= '</div>';
+		$output  = '<div class="' . esc_attr( $card_class ) . '">';
+		$output .= '<div class="op-pricing-header">';
+		$output .= '<h3 class="op-pricing-name">' . esc_html( $atts['name'] ) . '</h3>';
+		if ( ! empty( $atts['price'] ) ) {
+			$output .= '<div class="op-pricing-price-wrap">';
+			$output .= '<span class="op-pricing-price">' . esc_html( $atts['price'] ) . '</span>';
+			if ( ! empty( $atts['period'] ) ) {
+				$output .= '<span class="op-pricing-period">' . esc_html( $atts['period'] ) . '</span>';
+			}
+			$output .= '</div>';
+		}
+		if ( ! empty( $atts['description'] ) ) {
+			$output .= '<div class="op-pricing-desc">' . wp_kses_post( $atts['description'] ) . '</div>';
+		}
+		$output .= '</div>';
 
-        if ( ! empty( $features ) ) {
-            $output .= '<ul class="op-pricing-features">';
-            foreach ( $features as $feature ) {
-                $output .= '<li>' . esc_html( $feature ) . '</li>';
-            }
-            $output .= '</ul>';
-        }
+		if ( ! empty( $features ) ) {
+			$output .= '<ul class="op-pricing-features">';
+			foreach ( $features as $feature ) {
+				$output .= '<li>' . esc_html( $feature ) . '</li>';
+			}
+			$output .= '</ul>';
+		}
 
-        if ( ! empty( $atts['btn_text'] ) && ! empty( $atts['btn_url'] ) ) {
-            $output .= '<a href="' . esc_url( $atts['btn_url'] ) . '" class="op-pricing-btn">' . esc_html( $atts['btn_text'] ) . '</a>';
-        }
+		if ( ! empty( $atts['btn_text'] ) && ! empty( $atts['btn_url'] ) ) {
+			$output .= '<a href="' . esc_url( $atts['btn_url'] ) . '" class="op-pricing-btn">' . esc_html( $atts['btn_text'] ) . '</a>';
+		}
 
-        $output .= '</div>';
+		$output .= '</div>';
 
-        return $output;
-    }
+		return $output;
+	}
 
-    public function inline_css() {
-        if ( ! Opulentia_get_option( 'pricing-enable', true ) ) {
-            return;
-        }
+	public function inline_css() {
+		if ( ! Opulentia_get_option( 'pricing-enable', true ) ) {
+			return;
+		}
 
-        $css = '
+		$css = '
         .op-pricing-grid {
             display: grid;
             grid-template-columns: repeat(var(--op-columns, 3), 1fr);
@@ -258,6 +287,6 @@ class Opulentia_Pricing_Tables {
         }
         ';
 
-        wp_add_inline_style( 'opulentia-style', $css );
-    }
+		wp_add_inline_style( 'opulentia-style', $css );
+	}
 }

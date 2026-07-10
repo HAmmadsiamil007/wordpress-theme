@@ -14,7 +14,7 @@
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
-    exit;
+	exit;
 }
 
 /**
@@ -22,99 +22,99 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Opulentia_Gravity_Forms {
 
-    /**
-     * Singleton instance.
-     *
-     * @var self|null
-     */
-    private static $instance = null;
+	/**
+	 * Singleton instance.
+	 *
+	 * @var self|null
+	 */
+	private static $instance = null;
 
-    /**
-     * Returns the singleton instance.
-     *
-     * @return self
-     */
-    public static function get_instance() {
-        if ( is_null( self::$instance ) ) {
-            self::$instance = new self();
-        }
-        return self::$instance;
-    }
+	/**
+	 * Returns the singleton instance.
+	 *
+	 * @return self
+	 */
+	public static function get_instance() {
+		if ( is_null( self::$instance ) ) {
+			self::$instance = new self();
+		}
+		return self::$instance;
+	}
 
-    /**
-     * Constructor — registers hooks.
-     */
-    private function __construct() {
-        add_action( 'wp_enqueue_scripts', array( $this, 'inline_css' ), 100 );
+	/**
+	 * Constructor — registers hooks.
+	 */
+	private function __construct() {
+		add_action( 'wp_enqueue_scripts', array( $this, 'inline_css' ), 100 );
 
-        // Add custom CSS class to all Gravity Forms.
-        add_filter( 'gform_form_tag', array( $this, 'form_class' ), 10, 2 );
+		// Add custom CSS class to all Gravity Forms.
+		add_filter( 'gform_form_tag', array( $this, 'form_class' ), 10, 2 );
 
-        // Customize submit button wrapper.
-        add_filter( 'gform_submit_button', array( $this, 'submit_button' ), 10, 2 );
+		// Customize submit button wrapper.
+		add_filter( 'gform_submit_button', array( $this, 'submit_button' ), 10, 2 );
 
-        // Disable default Gravity Forms CSS.
-        add_filter( 'gform_disable_form_theme_css', '__return_true' );
-    }
+		// Disable default Gravity Forms CSS.
+		add_filter( 'gform_disable_form_theme_css', '__return_true' );
+	}
 
-    /**
-     * Check if Gravity Forms is active.
-     *
-     * @return bool
-     */
-    private function has_gf() {
-        return class_exists( 'GFForms' ) || defined( 'GFORMS_VERSION' );
-    }
+	/**
+	 * Check if Gravity Forms is active.
+	 *
+	 * @return bool
+	 */
+	private function has_gf() {
+		return class_exists( 'GFForms' ) || defined( 'GFORMS_VERSION' );
+	}
 
-    /**
-     * Add custom CSS class to form wrapper.
-     *
-     * @param string $form_tag Form HTML tag.
-     * @param array  $form     Form object.
-     * @return string
-     */
-    public function form_class( $form_tag, $form ) {
-        if ( ! $this->has_gf() ) {
-            return $form_tag;
-        }
+	/**
+	 * Add custom CSS class to form wrapper.
+	 *
+	 * @param string $form_tag Form HTML tag.
+	 * @param array  $form     Form object.
+	 * @return string
+	 */
+	public function form_class( $form_tag, $form ) {
+		if ( ! $this->has_gf() ) {
+			return $form_tag;
+		}
 
-        $class = 'opulentia-gf-form';
-        $form_tag = preg_replace(
-            '/class=["\']([^"\']*)["\']/',
-            'class="$1 ' . $class . '"',
-            $form_tag
-        );
+		$class    = 'opulentia-gf-form';
+		$form_tag = preg_replace(
+			'/class=["\']([^"\']*)["\']/',
+			'class="$1 ' . $class . '"',
+			$form_tag
+		);
 
-        return $form_tag;
-    }
+		return $form_tag;
+	}
 
-    /**
-     * Customize the submit button markup.
-     *
-     * @param string $button Submit button HTML.
-     * @param array  $form   Form object.
-     * @return string
-     */
-    public function submit_button( $button, $form ) {
-        if ( ! $this->has_gf() ) {
-            return $button;
-        }
+	/**
+	 * Customize the submit button markup.
+	 *
+	 * @param string $button Submit button HTML.
+	 * @param array  $form   Form object.
+	 * @return string
+	 */
+	public function submit_button( $button, $form ) {
+		if ( ! $this->has_gf() ) {
+			return $button;
+		}
 
-        // Wrap in a div for spacing and styling control.
-        $button = '<div class="opulentia-gf-actions">' . $button . '</div>';
+		// Wrap in a div for spacing and styling control.
+		$button = '<div class="opulentia-gf-actions">' . $button . '</div>';
 
-        return $button;
-    }
+		return $button;
+	}
 
-    /**
-     * Output Gravity Forms inline CSS matching theme design tokens.
-     */
-    public function inline_css() {
-        if ( ! $this->has_gf() ) {
-            return;
-        }
+	/**
+	 * Output Gravity Forms inline CSS matching theme design tokens.
+	 */
+	public function inline_css() {
+		if ( ! $this->has_gf() ) {
+			return;
+		}
 
-        $css = '
+		$css = '
             /* ── Form Container ── */
             .opulentia-gf-form .gform_wrapper {
                 max-width: 720px;
@@ -348,6 +348,6 @@ class Opulentia_Gravity_Forms {
             }
         ';
 
-        wp_add_inline_style( 'opulentia-style', $css );
-    }
+		wp_add_inline_style( 'opulentia-style', $css );
+	}
 }

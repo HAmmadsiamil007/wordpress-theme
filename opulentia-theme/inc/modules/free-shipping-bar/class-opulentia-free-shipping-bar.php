@@ -116,7 +116,7 @@ class Opulentia_Free_Shipping_Bar {
 				'label'       => esc_html__( 'Fallback free shipping amount', 'opulentia' ),
 				'section'     => 'opulentia_free_shipping',
 				'type'        => 'number',
-				'input_attrs'  => array(
+				'input_attrs' => array(
 					'min'  => 0,
 					'step' => 1,
 				),

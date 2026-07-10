@@ -1,233 +1,276 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) {
-    exit;
+	exit;
 }
 
 class Opulentia_Faq_Cpt {
 
-    private static $instance = null;
+	private static $instance = null;
 
-    public static function get_instance() {
-        if ( is_null( self::$instance ) ) {
-            self::$instance = new self();
-        }
-        return self::$instance;
-    }
+	public static function get_instance() {
+		if ( is_null( self::$instance ) ) {
+			self::$instance = new self();
+		}
+		return self::$instance;
+	}
 
-    private function __construct() {
-        add_action( 'init', array( $this, 'register_post_type' ) );
-        add_action( 'init', array( $this, 'register_taxonomy' ) );
-        add_action( 'customize_register', array( $this, 'register_customizer' ), 30 );
-        add_action( 'wp_enqueue_scripts', array( $this, 'inline_css' ), 120 );
-        add_shortcode( 'op_faq', array( $this, 'shortcode_faq' ) );
-    }
+	private function __construct() {
+		add_action( 'init', array( $this, 'register_post_type' ) );
+		add_action( 'init', array( $this, 'register_taxonomy' ) );
+		add_action( 'customize_register', array( $this, 'register_customizer' ), 30 );
+		add_action( 'wp_enqueue_scripts', array( $this, 'inline_css' ), 120 );
+		add_shortcode( 'op_faq', array( $this, 'shortcode_faq' ) );
+	}
 
-    public function register_post_type() {
-        $labels = array(
-            'name'               => __( 'FAQs', 'opulentia' ),
-            'singular_name'      => __( 'FAQ', 'opulentia' ),
-            'add_new'            => __( 'Add New', 'opulentia' ),
-            'add_new_item'       => __( 'Add New FAQ', 'opulentia' ),
-            'edit_item'          => __( 'Edit FAQ', 'opulentia' ),
-            'new_item'           => __( 'New FAQ', 'opulentia' ),
-            'view_item'          => __( 'View FAQ', 'opulentia' ),
-            'search_items'       => __( 'Search FAQs', 'opulentia' ),
-            'not_found'          => __( 'No FAQs found', 'opulentia' ),
-            'not_found_in_trash' => __( 'No FAQs found in trash', 'opulentia' ),
-            'all_items'          => __( 'All FAQs', 'opulentia' ),
-            'menu_name'          => __( 'FAQs', 'opulentia' ),
-        );
+	public function register_post_type() {
+		$labels = array(
+			'name'               => __( 'FAQs', 'opulentia' ),
+			'singular_name'      => __( 'FAQ', 'opulentia' ),
+			'add_new'            => __( 'Add New', 'opulentia' ),
+			'add_new_item'       => __( 'Add New FAQ', 'opulentia' ),
+			'edit_item'          => __( 'Edit FAQ', 'opulentia' ),
+			'new_item'           => __( 'New FAQ', 'opulentia' ),
+			'view_item'          => __( 'View FAQ', 'opulentia' ),
+			'search_items'       => __( 'Search FAQs', 'opulentia' ),
+			'not_found'          => __( 'No FAQs found', 'opulentia' ),
+			'not_found_in_trash' => __( 'No FAQs found in trash', 'opulentia' ),
+			'all_items'          => __( 'All FAQs', 'opulentia' ),
+			'menu_name'          => __( 'FAQs', 'opulentia' ),
+		);
 
-        register_post_type( 'faq', array(
-            'labels'       => $labels,
-            'public'       => true,
-            'has_archive'  => true,
-            'rewrite'      => array( 'slug' => 'faq' ),
-            'supports'     => array( 'title', 'editor' ),
-            'menu_icon'    => 'dashicons-editor-help',
-            'show_in_rest' => true,
-        ) );
-    }
+		register_post_type(
+			'faq',
+			array(
+				'labels'       => $labels,
+				'public'       => true,
+				'has_archive'  => true,
+				'rewrite'      => array( 'slug' => 'faq' ),
+				'supports'     => array( 'title', 'editor' ),
+				'menu_icon'    => 'dashicons-editor-help',
+				'show_in_rest' => true,
+			)
+		);
+	}
 
-    public function register_taxonomy() {
-        register_taxonomy( 'faq_category', 'faq', array(
-            'hierarchical' => true,
-            'labels'       => array(
-                'name'              => __( 'FAQ Categories', 'opulentia' ),
-                'singular_name'     => __( 'FAQ Category', 'opulentia' ),
-                'search_items'      => __( 'Search Categories', 'opulentia' ),
-                'all_items'         => __( 'All Categories', 'opulentia' ),
-                'parent_item'       => __( 'Parent Category', 'opulentia' ),
-                'parent_item_colon' => __( 'Parent Category:', 'opulentia' ),
-                'edit_item'         => __( 'Edit Category', 'opulentia' ),
-                'update_item'       => __( 'Update Category', 'opulentia' ),
-                'add_new_item'      => __( 'Add New Category', 'opulentia' ),
-                'new_item_name'     => __( 'New Category Name', 'opulentia' ),
-                'menu_name'         => __( 'Categories', 'opulentia' ),
-            ),
-            'rewrite'      => array( 'slug' => 'faq/category' ),
-            'show_in_rest' => true,
-        ) );
-    }
+	public function register_taxonomy() {
+		register_taxonomy(
+			'faq_category',
+			'faq',
+			array(
+				'hierarchical' => true,
+				'labels'       => array(
+					'name'              => __( 'FAQ Categories', 'opulentia' ),
+					'singular_name'     => __( 'FAQ Category', 'opulentia' ),
+					'search_items'      => __( 'Search Categories', 'opulentia' ),
+					'all_items'         => __( 'All Categories', 'opulentia' ),
+					'parent_item'       => __( 'Parent Category', 'opulentia' ),
+					'parent_item_colon' => __( 'Parent Category:', 'opulentia' ),
+					'edit_item'         => __( 'Edit Category', 'opulentia' ),
+					'update_item'       => __( 'Update Category', 'opulentia' ),
+					'add_new_item'      => __( 'Add New Category', 'opulentia' ),
+					'new_item_name'     => __( 'New Category Name', 'opulentia' ),
+					'menu_name'         => __( 'Categories', 'opulentia' ),
+				),
+				'rewrite'      => array( 'slug' => 'faq/category' ),
+				'show_in_rest' => true,
+			)
+		);
+	}
 
-    public function register_customizer( $wp_customize ) {
-        $wp_customize->add_section( 'opulentia_faq', array(
-            'title'    => __( 'FAQ', 'opulentia' ),
-            'panel'    => 'Opulentia_global_settings',
-            'priority' => 135,
-        ) );
+	public function register_customizer( $wp_customize ) {
+		$wp_customize->add_section(
+			'opulentia_faq',
+			array(
+				'title'    => __( 'FAQ', 'opulentia' ),
+				'panel'    => 'Opulentia_global_settings',
+				'priority' => 135,
+			)
+		);
 
-        $wp_customize->add_setting( 'faq-style', array(
-            'default'           => 'accordion',
-            'sanitize_callback' => 'sanitize_text_field',
-            'transport'         => 'refresh',
-        ) );
-        $wp_customize->add_control( 'faq-style', array(
-            'label'   => __( 'FAQ Style', 'opulentia' ),
-            'section' => 'opulentia_faq',
-            'type'    => 'select',
-            'choices' => array(
-                'accordion' => __( 'Accordion', 'opulentia' ),
-                'toggle'    => __( 'Toggle', 'opulentia' ),
-                'grouped'   => __( 'Grouped by Category', 'opulentia' ),
-            ),
-        ) );
+		$wp_customize->add_setting(
+			'faq-style',
+			array(
+				'default'           => 'accordion',
+				'sanitize_callback' => 'sanitize_text_field',
+				'transport'         => 'refresh',
+			)
+		);
+		$wp_customize->add_control(
+			'faq-style',
+			array(
+				'label'   => __( 'FAQ Style', 'opulentia' ),
+				'section' => 'opulentia_faq',
+				'type'    => 'select',
+				'choices' => array(
+					'accordion' => __( 'Accordion', 'opulentia' ),
+					'toggle'    => __( 'Toggle', 'opulentia' ),
+					'grouped'   => __( 'Grouped by Category', 'opulentia' ),
+				),
+			)
+		);
 
-        $wp_customize->add_setting( 'faq-show-search', array(
-            'default'           => false,
-            'sanitize_callback' => 'wp_validate_boolean',
-            'transport'         => 'refresh',
-        ) );
-        $wp_customize->add_control( 'faq-show-search', array(
-            'label'   => __( 'Show Search Input', 'opulentia' ),
-            'section' => 'opulentia_faq',
-            'type'    => 'checkbox',
-        ) );
+		$wp_customize->add_setting(
+			'faq-show-search',
+			array(
+				'default'           => false,
+				'sanitize_callback' => 'wp_validate_boolean',
+				'transport'         => 'refresh',
+			)
+		);
+		$wp_customize->add_control(
+			'faq-show-search',
+			array(
+				'label'   => __( 'Show Search Input', 'opulentia' ),
+				'section' => 'opulentia_faq',
+				'type'    => 'checkbox',
+			)
+		);
 
-        $wp_customize->add_setting( 'faq-open-first', array(
-            'default'           => false,
-            'sanitize_callback' => 'wp_validate_boolean',
-            'transport'         => 'refresh',
-        ) );
-        $wp_customize->add_control( 'faq-open-first', array(
-            'label'   => __( 'Auto-open First Item', 'opulentia' ),
-            'section' => 'opulentia_faq',
-            'type'    => 'checkbox',
-        ) );
+		$wp_customize->add_setting(
+			'faq-open-first',
+			array(
+				'default'           => false,
+				'sanitize_callback' => 'wp_validate_boolean',
+				'transport'         => 'refresh',
+			)
+		);
+		$wp_customize->add_control(
+			'faq-open-first',
+			array(
+				'label'   => __( 'Auto-open First Item', 'opulentia' ),
+				'section' => 'opulentia_faq',
+				'type'    => 'checkbox',
+			)
+		);
 
-        $wp_customize->add_setting( 'faq-schema-markup', array(
-            'default'           => true,
-            'sanitize_callback' => 'wp_validate_boolean',
-            'transport'         => 'refresh',
-        ) );
-        $wp_customize->add_control( 'faq-schema-markup', array(
-            'label'   => __( 'Output Schema.org Markup', 'opulentia' ),
-            'section' => 'opulentia_faq',
-            'type'    => 'checkbox',
-        ) );
-    }
+		$wp_customize->add_setting(
+			'faq-schema-markup',
+			array(
+				'default'           => true,
+				'sanitize_callback' => 'wp_validate_boolean',
+				'transport'         => 'refresh',
+			)
+		);
+		$wp_customize->add_control(
+			'faq-schema-markup',
+			array(
+				'label'   => __( 'Output Schema.org Markup', 'opulentia' ),
+				'section' => 'opulentia_faq',
+				'type'    => 'checkbox',
+			)
+		);
+	}
 
-    public function shortcode_faq( $atts ) {
-        $atts = shortcode_atts( array(
-            'category'   => '',
-            'style'      => Opulentia_get_option( 'faq-style', 'accordion' ),
-            'show_search' => Opulentia_get_option( 'faq-show-search', false ),
-        ), $atts );
+	public function shortcode_faq( $atts ) {
+		$atts = shortcode_atts(
+			array(
+				'category'    => '',
+				'style'       => Opulentia_get_option( 'faq-style', 'accordion' ),
+				'show_search' => Opulentia_get_option( 'faq-show-search', false ),
+			),
+			$atts
+		);
 
-        $args = array(
-            'post_type'      => 'faq',
-            'posts_per_page'  => -1,
-            'orderby'        => 'menu_order',
-            'order'          => 'ASC',
-        );
+		$args = array(
+			'post_type'      => 'faq',
+			'posts_per_page' => -1,
+			'orderby'        => 'menu_order',
+			'order'          => 'ASC',
+		);
 
-        if ( ! empty( $atts['category'] ) ) {
-            $args['tax_query'] = array(
-                array(
-                    'taxonomy' => 'faq_category',
-                    'field'    => 'slug',
-                    'terms'    => sanitize_text_field( $atts['category'] ),
-                ),
-            );
-        }
+		if ( ! empty( $atts['category'] ) ) {
+			$args['tax_query'] = array(
+				array(
+					'taxonomy' => 'faq_category',
+					'field'    => 'slug',
+					'terms'    => sanitize_text_field( $atts['category'] ),
+				),
+			);
+		}
 
-        $query = new WP_Query( $args );
-        if ( ! $query->have_posts() ) {
-            return '<p>' . __( 'No FAQs found.', 'opulentia' ) . '</p>';
-        }
+		$query = new WP_Query( $args );
+		if ( ! $query->have_posts() ) {
+			return '<p>' . __( 'No FAQs found.', 'opulentia' ) . '</p>';
+		}
 
-        $style       = sanitize_text_field( $atts['style'] );
-        $show_search = filter_var( $atts['show_search'], FILTER_VALIDATE_BOOLEAN );
-        $open_first  = Opulentia_get_option( 'faq-open-first', false );
-        $use_schema  = Opulentia_get_option( 'faq-schema-markup', true );
+		$style       = sanitize_text_field( $atts['style'] );
+		$show_search = filter_var( $atts['show_search'], FILTER_VALIDATE_BOOLEAN );
+		$open_first  = Opulentia_get_option( 'faq-open-first', false );
+		$use_schema  = Opulentia_get_option( 'faq-schema-markup', true );
 
-        $faq_id = 'op-faq-' . uniqid();
-        $output = '<div class="op-faq-wrapper op-faq-style--' . esc_attr( $style ) . '" id="' . esc_attr( $faq_id ) . '">';
+		$faq_id = 'op-faq-' . uniqid();
+		$output = '<div class="op-faq-wrapper op-faq-style--' . esc_attr( $style ) . '" id="' . esc_attr( $faq_id ) . '">';
 
-        if ( $show_search ) {
-            $output .= '<div class="op-faq-search">';
-            $output .= '<input type="text" class="op-faq-search-input" placeholder="' . esc_attr__( 'Search FAQs...', 'opulentia' ) . '" data-faq="' . esc_attr( $faq_id ) . '">';
-            $output .= '</div>';
-        }
+		if ( $show_search ) {
+			$output .= '<div class="op-faq-search">';
+			$output .= '<input type="text" class="op-faq-search-input" placeholder="' . esc_attr__( 'Search FAQs...', 'opulentia' ) . '" data-faq="' . esc_attr( $faq_id ) . '">';
+			$output .= '</div>';
+		}
 
-        $schema_items = array();
+		$schema_items = array();
 
-        if ( 'grouped' === $style ) {
-            $categories = get_terms( array(
-                'taxonomy' => 'faq_category',
-                'hide_empty' => true,
-            ) );
+		if ( 'grouped' === $style ) {
+			$categories = get_terms(
+				array(
+					'taxonomy'   => 'faq_category',
+					'hide_empty' => true,
+				)
+			);
 
-            if ( ! empty( $atts['category'] ) ) {
-                $terms = get_terms( array(
-                    'taxonomy' => 'faq_category',
-                    'slug'     => sanitize_text_field( $atts['category'] ),
-                    'hide_empty' => true,
-                ) );
-                if ( ! empty( $terms ) ) {
-                    $categories = $terms;
-                }
-            }
+			if ( ! empty( $atts['category'] ) ) {
+				$terms = get_terms(
+					array(
+						'taxonomy'   => 'faq_category',
+						'slug'       => sanitize_text_field( $atts['category'] ),
+						'hide_empty' => true,
+					)
+				);
+				if ( ! empty( $terms ) ) {
+					$categories = $terms;
+				}
+			}
 
-            if ( ! empty( $categories ) ) {
-                foreach ( $categories as $term ) {
-                    $term_args = $args;
-                    $term_args['tax_query'] = array(
-                        array(
-                            'taxonomy' => 'faq_category',
-                            'field'    => 'term_id',
-                            'terms'    => $term->term_id,
-                        ),
-                    );
-                    $term_query = new WP_Query( $term_args );
+			if ( ! empty( $categories ) ) {
+				foreach ( $categories as $term ) {
+					$term_args              = $args;
+					$term_args['tax_query'] = array(
+						array(
+							'taxonomy' => 'faq_category',
+							'field'    => 'term_id',
+							'terms'    => $term->term_id,
+						),
+					);
+					$term_query             = new WP_Query( $term_args );
 
-                    if ( $term_query->have_posts() ) {
-                        $output .= '<div class="op-faq-group">';
-                        $output .= '<h3 class="op-faq-group-title">' . esc_html( $term->name ) . '</h3>';
-                        $output .= $this->render_faq_items( $term_query, $style, $open_first, $schema_items );
-                        $output .= '</div>';
-                    }
-                    wp_reset_postdata();
-                }
-            } else {
-                $output .= $this->render_faq_items( $query, $style, $open_first, $schema_items );
-            }
-        } else {
-            $output .= $this->render_faq_items( $query, $style, $open_first, $schema_items );
-        }
+					if ( $term_query->have_posts() ) {
+						$output .= '<div class="op-faq-group">';
+						$output .= '<h3 class="op-faq-group-title">' . esc_html( $term->name ) . '</h3>';
+						$output .= $this->render_faq_items( $term_query, $style, $open_first, $schema_items );
+						$output .= '</div>';
+					}
+					wp_reset_postdata();
+				}
+			} else {
+				$output .= $this->render_faq_items( $query, $style, $open_first, $schema_items );
+			}
+		} else {
+			$output .= $this->render_faq_items( $query, $style, $open_first, $schema_items );
+		}
 
-        if ( $use_schema && ! empty( $schema_items ) ) {
-            $output .= '<script type="application/ld+json">';
-            $output .= json_encode( array(
-                '@context'   => 'https://schema.org',
-                '@type'      => 'FAQPage',
-                'mainEntity' => $schema_items,
-            ) );
-            $output .= '</script>';
-        }
+		if ( $use_schema && ! empty( $schema_items ) ) {
+			$output .= '<script type="application/ld+json">';
+			$output .= json_encode(
+				array(
+					'@context'   => 'https://schema.org',
+					'@type'      => 'FAQPage',
+					'mainEntity' => $schema_items,
+				)
+			);
+			$output .= '</script>';
+		}
 
-        if ( $show_search ) {
-            $output .= '<script>
+		if ( $show_search ) {
+			$output .= '<script>
             (function(){
                 var inputs = document.querySelectorAll(".op-faq-search-input");
                 inputs.forEach(function(input){
@@ -246,65 +289,65 @@ class Opulentia_Faq_Cpt {
                 });
             })();
             </script>';
-        }
+		}
 
-        $output .= '</div>';
+		$output .= '</div>';
 
-        wp_reset_postdata();
+		wp_reset_postdata();
 
-        return $output;
-    }
+		return $output;
+	}
 
-    private function render_faq_items( $query, $style, $open_first, &$schema_items ) {
-        $output = '';
-        $index = 0;
+	private function render_faq_items( $query, $style, $open_first, &$schema_items ) {
+		$output = '';
+		$index  = 0;
 
-        while ( $query->have_posts() ) {
-            $query->the_post();
-            $id       = get_the_ID();
-            $question = get_the_title();
-            $answer   = apply_filters( 'the_content', get_the_content() );
+		while ( $query->have_posts() ) {
+			$query->the_post();
+			$id       = get_the_ID();
+			$question = get_the_title();
+			$answer   = apply_filters( 'the_content', get_the_content() );
 
-            $is_first = ( 0 === $index && $open_first );
-            $expanded = $is_first ? 'open' : '';
+			$is_first = ( 0 === $index && $open_first );
+			$expanded = $is_first ? 'open' : '';
 
-            if ( 'accordion' === $style || 'toggle' === $style ) {
-                $name_attr = 'accordion' === $style ? ' name="op-faq-group-' . esc_attr( $id ) . '"' : '';
-                $output .= '<details class="op-faq-item op-faq-item--' . esc_attr( $style ) . '"' . $name_attr . ' ' . $expanded . '>';
-                $output .= '<summary class="op-faq-question">' . esc_html( $question ) . '</summary>';
-                $output .= '<div class="op-faq-answer">' . $answer . '</div>';
-                $output .= '</details>';
-            } elseif ( 'grouped' === $style ) {
-                $output .= '<div class="op-faq-item">';
-                $output .= '<div class="op-faq-question">' . esc_html( $question ) . '</div>';
-                $output .= '<div class="op-faq-answer">' . $answer . '</div>';
-                $output .= '</div>';
-            }
+			if ( 'accordion' === $style || 'toggle' === $style ) {
+				$name_attr = 'accordion' === $style ? ' name="op-faq-group-' . esc_attr( $id ) . '"' : '';
+				$output   .= '<details class="op-faq-item op-faq-item--' . esc_attr( $style ) . '"' . $name_attr . ' ' . $expanded . '>';
+				$output   .= '<summary class="op-faq-question">' . esc_html( $question ) . '</summary>';
+				$output   .= '<div class="op-faq-answer">' . $answer . '</div>';
+				$output   .= '</details>';
+			} elseif ( 'grouped' === $style ) {
+				$output .= '<div class="op-faq-item">';
+				$output .= '<div class="op-faq-question">' . esc_html( $question ) . '</div>';
+				$output .= '<div class="op-faq-answer">' . $answer . '</div>';
+				$output .= '</div>';
+			}
 
-            $schema_items[] = array(
-                '@type'          => 'Question',
-                'name'           => $question,
-                'acceptedAnswer' => array(
-                    '@type' => 'Answer',
-                    'text'  => wp_strip_all_tags( get_the_content() ),
-                ),
-            );
+			$schema_items[] = array(
+				'@type'          => 'Question',
+				'name'           => $question,
+				'acceptedAnswer' => array(
+					'@type' => 'Answer',
+					'text'  => wp_strip_all_tags( get_the_content() ),
+				),
+			);
 
-            $index++;
-        }
+			++$index;
+		}
 
-        return $output;
-    }
+		return $output;
+	}
 
-    public function inline_css() {
-        global $post;
-        if ( ! is_singular( 'faq' ) && ! is_post_type_archive( 'faq' ) ) {
-            if ( ! is_a( $post, 'WP_Post' ) || ! has_shortcode( $post->post_content, 'op_faq' ) ) {
-                return;
-            }
-        }
+	public function inline_css() {
+		global $post;
+		if ( ! is_singular( 'faq' ) && ! is_post_type_archive( 'faq' ) ) {
+			if ( ! is_a( $post, 'WP_Post' ) || ! has_shortcode( $post->post_content, 'op_faq' ) ) {
+				return;
+			}
+		}
 
-        $css = '
+		$css = '
         .op-faq--accordion .op-faq-item,
         .op-faq--toggle .op-faq-item {
             border: 1px solid var(--color-border);
@@ -400,8 +443,8 @@ class Opulentia_Faq_Cpt {
         }
         ';
 
-        wp_add_inline_style( 'opulentia-style', $css );
-    }
+		wp_add_inline_style( 'opulentia-style', $css );
+	}
 }
 
 add_action( 'init', array( 'Opulentia_Faq_Cpt', 'get_instance' ) );

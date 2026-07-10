@@ -10,7 +10,7 @@
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
-    exit;
+	exit;
 }
 ?>
 
@@ -18,19 +18,19 @@ if ( ! defined( 'ABSPATH' ) ) {
 // Render the footer using the Footer Builder (handles all rows and sections).
 // Wrapped in a filter so plugins (e.g. Divi Theme Builder) can suppress it.
 if ( apply_filters( 'opulentia_footer_enabled', true ) ) {
-    do_action( 'Opulentia_footer_before' );
-    do_action( 'Opulentia_colophon_before' );
-    Opulentia_Footer_Builder::render();
-    do_action( 'Opulentia_colophon_after' );
-    do_action( 'Opulentia_footer_after' );
+	do_action( 'Opulentia_footer_before' );
+	do_action( 'Opulentia_colophon_before' );
+	Opulentia_Footer_Builder::render();
+	do_action( 'Opulentia_colophon_after' );
+	do_action( 'Opulentia_footer_after' );
 }
 ?>
 
 <!-- Back to Top -->
 <button class="back-to-top" aria-label="<?php esc_attr_e( 'Back to top', 'opulentia' ); ?>">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M18 15l-6-6-6 6"/>
-    </svg>
+	<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+		<path d="M18 15l-6-6-6 6"/>
+	</svg>
 </button>
 
 </div><!-- #primary -->

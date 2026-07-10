@@ -16,7 +16,7 @@
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
-    exit;
+	exit;
 }
 
 /**
@@ -24,69 +24,69 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Opulentia_Accessibility {
 
-    /**
-     * Singleton instance.
-     *
-     * @var self|null
-     */
-    private static $instance = null;
+	/**
+	 * Singleton instance.
+	 *
+	 * @var self|null
+	 */
+	private static $instance = null;
 
-    /**
-     * Returns the singleton instance.
-     *
-     * @return self
-     */
-    public static function get_instance() {
-        if ( is_null( self::$instance ) ) {
-            self::$instance = new self();
-        }
-        return self::$instance;
-    }
+	/**
+	 * Returns the singleton instance.
+	 *
+	 * @return self
+	 */
+	public static function get_instance() {
+		if ( is_null( self::$instance ) ) {
+			self::$instance = new self();
+		}
+		return self::$instance;
+	}
 
-    /**
-     * Constructor — registers hooks.
-     */
-    private function __construct() {
-        add_action( 'wp_enqueue_scripts', array( $this, 'inline_css' ), 100 );
-        add_filter( 'body_class', array( $this, 'body_class' ) );
-        add_action( 'wp_footer', array( $this, 'focus_trap_script' ), 100 );
-    }
+	/**
+	 * Constructor — registers hooks.
+	 */
+	private function __construct() {
+		add_action( 'wp_enqueue_scripts', array( $this, 'inline_css' ), 100 );
+		add_filter( 'body_class', array( $this, 'body_class' ) );
+		add_action( 'wp_footer', array( $this, 'focus_trap_script' ), 100 );
+	}
 
-    /**
-     * Check if accessibility features are enabled.
-     *
-     * @return bool
-     */
-    private function is_enabled() {
-        return (bool) Opulentia_get_option( 'enable-accessibility', true );
-    }
+	/**
+	 * Check if accessibility features are enabled.
+	 *
+	 * @return bool
+	 */
+	private function is_enabled() {
+		return (bool) Opulentia_get_option( 'enable-accessibility', true );
+	}
 
-    /**
-     * Output inline CSS for accessibility.
-     */
-    public function inline_css() {
-        if ( ! $this->is_enabled() ) {
-            return;
-        }
+	/**
+	 * Output inline CSS for accessibility.
+	 */
+	public function inline_css() {
+		if ( ! $this->is_enabled() ) {
+			return;
+		}
 
-        $outline_style = Opulentia_get_option( 'accessibility-outline-style', 'solid' );
-        $outline_color = Opulentia_get_option( 'accessibility-outline-color', '#c9a96e' );
-        $input_style   = Opulentia_get_option( 'accessibility-input-style', 'solid' );
-        $input_color   = Opulentia_get_option( 'accessibility-input-color', '#c9a96e' );
+		$outline_style = Opulentia_get_option( 'accessibility-outline-style', 'solid' );
+		$outline_color = Opulentia_get_option( 'accessibility-outline-color', '#c9a96e' );
+		$input_style   = Opulentia_get_option( 'accessibility-input-style', 'solid' );
+		$input_color   = Opulentia_get_option( 'accessibility-input-color', '#c9a96e' );
 
-        $css = '';
+		$css = '';
 
-        // Focus outline styles.
-        $css .= '
+		// Focus outline styles.
+		$css .= '
         :focus-visible {
             outline: 2px ' . $outline_style . ' ' . $outline_color . ';
             outline-offset: 2px;
         }
         ';
 
-        // Input focus styles.
-        if ( 'disabled' !== $input_style ) {
-            $css .= '
+		// Input focus styles.
+		if ( 'disabled' !== $input_style ) {
+			$css .= '
             input:focus,
             textarea:focus,
             select:focus {
@@ -94,10 +94,10 @@ class Opulentia_Accessibility {
                 outline-offset: -1px;
             }
             ';
-        }
+		}
 
-        // Screen reader text.
-        $css .= '
+		// Screen reader text.
+		$css .= '
         .screen-reader-text,
         .sr-only {
             border: 0;
@@ -113,8 +113,8 @@ class Opulentia_Accessibility {
         }
         ';
 
-        // Skip link.
-        $css .= '
+		// Skip link.
+		$css .= '
         .skip-link {
             position: absolute;
             top: -100%;
@@ -133,8 +133,8 @@ class Opulentia_Accessibility {
         }
         ';
 
-        // Reduced motion.
-        $css .= '
+		// Reduced motion.
+		$css .= '
         @media (prefers-reduced-motion: reduce) {
             *,
             *::before,
@@ -147,56 +147,56 @@ class Opulentia_Accessibility {
         }
         ';
 
-        wp_add_inline_style( 'opulentia-style', $css );
-    }
+		wp_add_inline_style( 'opulentia-style', $css );
+	}
 
-    /**
-     * Add accessibility body classes.
-     *
-     * @param array $classes Body classes.
-     * @return array
-     */
-    public function body_class( $classes ) {
-        if ( $this->is_enabled() ) {
-            $classes[] = 'opulentia-a11y-enabled';
-        }
-        return $classes;
-    }
+	/**
+	 * Add accessibility body classes.
+	 *
+	 * @param array $classes Body classes.
+	 * @return array
+	 */
+	public function body_class( $classes ) {
+		if ( $this->is_enabled() ) {
+			$classes[] = 'opulentia-a11y-enabled';
+		}
+		return $classes;
+	}
 
-    /**
-     * Output focus trap script for modals/off-canvas.
-     */
-    public function focus_trap_script() {
-        if ( ! $this->is_enabled() ) {
-            return;
-        }
-        ?>
-        <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Focus trap for off-canvas panel.
-            var panel = document.getElementById('off-canvas-panel');
-            var toggle = document.querySelector('.mobile-menu-toggle');
-            if (panel && toggle) {
-                var focusableSelector = 'a[href], button:not([disabled]), textarea, input, select';
-                toggle.addEventListener('click', function() {
-                    if (panel.classList.contains('is-open')) {
-                        var firstFocusable = panel.querySelector(focusableSelector);
-                        if (firstFocusable) firstFocusable.focus();
-                    }
-                });
-            }
-        });
-        </script>
-        <?php
-    }
+	/**
+	 * Output focus trap script for modals/off-canvas.
+	 */
+	public function focus_trap_script() {
+		if ( ! $this->is_enabled() ) {
+			return;
+		}
+		?>
+		<script>
+		document.addEventListener('DOMContentLoaded', function() {
+			// Focus trap for off-canvas panel.
+			var panel = document.getElementById('off-canvas-panel');
+			var toggle = document.querySelector('.mobile-menu-toggle');
+			if (panel && toggle) {
+				var focusableSelector = 'a[href], button:not([disabled]), textarea, input, select';
+				toggle.addEventListener('click', function() {
+					if (panel.classList.contains('is-open')) {
+						var firstFocusable = panel.querySelector(focusableSelector);
+						if (firstFocusable) firstFocusable.focus();
+					}
+				});
+			}
+		});
+		</script>
+		<?php
+	}
 
-    /**
-     * Get aria-current attribute for navigation.
-     *
-     * @param string $item_type The type of current item.
-     * @return string
-     */
-    public static function aria_current( $item_type = 'page' ) {
-        return 'aria-current="' . esc_attr( $item_type ) . '"';
-    }
+	/**
+	 * Get aria-current attribute for navigation.
+	 *
+	 * @param string $item_type The type of current item.
+	 * @return string
+	 */
+	public static function aria_current( $item_type = 'page' ) {
+		return 'aria-current="' . esc_attr( $item_type ) . '"';
+	}
 }

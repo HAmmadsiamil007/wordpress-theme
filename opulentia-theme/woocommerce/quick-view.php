@@ -9,40 +9,40 @@
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
-    exit;
+	exit;
 }
 
 global $product;
 
 if ( ! is_a( $product, 'WC_Product' ) ) {
-    return;
+	return;
 }
 ?>
 
 <div class="quick-view__gallery">
-    <?php
-    /**
-     * Hook: woocommerce_before_single_product_summary.
-     *
-     * @hooked woocommerce_show_product_images - 20
-     */
-    do_action( 'woocommerce_before_single_product_summary' );
-    ?>
+	<?php
+	/**
+	 * Hook: woocommerce_before_single_product_summary.
+	 *
+	 * @hooked woocommerce_show_product_images - 20
+	 */
+	do_action( 'woocommerce_before_single_product_summary' );
+	?>
 </div>
 
 <div class="quick-view__summary entry-summary">
-    <?php
-    /**
-     * Hook: woocommerce_single_product_summary.
-     *
-     * @hooked woocommerce_template_single_title - 5
-     * @hooked woocommerce_template_single_rating - 10
-     * @hooked woocommerce_template_single_price - 10
-     * @hooked woocommerce_template_single_excerpt - 20
-     * @hooked woocommerce_template_single_add_to_cart - 30
-     * @hooked woocommerce_template_single_meta - 40
-     * @hooked woocommerce_template_single_sharing - 50
-     */
-    do_action( 'woocommerce_single_product_summary' );
-    ?>
+	<?php
+	/**
+	 * Hook: woocommerce_single_product_summary.
+	 *
+	 * @hooked woocommerce_template_single_title - 5
+	 * @hooked woocommerce_template_single_rating - 10
+	 * @hooked woocommerce_template_single_price - 10
+	 * @hooked woocommerce_template_single_excerpt - 20
+	 * @hooked woocommerce_template_single_add_to_cart - 30
+	 * @hooked woocommerce_template_single_meta - 40
+	 * @hooked woocommerce_template_single_sharing - 50
+	 */
+	do_action( 'woocommerce_single_product_summary' );
+	?>
 </div>

@@ -6,7 +6,7 @@
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
-    exit;
+	exit;
 }
 
 /**
@@ -14,41 +14,41 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Opulentia_LifterLMS {
 
-    /**
-     * Singleton instance.
-     *
-     * @var self|null
-     */
-    private static $instance = null;
+	/**
+	 * Singleton instance.
+	 *
+	 * @var self|null
+	 */
+	private static $instance = null;
 
-    /**
-     * Returns the singleton instance.
-     *
-     * @return self
-     */
-    public static function get_instance() {
-        if ( is_null( self::$instance ) ) {
-            self::$instance = new self();
-        }
-        return self::$instance;
-    }
+	/**
+	 * Returns the singleton instance.
+	 *
+	 * @return self
+	 */
+	public static function get_instance() {
+		if ( is_null( self::$instance ) ) {
+			self::$instance = new self();
+		}
+		return self::$instance;
+	}
 
-    /**
-     * Constructor — registers hooks.
-     */
-    private function __construct() {
-        add_action( 'wp_enqueue_scripts', array( $this, 'inline_css' ), 100 );
-    }
+	/**
+	 * Constructor — registers hooks.
+	 */
+	private function __construct() {
+		add_action( 'wp_enqueue_scripts', array( $this, 'inline_css' ), 100 );
+	}
 
-    /**
-     * Output LifterLMS specific CSS.
-     */
-    public function inline_css() {
-        if ( ! function_exists( 'llms' ) ) {
-            return;
-        }
+	/**
+	 * Output LifterLMS specific CSS.
+	 */
+	public function inline_css() {
+		if ( ! function_exists( 'llms' ) ) {
+			return;
+		}
 
-        $css = '
+		$css = '
         .llms-loop-item-content {
             background: var(--color-secondary-dark);
             border: 1px solid var(--color-border);
@@ -99,6 +99,6 @@ class Opulentia_LifterLMS {
         }
         ';
 
-        wp_add_inline_style( 'opulentia-style', $css );
-    }
+		wp_add_inline_style( 'opulentia-style', $css );
+	}
 }

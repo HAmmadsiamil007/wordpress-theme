@@ -6,7 +6,7 @@
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
-    exit;
+	exit;
 }
 
 /**
@@ -14,52 +14,52 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Opulentia_LearnDash {
 
-    /**
-     * Singleton instance.
-     *
-     * @var self|null
-     */
-    private static $instance = null;
+	/**
+	 * Singleton instance.
+	 *
+	 * @var self|null
+	 */
+	private static $instance = null;
 
-    /**
-     * Returns the singleton instance.
-     *
-     * @return self
-     */
-    public static function get_instance() {
-        if ( is_null( self::$instance ) ) {
-            self::$instance = new self();
-        }
-        return self::$instance;
-    }
+	/**
+	 * Returns the singleton instance.
+	 *
+	 * @return self
+	 */
+	public static function get_instance() {
+		if ( is_null( self::$instance ) ) {
+			self::$instance = new self();
+		}
+		return self::$instance;
+	}
 
-    /**
-     * Constructor — registers hooks.
-     */
-    private function __construct() {
-        add_action( 'after_setup_theme', array( $this, 'add_theme_support' ) );
-        add_action( 'wp_enqueue_scripts', array( $this, 'inline_css' ), 100 );
-    }
+	/**
+	 * Constructor — registers hooks.
+	 */
+	private function __construct() {
+		add_action( 'after_setup_theme', array( $this, 'add_theme_support' ) );
+		add_action( 'wp_enqueue_scripts', array( $this, 'inline_css' ), 100 );
+	}
 
-    /**
-     * Add LearnDash theme support.
-     */
-    public function add_theme_support() {
-        if ( ! defined( 'LEARNDASH_VERSION' ) ) {
-            return;
-        }
-        add_theme_support( 'learndash-theme-support' );
-    }
+	/**
+	 * Add LearnDash theme support.
+	 */
+	public function add_theme_support() {
+		if ( ! defined( 'LEARNDASH_VERSION' ) ) {
+			return;
+		}
+		add_theme_support( 'learndash-theme-support' );
+	}
 
-    /**
-     * Output LearnDash specific CSS.
-     */
-    public function inline_css() {
-        if ( ! defined( 'LEARNDASH_VERSION' ) ) {
-            return;
-        }
+	/**
+	 * Output LearnDash specific CSS.
+	 */
+	public function inline_css() {
+		if ( ! defined( 'LEARNDASH_VERSION' ) ) {
+			return;
+		}
 
-        $css = '
+		$css = '
         .ld-course-list-items .ld_course_grid .thumbnail.course .ld_course_grid_price {
             background: var(--color-gold) !important;
             color: #fff !important;
@@ -117,6 +117,6 @@ class Opulentia_LearnDash {
         }
         ';
 
-        wp_add_inline_style( 'opulentia-style', $css );
-    }
+		wp_add_inline_style( 'opulentia-style', $css );
+	}
 }

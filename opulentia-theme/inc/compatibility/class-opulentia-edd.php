@@ -14,7 +14,7 @@
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
-    exit;
+	exit;
 }
 
 /**
@@ -22,110 +22,110 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Opulentia_EDD {
 
-    /**
-     * Singleton instance.
-     *
-     * @var self|null
-     */
-    private static $instance = null;
+	/**
+	 * Singleton instance.
+	 *
+	 * @var self|null
+	 */
+	private static $instance = null;
 
-    /**
-     * Returns the singleton instance.
-     *
-     * @return self
-     */
-    public static function get_instance() {
-        if ( is_null( self::$instance ) ) {
-            self::$instance = new self();
-        }
-        return self::$instance;
-    }
+	/**
+	 * Returns the singleton instance.
+	 *
+	 * @return self
+	 */
+	public static function get_instance() {
+		if ( is_null( self::$instance ) ) {
+			self::$instance = new self();
+		}
+		return self::$instance;
+	}
 
-    /**
-     * Constructor — registers hooks.
-     */
-    private function __construct() {
-        add_action( 'wp_enqueue_scripts', array( $this, 'inline_css' ), 100 );
+	/**
+	 * Constructor — registers hooks.
+	 */
+	private function __construct() {
+		add_action( 'wp_enqueue_scripts', array( $this, 'inline_css' ), 100 );
 
-        // Customize purchase button markup.
-        add_filter( 'edd_purchase_link_defaults', array( $this, 'purchase_button_defaults' ) );
+		// Customize purchase button markup.
+		add_filter( 'edd_purchase_link_defaults', array( $this, 'purchase_button_defaults' ) );
 
-        // Wrap download image in a styled container.
-        add_filter( 'edd_downloads_list_wrapper_class', array( $this, 'downloads_list_class' ) );
+		// Wrap download image in a styled container.
+		add_filter( 'edd_downloads_list_wrapper_class', array( $this, 'downloads_list_class' ) );
 
-        // Add theme body class.
-        add_filter( 'body_class', array( $this, 'body_classes' ) );
-    }
+		// Add theme body class.
+		add_filter( 'body_class', array( $this, 'body_classes' ) );
+	}
 
-    /**
-     * Check if EDD is active.
-     *
-     * @return bool
-     */
-    private function has_edd() {
-        return class_exists( 'Easy_Digital_Downloads' ) || defined( 'EDD_VERSION' );
-    }
+	/**
+	 * Check if EDD is active.
+	 *
+	 * @return bool
+	 */
+	private function has_edd() {
+		return class_exists( 'Easy_Digital_Downloads' ) || defined( 'EDD_VERSION' );
+	}
 
-    /**
-     * Customize purchase button default classes to match theme buttons.
-     *
-     * @param array $args Purchase link default args.
-     * @return array
-     */
-    public function purchase_button_defaults( $args ) {
-        if ( ! $this->has_edd() ) {
-            return $args;
-        }
+	/**
+	 * Customize purchase button default classes to match theme buttons.
+	 *
+	 * @param array $args Purchase link default args.
+	 * @return array
+	 */
+	public function purchase_button_defaults( $args ) {
+		if ( ! $this->has_edd() ) {
+			return $args;
+		}
 
-        $args['color']   = 'opulentia-edd-btn';
-        $args['style']   = 'opulentia-edd-btn';
-        $args['class']   = 'opulentia-edd-btn edd-submit';
+		$args['color'] = 'opulentia-edd-btn';
+		$args['style'] = 'opulentia-edd-btn';
+		$args['class'] = 'opulentia-edd-btn edd-submit';
 
-        return $args;
-    }
+		return $args;
+	}
 
-    /**
-     * Add custom class to downloads list wrapper.
-     *
-     * @param string $class Wrapper class string.
-     * @return string
-     */
-    public function downloads_list_class( $class ) {
-        if ( ! $this->has_edd() ) {
-            return $class;
-        }
+	/**
+	 * Add custom class to downloads list wrapper.
+	 *
+	 * @param string $class Wrapper class string.
+	 * @return string
+	 */
+	public function downloads_list_class( $class ) {
+		if ( ! $this->has_edd() ) {
+			return $class;
+		}
 
-        $class .= ' opulentia-edd-grid';
-        return $class;
-    }
+		$class .= ' opulentia-edd-grid';
+		return $class;
+	}
 
-    /**
-     * Add EDD-specific body classes.
-     *
-     * @param array $classes Body classes.
-     * @return array
-     */
-    public function body_classes( $classes ) {
-        if ( ! $this->has_edd() ) {
-            return $classes;
-        }
+	/**
+	 * Add EDD-specific body classes.
+	 *
+	 * @param array $classes Body classes.
+	 * @return array
+	 */
+	public function body_classes( $classes ) {
+		if ( ! $this->has_edd() ) {
+			return $classes;
+		}
 
-        if ( function_exists( 'edd_is_checkout' ) && edd_is_checkout() ) {
-            $classes[] = 'opulentia-edd-checkout';
-        }
+		if ( function_exists( 'edd_is_checkout' ) && edd_is_checkout() ) {
+			$classes[] = 'opulentia-edd-checkout';
+		}
 
-        return $classes;
-    }
+		return $classes;
+	}
 
-    /**
-     * Output EDD-specific inline CSS.
-     */
-    public function inline_css() {
-        if ( ! $this->has_edd() ) {
-            return;
-        }
+	/**
+	 * Output EDD-specific inline CSS.
+	 */
+	public function inline_css() {
+		if ( ! $this->has_edd() ) {
+			return;
+		}
 
-        $css = '
+		$css = '
             /* ── Download Archive Grid ── */
             .opulentia-edd-grid {
                 display: grid;
@@ -448,6 +448,6 @@ class Opulentia_EDD {
             }
         ';
 
-        wp_add_inline_style( 'opulentia-style', $css );
-    }
+		wp_add_inline_style( 'opulentia-style', $css );
+	}
 }

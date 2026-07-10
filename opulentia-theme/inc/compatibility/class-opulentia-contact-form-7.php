@@ -13,7 +13,7 @@
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
-    exit;
+	exit;
 }
 
 /**
@@ -21,85 +21,85 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Opulentia_Contact_Form_7 {
 
-    /**
-     * Singleton instance.
-     *
-     * @var self|null
-     */
-    private static $instance = null;
+	/**
+	 * Singleton instance.
+	 *
+	 * @var self|null
+	 */
+	private static $instance = null;
 
-    /**
-     * Returns the singleton instance.
-     *
-     * @return self
-     */
-    public static function get_instance() {
-        if ( is_null( self::$instance ) ) {
-            self::$instance = new self();
-        }
-        return self::$instance;
-    }
+	/**
+	 * Returns the singleton instance.
+	 *
+	 * @return self
+	 */
+	public static function get_instance() {
+		if ( is_null( self::$instance ) ) {
+			self::$instance = new self();
+		}
+		return self::$instance;
+	}
 
-    /**
-     * Constructor — registers hooks.
-     */
-    private function __construct() {
-        add_action( 'wp_enqueue_scripts', array( $this, 'inline_css' ), 100 );
+	/**
+	 * Constructor — registers hooks.
+	 */
+	private function __construct() {
+		add_action( 'wp_enqueue_scripts', array( $this, 'inline_css' ), 100 );
 
-        // Add custom form wrapper.
-        add_filter( 'wpcf7_form_class_attr', array( $this, 'form_class_attr' ) );
+		// Add custom form wrapper.
+		add_filter( 'wpcf7_form_class_attr', array( $this, 'form_class_attr' ) );
 
-        // Customize submit button.
-        add_filter( 'wpcf7_form_elements', array( $this, 'submit_button_wrapper' ) );
-    }
+		// Customize submit button.
+		add_filter( 'wpcf7_form_elements', array( $this, 'submit_button_wrapper' ) );
+	}
 
-    /**
-     * Check if Contact Form 7 is active.
-     *
-     * @return bool
-     */
-    private function has_cf7() {
-        return defined( 'WPCF7_VERSION' ) || class_exists( 'WPCF7' );
-    }
+	/**
+	 * Check if Contact Form 7 is active.
+	 *
+	 * @return bool
+	 */
+	private function has_cf7() {
+		return defined( 'WPCF7_VERSION' ) || class_exists( 'WPCF7' );
+	}
 
-    /**
-     * Add custom CSS class to CF7 form.
-     *
-     * @param string $class Default class attribute.
-     * @return string
-     */
-    public function form_class_attr( $class ) {
-        $class .= ' opulentia-cf7-form';
-        return $class;
-    }
+	/**
+	 * Add custom CSS class to CF7 form.
+	 *
+	 * @param string $class Default class attribute.
+	 * @return string
+	 */
+	public function form_class_attr( $class ) {
+		$class .= ' opulentia-cf7-form';
+		return $class;
+	}
 
-    /**
-     * Wrap the submit button in a form-actions div for consistent spacing.
-     *
-     * @param string $html Form HTML.
-     * @return string
-     */
-    public function submit_button_wrapper( $html ) {
-        // Wrap submit inputs in a form-actions div for spacing.
-        // CF7 uses <input type="submit"> by default.
-        $html = preg_replace(
-            '/<input\s+type=["\']submit["\']([^>]*)>/i',
-            '<div class="opulentia-cf7-actions"><input type="submit"$1></div>',
-            $html
-        );
+	/**
+	 * Wrap the submit button in a form-actions div for consistent spacing.
+	 *
+	 * @param string $html Form HTML.
+	 * @return string
+	 */
+	public function submit_button_wrapper( $html ) {
+		// Wrap submit inputs in a form-actions div for spacing.
+		// CF7 uses <input type="submit"> by default.
+		$html = preg_replace(
+			'/<input\s+type=["\']submit["\']([^>]*)>/i',
+			'<div class="opulentia-cf7-actions"><input type="submit"$1></div>',
+			$html
+		);
 
-        return $html;
-    }
+		return $html;
+	}
 
-    /**
-     * Output CF7-specific inline CSS matching theme design tokens.
-     */
-    public function inline_css() {
-        if ( ! $this->has_cf7() ) {
-            return;
-        }
+	/**
+	 * Output CF7-specific inline CSS matching theme design tokens.
+	 */
+	public function inline_css() {
+		if ( ! $this->has_cf7() ) {
+			return;
+		}
 
-        $css = '
+		$css = '
             /* ── Form Container ── */
             .opulentia-cf7-form {
                 max-width: 720px;
@@ -299,6 +299,6 @@ class Opulentia_Contact_Form_7 {
             }
         ';
 
-        wp_add_inline_style( 'opulentia-style', $css );
-    }
+		wp_add_inline_style( 'opulentia-style', $css );
+	}
 }
