@@ -1,0 +1,22 @@
+{
+	"sidebar-1": {
+		"search": {
+			"title": ""
+		},
+		"recent-posts": {
+			"title": "Recent Posts",
+			"number": 5
+		},
+		"categories": {
+			"title": "Categories",
+			"count": 1,
+			"hierarchical": 0,
+			"dropdown": 0
+		},
+		"archives": {
+			"title": "Archives",
+			"count": 1,
+			"dropdown": 0
+		}
+	}
+}

@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0"
+	xmlns:excerpt="http://wordpress.org/export/1.2/excerpt/"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:wp="http://wordpress.org/export/1.2/">
+
+<channel>
+	<title>Opulentia Agency Demo</title>
+	<link>https://opulentia-demo.com/agency</link>
+	<description>Agency demo content for Opulentia theme</description>
+	<language>en-US</language>
+	<wp:wxr_version>1.2</wp:wxr_version>
+	<wp:base_site_url>https://opulentia-demo.com/agency</wp:base_site_url>
+	<wp:base_blog_url>https://opulentia-demo.com/agency</wp:base_blog_url>
+
+	<wp:author>
+		<wp:author_id>1</wp:author_id>
+		<wp:author_login>admin</wp:author_login>
+		<wp:author_email>admin@opulentia-demo.com</wp:author_email>
+		<wp:author_display_name><![CDATA[Admin]]></wp:author_display_name>
+		<wp:author_first_name><![CDATA[Opulentia]]></wp:author_first_name>
+		<wp:author_last_name><![CDATA[Admin]]></wp:author_last_name>
+	</wp:author>
+
+	<wp:term>
+		<wp:term_id>1</wp:term_id>
+		<wp:term_taxonomy>category</wp:term_taxonomy>
+		<wp:term_slug>digital</wp:term_slug>
+		<wp:term_name><![CDATA[Digital]]></wp:term_name>
+	</wp:term>
+
+	<wp:term>
+		<wp:term_id>2</wp:term_id>
+		<wp:term_taxonomy>category</wp:term_taxonomy>
+		<wp:term_slug>strategy</wp:term_slug>
+		<wp:term_name><![CDATA[Strategy]]></wp:term_name>
+	</wp:term>
+
+	<wp:term>
+		<wp:term_id>3</wp:term_id>
+		<wp:term_taxonomy>category</wp:term_taxonomy>
+		<wp:term_slug>case-studies</wp:term_slug>
+		<wp:term_name><![CDATA[Case Studies]]></wp:term_name>
+	</wp:term>
+
+	<wp:term>
+		<wp:term_id>4</wp:term_id>
+		<wp:term_taxonomy>nav_menu</wp:term_taxonomy>
+		<wp:term_slug>primary-menu</wp:term_slug>
+		<wp:term_name><![CDATA[Primary Menu]]></wp:term_name>
+	</wp:term>
+
+	<item>
+		<title>Home</title>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<content:encoded><![CDATA[<!-- wp:group {"style":{"spacing":{"padding":{"top":"80px","bottom":"80px"}}},"backgroundColor":"primary-dark"} -->
+		<div class="wp-block-group has-primary-dark-background-color has-background" style="padding-top:80px;padding-bottom:80px"><!-- wp:heading {"textAlign":"center","style":{"color":{"text":"#c9a96e"}},"fontFamily":"heading"} -->
+		<h2 class="wp-block-heading has-text-align-center has-heading-font-family" style="color:#c9a96e">Ideas That Drive Impact</h2>
+		<!-- /wp:heading -->
+
+		<!-- wp:paragraph {"align":"center","style":{"color":{"text":"#999999"}}} -->
+		<p class="has-text-align-center" style="color:#999999">We're a full-service digital agency that builds brands, crafts experiences, and drives growth for ambitious companies.</p>
+		<!-- /wp:paragraph -->
+
+		<!-- wp:buttons {"layout":{"type":"flex","justifyContent":"center"}} -->
+		<div class="wp-block-buttons"><!-- wp:button {"backgroundColor":"accent","textColor":"white"} -->
+		<div class="wp-block-button"><a class="wp-block-button__link has-white-color has-accent-background-color has-text-color has-background wp-element-button" href="#">View Our Work</a></div>
+		<!-- /wp:button --></div>
+		<!-- /wp:buttons --></div>
+		<!-- /wp:group -->
+
+		<!-- wp:columns {"style":{"spacing":{"padding":{"top":"60px","bottom":"60px"}}}} -->
+		<div class="wp-block-columns" style="padding-top:60px;padding-bottom:60px"><!-- wp:column -->
+		<div class="wp-block-column"><!-- wp:heading {"level":3,"style":{"color":{"text":"#c9a96e"}}} -->
+		<h3 class="wp-block-heading" style="color:#c9a96e">Brand Strategy</h3>
+		<!-- /wp:heading -->
+		<!-- wp:paragraph {"style":{"color":{"text":"#999999"}}} -->
+		<p style="color:#999999">Positioning, messaging, and visual identity that sets you apart.</p>
+		<!-- /wp:paragraph --></div>
+		<!-- /wp:column -->
+
+		<!-- wp:column -->
+		<div class="wp-block-column"><!-- wp:heading {"level":3,"style":{"color":{"text":"#c9a96e"}}} -->
+		<h3 class="wp-block-heading" style="color:#c9a96e">Web Design</h3>
+		<!-- /wp:heading -->
+		<!-- wp:paragraph {"style":{"color":{"text":"#999999"}}} -->
+		<p style="color:#999999">Award-winning websites and digital experiences.</p>
+		<!-- /wp:paragraph --></div>
+		<!-- /wp:column -->
+
+		<!-- wp:column -->
+		<div class="wp-block-column"><!-- wp:heading {"level":3,"style":{"color":{"text":"#c9a96e"}}} -->
+		<h3 class="wp-block-heading" style="color:#c9a96e">Growth Marketing</h3>
+		<!-- /wp:heading -->
+		<!-- wp:paragraph {"style":{"color":{"text":"#999999"}}} -->
+		<p style="color:#999999">Data-driven campaigns that deliver ROI.</p>
+		<!-- /wp:paragraph --></div>
+		<!-- /wp:column --></div>
+		<!-- /wp:columns -->]]></content:encoded>
+		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+		<wp:post_type>page</wp:post_type>
+		<wp:post_name>agency-home</wp:post_name>
+		<wp:status>publish</wp:status>
+		<wp:post_id>5</wp:post_id>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_date>2026-01-15 10:00:00</wp:post_date>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:is_sticky>0</wp:is_sticky>
+	</item>
+
+	<item>
+		<title>About Us</title>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<content:encoded><![CDATA[<!-- wp:group {"style":{"spacing":{"padding":{"top":"60px","bottom":"60px"}}}} -->
+		<div class="wp-block-group" style="padding-top:60px;padding-bottom:60px"><!-- wp:heading {"style":{"color":{"text":"#c9a96e"}}} -->
+		<h2 class="wp-block-heading" style="color:#c9a96e">Meet the Agency</h2>
+		<!-- /wp:heading -->
+
+		<!-- wp:paragraph {"style":{"color":{"text":"#f5f5f5"}}} -->
+		<p style="color:#f5f5f5">Opulentia Agency is a collective of strategists, designers, and engineers who believe great work comes from collaboration. Since 2018, we've partnered with startups and Fortune 500 companies alike to create digital experiences that matter.</p>
+		<!-- /wp:paragraph -->
+
+		<!-- wp:paragraph {"style":{"color":{"text":"#999999"}}} -->
+		<p style="color:#999999">Our team of 30+ experts spans brand strategy, UX/UI design, development, and performance marketing. We're headquartered in San Francisco with satellites in London and Singapore.</p>
+		<!-- /wp:paragraph --></div>
+		<!-- /wp:group -->]]></content:encoded>
+		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+		<wp:post_type>page</wp:post_type>
+		<wp:post_name>agency-about</wp:post_name>
+		<wp:status>publish</wp:status>
+		<wp:post_id>6</wp:post_id>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_date>2026-01-15 10:00:00</wp:post_date>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:is_sticky>0</wp:is_sticky>
+	</item>
+
+	<item>
+		<title>Contact</title>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<content:encoded><![CDATA[<!-- wp:group {"style":{"spacing":{"padding":{"top":"60px","bottom":"60px"}}}} -->
+		<div class="wp-block-group" style="padding-top:60px;padding-bottom:60px"><!-- wp:heading {"style":{"color":{"text":"#c9a96e"}}} -->
+		<h2 class="wp-block-heading" style="color:#c9a96e">Start a Project</h2>
+		<!-- /wp:heading -->
+
+		<!-- wp:paragraph {"style":{"color":{"text":"#999999"}}} -->
+		<p style="color:#999999">Ready to build something great? Tell us about your project and we'll be in touch within 24 hours.</p>
+		<!-- /wp:paragraph -->
+
+		<!-- wp:paragraph {"style":{"color":{"text":"#f5f5f5"}}} -->
+		<p style="color:#f5f5f5">Email: hello@opulentia.agency<br>Phone: +1 (555) 456-7890<br>Address: 300 Mission Street, Floor 12, San Francisco, CA 94105</p>
+		<!-- /wp:paragraph --></div>
+		<!-- /wp:group -->]]></content:encoded>
+		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+		<wp:post_type>page</wp:post_type>
+		<wp:post_name>agency-contact</wp:post_name>
+		<wp:status>publish</wp:status>
+		<wp:post_id>7</wp:post_id>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_date>2026-01-15 10:00:00</wp:post_date>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:is_sticky>0</wp:is_sticky>
+	</item>
+
+	<item>
+		<title>Insights</title>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<content:encoded><![CDATA[]]></content:encoded>
+		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+		<wp:post_type>page</wp:post_type>
+		<wp:post_name>insights</wp:post_name>
+		<wp:status>publish</wp:status>
+		<wp:post_id>8</wp:post_id>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_date>2026-01-15 10:00:00</wp:post_date>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:is_sticky>0</wp:is_sticky>
+	</item>
+
+	<item>
+		<title>Why Your Brand Needs a Digital-First Strategy</title>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<content:encoded><![CDATA[<!-- wp:paragraph -->
+		<p>In 2026, a digital-first approach is no longer optional — it's essential. Consumers expect seamless experiences across every touchpoint, and brands that deliver outperform competitors by 3x.</p>
+		<!-- /wp:paragraph -->
+
+		<!-- wp:paragraph -->
+		<p>We break down the key components of a winning digital-first strategy, from unified brand messaging to omnichannel execution.</p>
+		<!-- /wp:paragraph -->]]></content:encoded>
+		<excerpt:encoded><![CDATA[Why a digital-first approach is essential in 2026 and the key components of a winning strategy.]]></excerpt:encoded>
+		<wp:post_type>post</wp:post_type>
+		<wp:post_name>digital-first-strategy</wp:post_name>
+		<wp:status>publish</wp:status>
+		<wp:post_id>10</wp:post_id>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_date>2026-02-05 09:00:00</wp:post_date>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:is_sticky>0</wp:is_sticky>
+		<category domain="category" nicename="digital"><![CDATA[Digital]]></category>
+		<category domain="category" nicename="strategy"><![CDATA[Strategy]]></category>
+	</item>
+
+	<item>
+		<title>Case Study: How We Tripled Conversions for FinTech Startup</title>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<content:encoded><![CDATA[<!-- wp:paragraph -->
+		<p>A Series A FinTech startup came to us with a great product but poor conversion rates. Their platform was feature-rich but confusing to navigate.</p>
+		<!-- /wp:paragraph -->
+
+		<!-- wp:heading {"level":3,"style":{"color":{"text":"#c9a96e"}}} -->
+		<h3 class="wp-block-heading" style="color:#c9a96e">The Approach</h3>
+		<!-- /wp:heading -->
+
+		<!-- wp:paragraph -->
+		<p>We redesigned the user journey, simplified the onboarding flow, and implemented a data-driven CRO program. Within 90 days, conversions tripled and user retention improved by 60%.</p>
+		<!-- /wp:paragraph -->]]></content:encoded>
+		<excerpt:encoded><![CDATA[How a complete UX redesign and CRO program tripled conversions and improved retention by 60% for a FinTech startup.]]></excerpt:encoded>
+		<wp:post_type>post</wp:post_type>
+		<wp:post_name>fintech-case-study</wp:post_name>
+		<wp:status>publish</wp:status>
+		<wp:post_id>11</wp:post_id>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_date>2026-02-20 10:00:00</wp:post_date>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:is_sticky>0</wp:is_sticky>
+		<category domain="category" nicename="case-studies"><![CDATA[Case Studies]]></category>
+		<category domain="category" nicename="digital"><![CDATA[Digital]]></category>
+	</item>
+
+	<item>
+		<title>Our Design Philosophy: Form Meets Function</title>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<content:encoded><![CDATA[<!-- wp:paragraph -->
+		<p>At Opulentia Agency, we don't believe in choosing between beauty and usability. The best designs are both stunning and intuitive.</p>
+		<!-- /wp:paragraph -->
+
+		<!-- wp:paragraph -->
+		<p>Our design philosophy is rooted in three principles: clarity, delight, and purpose. Every pixel earns its place. Every interaction should feel intentional. And every design must serve the user's goals.</p>
+		<!-- /wp:paragraph -->]]></content:encoded>
+		<excerpt:encoded><![CDATA[Opulentia Agency's design philosophy — clarity, delight, and purpose in every pixel.]]></excerpt:encoded>
+		<wp:post_type>post</wp:post_type>
+		<wp:post_name>design-philosophy</wp:post_name>
+		<wp:status>publish</wp:status>
+		<wp:post_id>12</wp:post_id>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_date>2026-03-10 11:00:00</wp:post_date>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:is_sticky>0</wp:is_sticky>
+		<category domain="category" nicename="strategy"><![CDATA[Strategy]]></category>
+	</item>
+
+	<item>
+		<title>Home</title>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<content:encoded><![CDATA[]]></content:encoded>
+		<wp:post_type>nav_menu_item</wp:post_type>
+		<wp:post_name>menu-home</wp:post_name>
+		<wp:status>publish</wp:status>
+		<wp:post_id>20</wp:post_id>
+		<wp:menu_order>1</wp:menu_order>
+		<wp:post_date>2026-01-15 10:00:00</wp:post_date>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:is_sticky>0</wp:is_sticky>
+		<wp:term item_type="nav_menu">
+			<wp:term_id>4</wp:term_id>
+			<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+		</wp:term>
+		<wp:postmeta>
+			<wp:meta_key>_menu_item_type</wp:meta_key>
+			<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>_menu_item_object</wp:meta_key>
+			<wp:meta_value><![CDATA[page]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>_menu_item_object_id</wp:meta_key>
+			<wp:meta_value><![CDATA[5]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>_menu_item_url</wp:meta_key>
+			<wp:meta_value><![CDATA[]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>_menu_item_orphaned</wp:meta_key>
+			<wp:meta_value><![CDATA[]]></wp:meta_value>
+		</wp:postmeta>
+	</item>
+
+	<item>
+		<title>About</title>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<content:encoded><![CDATA[]]></content:encoded>
+		<wp:post_type>nav_menu_item</wp:post_type>
+		<wp:post_name>menu-about</wp:post_name>
+		<wp:status>publish</wp:status>
+		<wp:post_id>21</wp:post_id>
+		<wp:menu_order>2</wp:menu_order>
+		<wp:post_date>2026-01-15 10:00:00</wp:post_date>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:is_sticky>0</wp:is_sticky>
+		<wp:term item_type="nav_menu">
+			<wp:term_id>4</wp:term_id>
+			<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+		</wp:term>
+		<wp:postmeta>
+			<wp:meta_key>_menu_item_type</wp:meta_key>
+			<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>_menu_item_object</wp:meta_key>
+			<wp:meta_value><![CDATA[page]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>_menu_item_object_id</wp:meta_key>
+			<wp:meta_value><![CDATA[6]]></wp:meta_value>
+		</wp:postmeta>
+	</item>
+
+	<item>
+		<title>Contact</title>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<content:encoded><![CDATA[]]></content:encoded>
+		<wp:post_type>nav_menu_item</wp:post_type>
+		<wp:post_name>menu-contact</wp:post_name>
+		<wp:status>publish</wp:status>
+		<wp:post_id>22</wp:post_id>
+		<wp:menu_order>3</wp:menu_order>
+		<wp:post_date>2026-01-15 10:00:00</wp:post_date>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:is_sticky>0</wp:is_sticky>
+		<wp:term item_type="nav_menu">
+			<wp:term_id>4</wp:term_id>
+			<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+		</wp:term>
+		<wp:postmeta>
+			<wp:meta_key>_menu_item_type</wp:meta_key>
+			<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>_menu_item_object</wp:meta_key>
+			<wp:meta_value><![CDATA[page]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>_menu_item_object_id</wp:meta_key>
+			<wp:meta_value><![CDATA[7]]></wp:meta_value>
+		</wp:postmeta>
+	</item>
+
+	<item>
+		<title>Insights</title>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<content:encoded><![CDATA[]]></content:encoded>
+		<wp:post_type>nav_menu_item</wp:post_type>
+		<wp:post_name>menu-insights</wp:post_name>
+		<wp:status>publish</wp:status>
+		<wp:post_id>23</wp:post_id>
+		<wp:menu_order>4</wp:menu_order>
+		<wp:post_date>2026-01-15 10:00:00</wp:post_date>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:is_sticky>0</wp:is_sticky>
+		<wp:term item_type="nav_menu">
+			<wp:term_id>4</wp:term_id>
+			<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+		</wp:term>
+		<wp:postmeta>
+			<wp:meta_key>_menu_item_type</wp:meta_key>
+			<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>_menu_item_object</wp:meta_key>
+			<wp:meta_value><![CDATA[page]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>_menu_item_object_id</wp:meta_key>
+			<wp:meta_value><![CDATA[8]]></wp:meta_value>
+		</wp:postmeta>
+	</item>
+
+	<item>
+		<title>Theme Settings</title>
+		<content:encoded><![CDATA[]]></content:encoded>
+		<wp:post_type>opulentia_options</wp:post_type>
+		<wp:status>publish</wp:status>
+		<wp:post_id>99</wp:post_id>
+		<wp:post_date>2026-01-15 10:00:00</wp:post_date>
+		<wp:postmeta>
+			<wp:meta_key>show_on_front</wp:meta_key>
+			<wp:meta_value><![CDATA[page]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>page_on_front</wp:meta_key>
+			<wp:meta_value><![CDATA[5]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>page_for_posts</wp:meta_key>
+			<wp:meta_value><![CDATA[8]]></wp:meta_value>
+		</wp:postmeta>
+	</item>
+
+</channel>
+</rss>

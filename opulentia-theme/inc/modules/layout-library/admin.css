@@ -1,0 +1,139 @@
+.op-layout-library {
+    max-width: 1400px;
+}
+.op-layout-filters {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin: 20px 0;
+    flex-wrap: wrap;
+}
+.op-filter-select {
+    min-width: 180px;
+}
+.op-layout-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+    margin-top: 20px;
+}
+.op-layout-card {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: box-shadow 0.2s;
+}
+.op-layout-card:hover {
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+.op-layout-card__preview {
+    height: 200px;
+    background: #f5f5f5;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.op-layout-card__preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.op-layout-card__placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    color: #999;
+}
+.op-layout-card__placeholder .dashicons {
+    font-size: 48px;
+    width: 48px;
+    height: 48px;
+}
+.op-layout-card__body {
+    padding: 16px;
+}
+.op-layout-card__body h3 {
+    margin: 0 0 8px;
+    font-size: 16px;
+}
+.op-layout-card__body p {
+    margin: 0 0 12px;
+    color: #666;
+    font-size: 13px;
+}
+.op-layout-card__badge {
+    display: inline-block;
+    background: #f0f0f1;
+    border-radius: 3px;
+    padding: 2px 8px;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #555;
+}
+.op-layout-card__actions {
+    display: flex;
+    gap: 8px;
+    padding: 12px 16px;
+    border-top: 1px solid #f0f0f0;
+}
+.op-layout-card__actions .button {
+    flex: 1;
+    text-align: center;
+}
+.op-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.op-modal__backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+}
+.op-modal__content {
+    position: relative;
+    background: #fff;
+    border-radius: 8px;
+    max-width: 800px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: 24px;
+}
+.op-modal__close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #666;
+    z-index: 1;
+}
+.op-modal__close:hover {
+    color: #333;
+}
+.op-import-btn,
+.op-export-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+.op-layout-card.hidden {
+    display: none;
+}

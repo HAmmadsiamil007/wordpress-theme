@@ -1,0 +1,352 @@
+/**
+ * Admin Styles for opulentia Theme
+ *
+ * @package opulentia
+ */
+
+/* Admin Dashboard */
+ Opulentia-admin {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+.Opulentia-admin h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-weight: 600;
+    color: #1d2327;
+    margin: 0 0 20px;
+}
+
+.Opulentia-admin .card {
+    background: #fff;
+    border: 1px solid #c3c4c7;
+    border-radius: 4px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.Opulentia-admin .card h2 {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: #1d2327;
+    margin: 0 0 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #c3c4c7;
+}
+
+.Opulentia-admin .card p {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: #50575e;
+    line-height: 1.6;
+    margin: 0 0 15px;
+}
+
+.Opulentia-admin .card ul {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: #50575e;
+    line-height: 1.6;
+    margin: 0;
+    padding-left: 20px;
+}
+
+.Opulentia-admin .card ul li {
+    margin-bottom: 5px;
+}
+
+/* Theme Options Page */
+.Opulentia-options {
+    max-width: 800px;
+    margin: 20px auto;
+}
+
+.Opulentia-options .nav-tab-wrapper {
+    margin-bottom: 20px;
+}
+
+.Opulentia-options .form-table th {
+    width: 200px;
+    font-weight: 600;
+}
+
+.Opulentia-options .form-table td {
+    padding: 10px;
+}
+
+.Opulentia-options input[type="text"],
+.Opulentia-options input[type="url"],
+.Opulentia-options textarea {
+    width: 100%;
+    max-width: 500px;
+}
+
+.Opulentia-options .description {
+    font-size: 12px;
+    color: #646970;
+    margin-top: 5px;
+}
+
+/* Image Upload */
+.Opulentia-image-upload {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.Opulentia-image-upload .preview {
+    width: 200px;
+    height: 150px;
+    border: 1px solid #c3c4c7;
+    border-radius: 4px;
+    overflow: hidden;
+    background: #f0f0f1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Opulentia-image-upload .preview img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+}
+
+.Opulentia-image-upload .actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Color Picker */
+.Opulentia-color-picker {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.Opulentia-color-picker .color-preview {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #c3c4c7;
+    border-radius: 4px;
+}
+
+/* Meta Boxes */
+.Opulentia-meta-box .inside {
+    padding: 0;
+}
+
+.Opulentia-meta-box .form-table {
+    margin: 0;
+}
+
+.Opulentia-meta-box .form-table th {
+    padding: 10px 10px 10px 15px;
+}
+
+.Opulentia-meta-box .form-table td {
+    padding: 10px 15px 10px 0;
+}
+
+/* Admin Notice */
+.Opulentia-notice {
+    border-left-color: #c9a96e;
+}
+
+.Opulentia-notice .notice-title {
+    font-weight: 600;
+}
+
+/* Welcome Panel */
+.Opulentia-welcome {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.Opulentia-welcome .card {
+    text-align: center;
+    padding: 30px 20px;
+}
+
+.Opulentia-welcome .card .dashicons {
+    font-size: 40px;
+    width: 40px;
+    height: 40px;
+    color: #c9a96e;
+    margin-bottom: 15px;
+}
+
+.Opulentia-welcome .card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: #1d2327;
+    margin: 0 0 10px;
+}
+
+.Opulentia-welcome .card p {
+    font-size: 14px;
+    color: #50575e;
+    margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 782px) {
+    .Opulentia-welcome {
+        grid-template-columns: 1fr;
+    }
+
+    .Opulentia-options .form-table th {
+        width: auto;
+        display: block;
+        padding-bottom: 5px;
+    }
+
+    .Opulentia-options .form-table td {
+        display: block;
+    }
+
+    .Opulentia-options input[type="text"],
+    .Opulentia-options input[type="url"],
+    .Opulentia-options textarea {
+        max-width: 100%;
+    }
+}
+
+/* -------------------------------------------------------------------------
+ * Dashboard — Module Manager, Import/Export
+ * ------------------------------------------------------------------------- */
+
+.Opulentia-dashboard .Opulentia-dashboard__content {
+    margin-top: 20px;
+}
+.Opulentia-dashboard .Opulentia-dashboard__card {
+    background: #fff;
+    border: 1px solid #ccd0d4;
+    border-radius: 4px;
+    padding: 20px;
+    margin-bottom: 20px;
+    max-width: 960px;
+}
+.Opulentia-dashboard .Opulentia-dashboard__card h2 {
+    margin-top: 0;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+.Opulentia-dashboard .Opulentia-dashboard__table td {
+    padding: 10px 12px;
+}
+.Opulentia-dashboard .Opulentia-dashboard__table td:first-child {
+    width: 200px;
+}
+
+/* Module Category */
+.Opulentia-module-category {
+    margin-bottom: 24px;
+}
+.Opulentia-module-category__title {
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #555;
+    margin: 20px 0 8px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Module Table */
+.Opulentia-module-table {
+    margin-bottom: 0;
+}
+.Opulentia-module-table th {
+    font-weight: 600;
+}
+.Opulentia-module-table__toggle { width: 80px; }
+.Opulentia-module-table__name { width: 180px; }
+.Opulentia-module-table__deps { width: 200px; }
+
+.Opulentia-module-row.is-inactive {
+    opacity: 0.65;
+}
+.Opulentia-module-row.is-inactive:hover {
+    opacity: 0.85;
+}
+
+.Opulentia-module-status {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-left: 6px;
+    vertical-align: middle;
+}
+.Opulentia-module-status.is-active { color: #46b450; }
+.Opulentia-module-status.is-inactive { color: #999; }
+
+.Opulentia-module-deps-warning {
+    color: #dc3232;
+    font-size: 12px;
+}
+.Opulentia-module-no-deps {
+    color: #999;
+}
+
+/* Toggle Switch */
+.Opulentia-toggle {
+    position: relative;
+    display: inline-block;
+    width: 36px;
+    height: 20px;
+    vertical-align: middle;
+}
+.Opulentia-toggle__input {
+    display: none !important;
+}
+.Opulentia-toggle__slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: #ccc;
+    border-radius: 20px;
+    transition: 0.3s;
+}
+.Opulentia-toggle__slider::before {
+    content: "";
+    position: absolute;
+    height: 14px;
+    width: 14px;
+    left: 3px;
+    bottom: 3px;
+    background-color: #fff;
+    border-radius: 50%;
+    transition: 0.3s;
+}
+.Opulentia-toggle__input:checked + .Opulentia-toggle__slider {
+    background-color: #46b450;
+}
+.Opulentia-toggle__input:checked + .Opulentia-toggle__slider::before {
+    transform: translateX(16px);
+}
+.Opulentia-toggle__input:disabled + .Opulentia-toggle__slider {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+/* Spinner integration */
+#Opulentia-export-btn .spinner,
+#Opulentia-import-btn .spinner {
+    display: none;
+}
+#Opulentia-export-btn.is-busy .spinner,
+#Opulentia-import-btn.is-busy .spinner {
+    display: inline-block;
+    visibility: visible;
+}

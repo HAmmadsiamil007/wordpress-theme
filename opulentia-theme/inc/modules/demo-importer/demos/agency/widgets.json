@@ -1,0 +1,17 @@
+{
+	"sidebar-1": {
+		"search": {
+			"title": ""
+		},
+		"recent-posts": {
+			"title": "Latest Insights",
+			"number": 5
+		},
+		"categories": {
+			"title": "Topics",
+			"count": 1,
+			"hierarchical": 0,
+			"dropdown": 0
+		}
+	}
+}

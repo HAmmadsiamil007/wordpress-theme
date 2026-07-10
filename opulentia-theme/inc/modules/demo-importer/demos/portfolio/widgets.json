@@ -1,0 +1,21 @@
+{
+	"sidebar-1": {
+		"search": {
+			"title": ""
+		},
+		"recent-posts": {
+			"title": "Latest Work",
+			"number": 5
+		},
+		"categories": {
+			"title": "Categories",
+			"count": 1,
+			"hierarchical": 0,
+			"dropdown": 0
+		},
+		"tag_cloud": {
+			"title": "Tags",
+			"taxonomy": "post_tag"
+		}
+	}
+}

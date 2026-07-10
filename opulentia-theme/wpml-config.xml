@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wpml-config>
+    <!--
+    WPML Translation Configuration for opulentia Theme
+    =====================================================
+    This file tells WPML which parts of the theme are translatable
+    and how custom post types, taxonomies, and other elements
+    should be handled for multilingual sites.
+    -->
+
+    <!-- Custom Post Types -->
+    <custom-types>
+        <custom-type translate="1">collection</custom-type>
+        <custom-type translate="1">style</custom-type>
+        <custom-type translate="1">brand</custom-type>
+    </custom-types>
+
+    <!-- Custom Taxonomies -->
+    <taxonomies>
+        <taxonomy translate="1">collection_category</taxonomy>
+        <taxonomy translate="1">style_category</taxonomy>
+        <taxonomy translate="1">brand_category</taxonomy>
+    </taxonomies>
+
+    <!-- Navigation Menus -->
+    <admin-texts>
+        <key name="nav_menu_locations">
+            <key name="primary">
+                <key name="title">
+                    <key name="value" />
+                </key>
+            </key>
+            <key name="footer">
+                <key name="title">
+                    <key name="value" />
+                </key>
+            </key>
+        </key>
+    </admin-texts>
+
+    <!-- Customizer Settings (admin-texts) -->
+    <admin-texts>
+        <!-- Hero Section -->
+        <key name="theme_mods_opulentia">
+            <key name="hero_title" />
+            <key name="hero_subtitle" />
+            <key name="hero_button_1_text" />
+            <key name="hero_button_2_text" />
+
+            <!-- About Section -->
+            <key name="about_title" />
+            <key name="about_subtitle" />
+            <key name="about_text" />
+
+            <!-- Newsletter -->
+            <key name="newsletter_title" />
+            <key name="newsletter_subtitle" />
+            <key name="newsletter_button_text" />
+            <key name="newsletter_placeholder" />
+
+            <!-- Blog Settings -->
+            <key name="blog_read_more_text" />
+
+            <!-- Footer -->
+            <key name="footer_copyright_text" />
+
+            <!-- Social URLs -->
+            <key name="social_facebook" />
+            <key name="social_twitter" />
+            <key name="social_instagram" />
+            <key name="social_pinterest" />
+            <key name="social_youtube" />
+        </key>
+    </admin-texts>
+
+    <!-- Shortcodes used in the theme -->
+    <shortcodes>
+        <shortcode>
+            <tag>Opulentia_hero</tag>
+            <attributes>
+                <attribute>title</attribute>
+                <attribute>subtitle</attribute>
+                <attribute>button_1_text</attribute>
+                <attribute>button_2_text</attribute>
+            </attributes>
+        </shortcode>
+        <shortcode>
+            <tag>Opulentia_brand_story</tag>
+            <attributes>
+                <attribute>title</attribute>
+                <attribute>subtitle</attribute>
+                <attribute>description</attribute>
+                <attribute>button_text</attribute>
+            </attributes>
+        </shortcode>
+        <shortcode>
+            <tag>Opulentia_product_grid</tag>
+            <attributes>
+                <attribute>section_title</attribute>
+                <attribute>section_subtitle</attribute>
+                <attribute>section_description</attribute>
+                <attribute>button_text</attribute>
+            </attributes>
+        </shortcode>
+    </shortcodes>
+
+    <!-- Gutenberg Blocks used in the theme -->
+    <gutenberg-blocks>
+        <gutenberg-block type="opulentia/hero" translate="1">
+            <key name="title" />
+            <key name="subtitle" />
+            <key name="button1Text" />
+            <key name="button2Text" />
+        </gutenberg-block>
+        <gutenberg-block type="opulentia/features" translate="1">
+            <key name="features">
+                <key name="title" />
+                <key name="description" />
+            </key>
+        </gutenberg-block>
+        <gutenberg-block type="opulentia/brand-story" translate="1">
+            <key name="subtitle" />
+            <key name="title" />
+            <key name="description" />
+            <key name="buttonText" />
+        </gutenberg-block>
+        <gutenberg-block type="opulentia/testimonials" translate="1">
+            <key name="sectionSubtitle" />
+            <key name="sectionTitle" />
+            <key name="testimonials">
+                <key name="text" />
+                <key name="author" />
+                <key name="role" />
+            </key>
+        </gutenberg-block>
+        <gutenberg-block type="opulentia/product-grid" translate="1">
+            <key name="sectionSubtitle" />
+            <key name="sectionTitle" />
+            <key name="sectionDescription" />
+            <key name="buttonText" />
+        </gutenberg-block>
+    </gutenberg-blocks>
+
+    <!-- Custom Fields to translate -->
+    <custom-fields>
+        <custom-field action="translate">_yoast_wpseo_title</custom-field>
+        <custom-field action="translate">_yoast_wpseo_metadesc</custom-field>
+        <custom-field action="translate">_yoast_wpseo_bctitle</custom-field>
+        <custom-field action="copy">_yoast_wpseo_focuskw</custom-field>
+    </custom-fields>
+
+    <!-- Elementor Widgets translation -->
+    <elementor-widgets>
+        <widget name="Opulentia_hero">
+            <fields>
+                <field type="text">title</field>
+                <field type="text">subtitle</field>
+                <field type="text">button_1_text</field>
+                <field type="text">button_2_text</field>
+            </fields>
+        </widget>
+        <widget name="Opulentia_features">
+            <fields>
+                <field type="text">title</field>
+                <field type="textarea">description</field>
+            </fields>
+        </widget>
+        <widget name="Opulentia_about">
+            <fields>
+                <field type="text">subtitle</field>
+                <field type="text">title</field>
+                <field type="textarea">description</field>
+                <field type="text">button_text</field>
+            </fields>
+        </widget>
+        <widget name="Opulentia_testimonials">
+            <fields>
+                <field type="text">section_subtitle</field>
+                <field type="text">section_title</field>
+                <field type="textarea">text</field>
+                <field type="text">author_name</field>
+                <field type="text">author_role</field>
+            </fields>
+        </widget>
+        <widget name="Opulentia_product_grid">
+            <fields>
+                <field type="text">section_subtitle</field>
+                <field type="text">section_title</field>
+                <field type="textarea">section_description</field>
+                <field type="text">button_text</field>
+            </fields>
+        </widget>
+    </elementor-widgets>
+
+    <!-- WooCommerce translation settings -->
+    <woocommerce>
+        <product-type translate="1">simple</product-type>
+        <product-type translate="1">variable</product-type>
+        <product-type translate="1">grouped</product-type>
+        <product-type translate="1">external</product-type>
+    </woocommerce>
+</wpml-config>

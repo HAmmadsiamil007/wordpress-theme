@@ -1,0 +1,9 @@
+﻿{
+    "thumbnail":  "",
+    "slug":  "team-carousel",
+    "description":  "Horizontal team carousel with photo, quote, and role badge.",
+    "content":  "\u003c!-- wp:group {\"align\":\"full\",\"style\":{\"spacing\":{\"padding\":{\"top\":\"80px\",\"bottom\":\"80px\"}}}} --\u003e\u003cdiv class=\"wp-block-group alignfull\" style=\"padding-top:80px;padding-bottom:80px\"\u003e\u003c!-- wp:paragraph {\"align\":\"center\"} --\u003e\u003cp class=\"has-text-align-center\"\u003ePremium layout built with Opulentia theme.\u003c/p\u003e\u003c!-- /wp:paragraph --\u003e\u003c/div\u003e\u003c!-- /wp:group --\u003e",
+    "name":  "Team Carousel",
+    "category":  "team",
+    "industry":  "landing"
+}

@@ -1,0 +1,198 @@
+# Copyright (C) 2026 Opulentia
+# This file is distributed under the GNU General Public License v2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Opulentia 2.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/theme/opulentia\n"
+"POT-Creation-Date: 2026-01-01 00:00+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: 404.php
+msgid "Page Not Found"
+msgstr ""
+
+#: 404.php
+msgid "The page you are looking for might have been removed, had its name changed, or is temporarily unavailable."
+msgstr ""
+
+#: 404.php
+msgid "Back to Home"
+msgstr ""
+
+#: archive.php
+msgid "Archives"
+msgstr ""
+
+#: comments.php
+msgid "Leave a Reply"
+msgstr ""
+
+#: comments.php
+msgid "Comment"
+msgstr ""
+
+#: comments.php
+msgid "Comments"
+msgstr ""
+
+#: footer.php
+msgid "All Rights Reserved."
+msgstr ""
+
+#: functions.php
+msgid "Primary Menu"
+msgstr ""
+
+#: functions.php
+msgid "Footer Menu"
+msgstr ""
+
+#: functions.php
+msgid "Sidebar Widget Area"
+msgstr ""
+
+#: functions.php
+msgid "Footer Widget Area 1"
+msgstr ""
+
+#: functions.php
+msgid "Footer Widget Area 2"
+msgstr ""
+
+#: functions.php
+msgid "Footer Widget Area 3"
+msgstr ""
+
+#: header.php
+msgid "Toggle navigation"
+msgstr ""
+
+#: index.php
+msgid "Latest Posts"
+msgstr ""
+
+#: page-templates/template-about.php
+msgid "About Us"
+msgstr ""
+
+#: page-templates/template-contact.php
+msgid "Contact Us"
+msgstr ""
+
+#: page-templates/template-gallery.php
+msgid "Our Collection"
+msgstr ""
+
+#: search.php
+msgid "Search Results for:"
+msgstr ""
+
+#: searchform.php
+msgid "Search for:"
+msgstr ""
+
+#: sidebar.php
+msgid "Sidebar"
+msgstr ""
+
+#: single.php
+msgid "Continue Reading"
+msgstr ""
+
+#: template-parts/content.php
+msgid "Read More"
+msgstr ""
+
+#: woocommerce/cart/cart.php
+msgid "Shopping Cart"
+msgstr ""
+
+#: woocommerce/cart/cart.php
+msgid "Review your selections before checkout"
+msgstr ""
+
+#: woocommerce/cart/cart.php
+msgid "Update Cart"
+msgstr ""
+
+#: woocommerce/cart/cart.php
+msgid "Coupon code"
+msgstr ""
+
+#: woocommerce/cart/cart.php
+msgid "Apply Coupon"
+msgstr ""
+
+#: woocommerce/checkout/checkout.php
+msgid "Checkout"
+msgstr ""
+
+#: woocommerce/checkout/checkout.php
+msgid "Complete your order"
+msgstr ""
+
+#: woocommerce/checkout/checkout.php
+msgid "Your cart is currently empty."
+msgstr ""
+
+#: woocommerce/checkout/checkout.php
+msgid "Continue Shopping"
+msgstr ""
+
+#: woocommerce/checkout/checkout.php
+msgid "Already have an account?"
+msgstr ""
+
+#: woocommerce/checkout/checkout.php
+msgid "Log in"
+msgstr ""
+
+#: woocommerce/checkout/checkout.php
+msgid "Ship to a different address?"
+msgstr ""
+
+#: woocommerce/checkout/checkout.php
+msgid "Billing Details"
+msgstr ""
+
+#: woocommerce/checkout/checkout.php
+msgid "Shipping Details"
+msgstr ""
+
+#: woocommerce/checkout/checkout.php
+msgid "Additional Information"
+msgstr ""
+
+#: woocommerce/checkout/checkout.php
+msgid "Your Order"
+msgstr ""
+
+#: woocommerce/checkout/checkout.php
+msgid "Place Order"
+msgstr ""
+
+#: woocommerce/myaccount/my-account.php
+msgid "My Account"
+msgstr ""
+
+#: woocommerce/myaccount/my-account.php
+msgid "Manage your account settings"
+msgstr ""
+
+#: woocommerce/myaccount/my-account.php
+msgid "Please log in to access your account."
+msgstr ""
+
+#: woocommerce/myaccount/my-account.php
+msgid "Login"
+msgstr ""
+
+#: woocommerce/myaccount/my-account.php
+msgid "Register"
+msgstr ""

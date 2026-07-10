@@ -1,0 +1,35 @@
+{
+	"sidebar-1": {
+		"search": {
+			"title": ""
+		},
+		"recent-posts": {
+			"title": "Latest",
+			"number": 5
+		},
+		"categories": {
+			"title": "Categories",
+			"count": 1,
+			"hierarchical": 0,
+			"dropdown": 0
+		}
+	},
+	"sidebar-shop": {
+		"woocommerce_product_search": {
+			"title": ""
+		},
+		"woocommerce_price_filter": {
+			"title": "Filter by Price"
+		},
+		"woocommerce_product_categories": {
+			"title": "Product Categories",
+			"count": 1,
+			"hierarchical": 1,
+			"dropdown": 0
+		},
+		"woocommerce_top_rated_products": {
+			"title": "Top Rated",
+			"number": 4
+		}
+	}
+}

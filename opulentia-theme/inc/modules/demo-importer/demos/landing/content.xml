@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0"
+	xmlns:excerpt="http://wordpress.org/export/1.2/excerpt/"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:wp="http://wordpress.org/export/1.2/">
+
+<channel>
+	<title>Opulentia Landing Demo</title>
+	<link>https://opulentia-demo.com/landing</link>
+	<description>Landing page demo content for Opulentia theme</description>
+	<language>en-US</language>
+	<wp:wxr_version>1.2</wp:wxr_version>
+	<wp:base_site_url>https://opulentia-demo.com/landing</wp:base_site_url>
+	<wp:base_blog_url>https://opulentia-demo.com/landing</wp:base_blog_url>
+
+	<wp:author>
+		<wp:author_id>1</wp:author_id>
+		<wp:author_login>admin</wp:author_login>
+		<wp:author_email>admin@opulentia-demo.com</wp:author_email>
+		<wp:author_display_name><![CDATA[Admin]]></wp:author_display_name>
+		<wp:author_first_name><![CDATA[Opulentia]]></wp:author_first_name>
+		<wp:author_last_name><![CDATA[Admin]]></wp:author_last_name>
+	</wp:author>
+
+	<wp:term>
+		<wp:term_id>1</wp:term_id>
+		<wp:term_taxonomy>category</wp:term_taxonomy>
+		<wp:term_slug>product</wp:term_slug>
+		<wp:term_name><![CDATA[Product]]></wp:term_name>
+	</wp:term>
+
+	<wp:term>
+		<wp:term_id>2</wp:term_id>
+		<wp:term_taxonomy>category</wp:term_taxonomy>
+		<wp:term_slug>updates</wp:term_slug>
+		<wp:term_name><![CDATA[Updates]]></wp:term_name>
+	</wp:term>
+
+	<wp:term>
+		<wp:term_id>3</wp:term_id>
+		<wp:term_taxonomy>category</wp:term_taxonomy>
+		<wp:term_slug>community</wp:term_slug>
+		<wp:term_name><![CDATA[Community]]></wp:term_name>
+	</wp:term>
+
+	<wp:term>
+		<wp:term_id>4</wp:term_id>
+		<wp:term_taxonomy>nav_menu</wp:term_taxonomy>
+		<wp:term_slug>primary-menu</wp:term_slug>
+		<wp:term_name><![CDATA[Primary Menu]]></wp:term_name>
+	</wp:term>
+
+	<item>
+		<title>Home</title>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<content:encoded><![CDATA[<!-- wp:group {"style":{"spacing":{"padding":{"top":"80px","bottom":"60px"}}},"backgroundColor":"primary-dark"} -->
+		<div class="wp-block-group has-primary-dark-background-color has-background" style="padding-top:80px;padding-bottom:60px"><!-- wp:heading {"textAlign":"center","style":{"color":{"text":"#c9a96e"}},"fontFamily":"heading"} -->
+		<h2 class="wp-block-heading has-text-align-center has-heading-font-family" style="color:#c9a96e">Launch Your Future Today</h2>
+		<!-- /wp:heading -->
+
+		<!-- wp:paragraph {"align":"center","style":{"color":{"text":"#999999"}}} -->
+		<p class="has-text-align-center" style="color:#999999">The all-in-one platform that helps you build, grow, and scale your online presence. No coding required.</p>
+		<!-- /wp:paragraph -->
+
+		<!-- wp:buttons {"layout":{"type":"flex","justifyContent":"center"}} -->
+		<div class="wp-block-buttons"><!-- wp:button {"backgroundColor":"accent","textColor":"white"} -->
+		<div class="wp-block-button"><a class="wp-block-button__link has-white-color has-accent-background-color has-text-color has-background wp-element-button" href="#">Get Early Access</a></div>
+		<!-- /wp:button -->
+
+		<!-- wp:button {"backgroundColor":"transparent","textColor":"white","style":{"border":{"color":"#ffffff","width":"2px"}}} -->
+		<div class="wp-block-button"><a class="wp-block-button__link has-white-color has-transparent-background-color has-text-color has-background wp-element-button" href="#" style="border-color:#ffffff;border-width:2px">Learn More</a></div>
+		<!-- /wp:button --></div>
+		<!-- /wp:buttons --></div>
+		<!-- /wp:group -->
+
+		<!-- wp:columns {"style":{"spacing":{"padding":{"top":"60px","bottom":"60px"}}}} -->
+		<div class="wp-block-columns" style="padding-top:60px;padding-bottom:60px"><!-- wp:column -->
+		<div class="wp-block-column"><!-- wp:heading {"level":3,"style":{"color":{"text":"#c9a96e"}}} -->
+		<h3 class="wp-block-heading" style="color:#c9a96e">Lightning Fast</h3>
+		<!-- /wp:heading -->
+		<!-- wp:paragraph {"style":{"color":{"text":"#999999"}}} -->
+		<p style="color:#999999">Optimized for speed. Your site loads in under a second.</p>
+		<!-- /wp:paragraph --></div>
+		<!-- /wp:column -->
+
+		<!-- wp:column -->
+		<div class="wp-block-column"><!-- wp:heading {"level":3,"style":{"color":{"text":"#c9a96e"}}} -->
+		<h3 class="wp-block-heading" style="color:#c9a96e">Beautiful Design</h3>
+		<!-- /wp:heading -->
+		<!-- wp:paragraph {"style":{"color":{"text":"#999999"}}} -->
+		<p style="color:#999999">Premium templates that look great out of the box.</p>
+		<!-- /wp:paragraph --></div>
+		<!-- /wp:column -->
+
+		<!-- wp:column -->
+		<div class="wp-block-column"><!-- wp:heading {"level":3,"style":{"color":{"text":"#c9a96e"}}} -->
+		<h3 class="wp-block-heading" style="color:#c9a96e">24/7 Support</h3>
+		<!-- /wp:heading -->
+		<!-- wp:paragraph {"style":{"color":{"text":"#999999"}}} -->
+		<p style="color:#999999">Our team is here whenever you need us.</p>
+		<!-- /wp:paragraph --></div>
+		<!-- /wp:column --></div>
+		<!-- /wp:columns -->]]></content:encoded>
+		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+		<wp:post_type>page</wp:post_type>
+		<wp:post_name>landing-home</wp:post_name>
+		<wp:status>publish</wp:status>
+		<wp:post_id>5</wp:post_id>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_date>2026-01-15 10:00:00</wp:post_date>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:is_sticky>0</wp:is_sticky>
+	</item>
+
+	<item>
+		<title>About</title>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<content:encoded><![CDATA[<!-- wp:group {"style":{"spacing":{"padding":{"top":"60px","bottom":"60px"}}}} -->
+		<div class="wp-block-group" style="padding-top:60px;padding-bottom:60px"><!-- wp:heading {"style":{"color":{"text":"#c9a96e"}}} -->
+		<h2 class="wp-block-heading" style="color:#c9a96e">About the Product</h2>
+		<!-- /wp:heading -->
+
+		<!-- wp:paragraph {"style":{"color":{"text":"#f5f5f5"}}} -->
+		<p style="color:#f5f5f5">Opulentia Launchpad is the simplest way to create a stunning online presence. We combine AI-powered tools with professional templates so you can go from idea to live in minutes.</p>
+		<!-- /wp:paragraph -->
+
+		<!-- wp:paragraph {"style":{"color":{"text":"#999999"}}} -->
+		<p style="color:#999999">Trusted by over 10,000 creators and small businesses worldwide. Built by a team of designers and engineers who believe everyone deserves a beautiful website.</p>
+		<!-- /wp:paragraph --></div>
+		<!-- /wp:group -->]]></content:encoded>
+		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+		<wp:post_type>page</wp:post_type>
+		<wp:post_name>landing-about</wp:post_name>
+		<wp:status>publish</wp:status>
+		<wp:post_id>6</wp:post_id>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_date>2026-01-15 10:00:00</wp:post_date>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:is_sticky>0</wp:is_sticky>
+	</item>
+
+	<item>
+		<title>Contact</title>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<content:encoded><![CDATA[<!-- wp:group {"style":{"spacing":{"padding":{"top":"60px","bottom":"60px"}}}} -->
+		<div class="wp-block-group" style="padding-top:60px;padding-bottom:60px"><!-- wp:heading {"style":{"color":{"text":"#c9a96e"}}} -->
+		<h2 class="wp-block-heading" style="color:#c9a96e">Get In Touch</h2>
+		<!-- /wp:heading -->
+
+		<!-- wp:paragraph {"style":{"color":{"text":"#999999"}}} -->
+		<p style="color:#999999">Have questions about Launchpad? Our team is ready to help you get started.</p>
+		<!-- /wp:paragraph -->
+
+		<!-- wp:paragraph {"style":{"color":{"text":"#f5f5f5"}}} -->
+		<p style="color:#f5f5f5">Email: launchpad@opulentia.com<br>Phone: +1 (555) 567-8901</p>
+		<!-- /wp:paragraph --></div>
+		<!-- /wp:group -->]]></content:encoded>
+		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+		<wp:post_type>page</wp:post_type>
+		<wp:post_name>landing-contact</wp:post_name>
+		<wp:status>publish</wp:status>
+		<wp:post_id>7</wp:post_id>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_date>2026-01-15 10:00:00</wp:post_date>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:is_sticky>0</wp:is_sticky>
+	</item>
+
+	<item>
+		<title>Blog</title>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<content:encoded><![CDATA[]]></content:encoded>
+		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+		<wp:post_type>page</wp:post_type>
+		<wp:post_name>landing-blog</wp:post_name>
+		<wp:status>publish</wp:status>
+		<wp:post_id>8</wp:post_id>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_date>2026-01-15 10:00:00</wp:post_date>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:is_sticky>0</wp:is_sticky>
+	</item>
+
+	<item>
+		<title>Introducing Launchpad v2.0 — What's New</title>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<content:encoded><![CDATA[<!-- wp:paragraph -->
+		<p>We're thrilled to announce Launchpad v2.0, our biggest update yet. Packed with over 50 new features including AI-powered page builder, advanced analytics, and seamless e-commerce integrations.</p>
+		<!-- /wp:paragraph -->
+
+		<!-- wp:paragraph -->
+		<p>Existing users get the upgrade at no additional cost. New users can sign up for early access today.</p>
+		<!-- /wp:paragraph -->]]></content:encoded>
+		<excerpt:encoded><![CDATA[Launchpad v2.0 is here — AI page builder, advanced analytics, and e-commerce integrations. Free upgrade for existing users.]]></excerpt:encoded>
+		<wp:post_type>post</wp:post_type>
+		<wp:post_name>launchpad-v2</wp:post_name>
+		<wp:status>publish</wp:status>
+		<wp:post_id>10</wp:post_id>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_date>2026-03-01 09:00:00</wp:post_date>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:is_sticky>1</wp:is_sticky>
+		<category domain="category" nicename="product"><![CDATA[Product]]></category>
+		<category domain="category" nicename="updates"><![CDATA[Updates]]></category>
+	</item>
+
+	<item>
+		<title>Early Access: What You Get and How to Join</title>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<content:encoded><![CDATA[<!-- wp:paragraph -->
+		<p>Our early access program gives you priority access to Launchpad Pro features, including custom domains, advanced SEO tools, and priority support.</p>
+		<!-- /wp:paragraph -->
+
+		<!-- wp:heading {"level":3,"style":{"color":{"text":"#c9a96e"}}} -->
+		<h3 class="wp-block-heading" style="color:#c9a96e">What Early Access Includes</h3>
+		<!-- /wp:heading -->
+
+		<!-- wp:paragraph -->
+		<p>Unlimited pages, custom domain, analytics dashboard, priority chat support, and lifetime discount on your plan.</p>
+		<!-- /wp:paragraph -->]]></content:encoded>
+		<excerpt:encoded><![CDATA[Join Launchpad Pro early access — unlimited pages, custom domains, analytics, and lifetime discounts.]]></excerpt:encoded>
+		<wp:post_type>post</wp:post_type>
+		<wp:post_name>early-access</wp:post_name>
+		<wp:status>publish</wp:status>
+		<wp:post_id>11</wp:post_id>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_date>2026-02-20 10:00:00</wp:post_date>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:is_sticky>0</wp:is_sticky>
+		<category domain="category" nicename="product"><![CDATA[Product]]></category>
+	</item>
+
+	<item>
+		<title>From Our Community: Success Stories</title>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<content:encoded><![CDATA[<!-- wp:paragraph -->
+		<p>Nothing makes us happier than seeing what our community builds. This month, we're spotlighting three Launchpad creators who turned their passion into thriving online businesses.</p>
+		<!-- /wp:paragraph -->
+
+		<!-- wp:paragraph -->
+		<p>From a handmade ceramics shop in Portland to a consulting practice in London — each story is unique, but they all share one thing: the courage to start.</p>
+		<!-- /wp:paragraph -->]]></content:encoded>
+		<excerpt:encoded><![CDATA[Community spotlight: three Launchpad creators who turned their passion into thriving online businesses.]]></excerpt:encoded>
+		<wp:post_type>post</wp:post_type>
+		<wp:post_name>community-success</wp:post_name>
+		<wp:status>publish</wp:status>
+		<wp:post_id>12</wp:post_id>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_date>2026-02-10 11:00:00</wp:post_date>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:is_sticky>0</wp:is_sticky>
+		<category domain="category" nicename="community"><![CDATA[Community]]></category>
+	</item>
+
+	<item>
+		<title>Home</title>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<content:encoded><![CDATA[]]></content:encoded>
+		<wp:post_type>nav_menu_item</wp:post_type>
+		<wp:post_name>menu-home</wp:post_name>
+		<wp:status>publish</wp:status>
+		<wp:post_id>20</wp:post_id>
+		<wp:menu_order>1</wp:menu_order>
+		<wp:post_date>2026-01-15 10:00:00</wp:post_date>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:is_sticky>0</wp:is_sticky>
+		<wp:term item_type="nav_menu">
+			<wp:term_id>4</wp:term_id>
+			<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+		</wp:term>
+		<wp:postmeta>
+			<wp:meta_key>_menu_item_type</wp:meta_key>
+			<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>_menu_item_object</wp:meta_key>
+			<wp:meta_value><![CDATA[page]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>_menu_item_object_id</wp:meta_key>
+			<wp:meta_value><![CDATA[5]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>_menu_item_url</wp:meta_key>
+			<wp:meta_value><![CDATA[]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>_menu_item_orphaned</wp:meta_key>
+			<wp:meta_value><![CDATA[]]></wp:meta_value>
+		</wp:postmeta>
+	</item>
+
+	<item>
+		<title>About</title>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<content:encoded><![CDATA[]]></content:encoded>
+		<wp:post_type>nav_menu_item</wp:post_type>
+		<wp:post_name>menu-about</wp:post_name>
+		<wp:status>publish</wp:status>
+		<wp:post_id>21</wp:post_id>
+		<wp:menu_order>2</wp:menu_order>
+		<wp:post_date>2026-01-15 10:00:00</wp:post_date>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:is_sticky>0</wp:is_sticky>
+		<wp:term item_type="nav_menu">
+			<wp:term_id>4</wp:term_id>
+			<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+		</wp:term>
+		<wp:postmeta>
+			<wp:meta_key>_menu_item_type</wp:meta_key>
+			<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>_menu_item_object</wp:meta_key>
+			<wp:meta_value><![CDATA[page]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>_menu_item_object_id</wp:meta_key>
+			<wp:meta_value><![CDATA[6]]></wp:meta_value>
+		</wp:postmeta>
+	</item>
+
+	<item>
+		<title>Contact</title>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<content:encoded><![CDATA[]]></content:encoded>
+		<wp:post_type>nav_menu_item</wp:post_type>
+		<wp:post_name>menu-contact</wp:post_name>
+		<wp:status>publish</wp:status>
+		<wp:post_id>22</wp:post_id>
+		<wp:menu_order>3</wp:menu_order>
+		<wp:post_date>2026-01-15 10:00:00</wp:post_date>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:is_sticky>0</wp:is_sticky>
+		<wp:term item_type="nav_menu">
+			<wp:term_id>4</wp:term_id>
+			<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+		</wp:term>
+		<wp:postmeta>
+			<wp:meta_key>_menu_item_type</wp:meta_key>
+			<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>_menu_item_object</wp:meta_key>
+			<wp:meta_value><![CDATA[page]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>_menu_item_object_id</wp:meta_key>
+			<wp:meta_value><![CDATA[7]]></wp:meta_value>
+		</wp:postmeta>
+	</item>
+
+	<item>
+		<title>Blog</title>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<content:encoded><![CDATA[]]></content:encoded>
+		<wp:post_type>nav_menu_item</wp:post_type>
+		<wp:post_name>menu-blog</wp:post_name>
+		<wp:status>publish</wp:status>
+		<wp:post_id>23</wp:post_id>
+		<wp:menu_order>4</wp:menu_order>
+		<wp:post_date>2026-01-15 10:00:00</wp:post_date>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:is_sticky>0</wp:is_sticky>
+		<wp:term item_type="nav_menu">
+			<wp:term_id>4</wp:term_id>
+			<category domain="nav_menu" nicename="primary-menu"><![CDATA[Primary Menu]]></category>
+		</wp:term>
+		<wp:postmeta>
+			<wp:meta_key>_menu_item_type</wp:meta_key>
+			<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>_menu_item_object</wp:meta_key>
+			<wp:meta_value><![CDATA[page]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>_menu_item_object_id</wp:meta_key>
+			<wp:meta_value><![CDATA[8]]></wp:meta_value>
+		</wp:postmeta>
+	</item>
+
+	<item>
+		<title>Theme Settings</title>
+		<content:encoded><![CDATA[]]></content:encoded>
+		<wp:post_type>opulentia_options</wp:post_type>
+		<wp:status>publish</wp:status>
+		<wp:post_id>99</wp:post_id>
+		<wp:post_date>2026-01-15 10:00:00</wp:post_date>
+		<wp:postmeta>
+			<wp:meta_key>show_on_front</wp:meta_key>
+			<wp:meta_value><![CDATA[page]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>page_on_front</wp:meta_key>
+			<wp:meta_value><![CDATA[5]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>page_for_posts</wp:meta_key>
+			<wp:meta_value><![CDATA[8]]></wp:meta_value>
+		</wp:postmeta>
+	</item>
+
+</channel>
+</rss>
