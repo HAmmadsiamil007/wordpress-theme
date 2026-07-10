@@ -28,7 +28,7 @@ services:
       WORDPRESS_DEBUG: 1
     volumes:
       - ./opulentia-theme:/var/www/html/wp-content/themes/opulentia-theme
-      - ./astro/astra.4.13.4/astra:/var/www/html/wp-content/themes/astra
+      - ./opulentia-child:/var/www/html/wp-content/themes/opulentia-child
 
 volumes:
   db_data:
